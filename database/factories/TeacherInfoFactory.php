@@ -23,10 +23,12 @@ class TeacherInfoFactory extends Factory
             'city'=>fake()->city(),
             'edu_qual'=>fake()->word(),
             'national_card_id'=>fake()->uuid(),
-            'image_national_card_front'=>fake()->imageUrl(640, 480, 'card', true),
-            'image_national_card_back'=>fake()->imageUrl(640, 480, 'card', true),
-            'image_attend'=>fake()->imageUrl(640, 480, 'card', true),
-            'image_contract_direct_work'=>fake()->imageUrl(640, 480, 'card', true),
+
+
+            // 'image_national_card_front'=>fake()->imageUrl(640, 480, 'card', true),
+            // 'image_national_card_back'=>fake()->imageUrl(640, 480, 'card', true),
+            // 'image_attend'=>fake()->imageUrl(640, 480, 'card', true),
+            // 'image_contract_direct_work'=>fake()->imageUrl(640, 480, 'card', true),
 
 
             // 'image_national_card_front' => fake()->image('storage/app/public', 360, 360, 'card', false, true, 'id', false, 'jpg'),
@@ -34,6 +36,11 @@ class TeacherInfoFactory extends Factory
             // 'image_attend' => fake()->image('storage/app/public', 360, 360, 'card', false, true, 'id', false, 'jpg'),
             // 'image_contract_direct_work' => fake()->image('storage/app/public', 360, 360, 'card', false, true, 'id', false, 'jpg'),
 
+
+            'image_national_card_front' => '1cbfac69e28183f40e110017ab3f1e52.jpg',
+            'image_national_card_back' => '1cbfac69e28183f40e110017ab3f1e52.jpg',
+            'image_attend' => '1cbfac69e28183f40e110017ab3f1e52.jpg',
+            'image_contract_direct_work' => '1cbfac69e28183f40e110017ab3f1e52.jpg',
 
             'q_1'=>fake()->text(),
             'q_2'=>fake()->text(),

@@ -12,9 +12,17 @@ class Researcher extends Model
     public $fillable=[
         'name',
         'phone',
-        'password',
         'gender',
-        'device_id',
+        'valid',
+    ];
+
+    protected $hidden = [
+        'password',
+        // 'device_id',
+    ];
+
+    protected $casts = [
+        'password' => 'hashed',
     ];
 
 

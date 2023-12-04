@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->string('password');
             $table->string('device_id')->nullable();
+            $table->boolean('valid')->default(0);
 
 
 

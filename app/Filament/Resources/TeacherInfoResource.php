@@ -48,6 +48,7 @@ class TeacherInfoResource extends Resource
                         Forms\Components\Select::make('researcher.name')
                             ->label(__('researcher_name'))
                             ->relationship('researcher', 'name')
+                    ->columnSpanFull()
                             ->disabled(),
                     ])
                     ->columns(2),
@@ -76,9 +77,9 @@ class TeacherInfoResource extends Resource
                     ->schema([
 
 
-                        Forms\Components\TextInput::make('edu_qual')
-                            ->label(__('edu_qual'))
-                            ->disabled(),
+                        // Forms\Components\TextInput::make('edu_qual')
+                        //     ->label(__('edu_qual'))
+                        //     ->disabled(),
                         Forms\Components\TextInput::make('national_card_id')
                             ->label(__('national_card_id'))
                             ->disabled(),
@@ -213,6 +214,7 @@ class TeacherInfoResource extends Resource
                                 __('yes') => __('yes'),
                                 __('no') => __('no'),
                             ])
+                            ->columnSpanFull()
                             ->required(),
                     ])
                     ->columns(2),

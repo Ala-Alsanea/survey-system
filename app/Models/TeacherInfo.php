@@ -15,7 +15,7 @@ class TeacherInfo extends Model
         'phone',
         'gender',
         'city',
-        'edu_qual',
+        // 'edu_qual',
         'national_card_id',
 
         'image_national_card_front',
