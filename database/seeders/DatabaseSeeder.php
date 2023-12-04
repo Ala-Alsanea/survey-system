@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Researcher;
 use App\Models\TeacherInfo;
 use Illuminate\Database\Seeder;
 
@@ -23,7 +24,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        TeacherInfo::factory()->count(10)->create();
+        Researcher::factory()->count(10)->create();
+        TeacherInfo::factory()->count(3)->create();
 
     }
 }

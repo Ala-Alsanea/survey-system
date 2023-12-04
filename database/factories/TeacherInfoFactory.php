@@ -22,11 +22,19 @@ class TeacherInfoFactory extends Factory
             'gender'=>fake()->word(),
             'city'=>fake()->city(),
             'edu_qual'=>fake()->word(),
-            'national_cart_id'=>fake()->uuid(),
-            'national_cart_id_image_front'=>fake()->imageUrl(640, 480, 'card', true),
-            'national_cart_id_image_back'=>fake()->imageUrl(640, 480, 'card', true),
+            'national_card_id'=>fake()->uuid(),
+            'image_national_card_front'=>fake()->imageUrl(640, 480, 'card', true),
+            'image_national_card_back'=>fake()->imageUrl(640, 480, 'card', true),
             'image_attend'=>fake()->imageUrl(640, 480, 'card', true),
             'image_contract_direct_work'=>fake()->imageUrl(640, 480, 'card', true),
+
+
+            // 'image_national_card_front' => fake()->image('storage/app/public', 360, 360, 'card', false, true, 'id', false, 'jpg'),
+            // 'image_national_card_back' => fake()->image('storage/app/public', 360, 360, 'card', false, true, 'id', false, 'jpg'),
+            // 'image_attend' => fake()->image('storage/app/public', 360, 360, 'card', false, true, 'id', false, 'jpg'),
+            // 'image_contract_direct_work' => fake()->image('storage/app/public', 360, 360, 'card', false, true, 'id', false, 'jpg'),
+
+
             'q_1'=>fake()->text(),
             'q_2'=>fake()->text(),
             'q_3'=>fake()->text(),
@@ -38,6 +46,8 @@ class TeacherInfoFactory extends Factory
             'q_9' => fake()->text(),
             'q_10' => fake()->text(),
             'q_11' => fake()->text(),
+            'researcher_id' => rand(1,10),
+
         ];
     }
 }

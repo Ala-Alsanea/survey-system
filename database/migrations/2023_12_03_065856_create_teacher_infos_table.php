@@ -21,9 +21,9 @@ return new class extends Migration
             $table->string('edu_qual')->nullable();
 
             // attach
-            $table->string('national_cart_id')->nullable();
-            $table->string('national_cart_id_image_front')->nullable();
-            $table->string('national_cart_id_image_back')->nullable();
+            $table->string('national_card_id')->nullable();
+            $table->string('image_national_card_front')->nullable();
+            $table->string('image_national_card_back')->nullable();
             $table->string('image_attend')->nullable();
             $table->string('image_contract_direct_work')->nullable();
 
@@ -51,7 +51,8 @@ return new class extends Migration
             $table->string('val_signature')->nullable();
             $table->string('val_Seal')->nullable();
 
-            $table->boolean('done')->nullable();
+            $table->boolean('done')->default(0);
+            $table->foreignId('researcher_id')->nullable()->constrained('researchers')->cascadeOnUpdate();
 
 
 
