@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        Researcher::factory()->count(10)->create();
+        Researcher::factory()->count(1)->create();
         TeacherInfo::factory()->count(3)->create();
 
     }

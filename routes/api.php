@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\ResearcherMiddleware;
+use App\Http\Controllers\ResearcherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('login',[ResearcherController::class,'login']);
+
+Route::group(['middleware' => [
+
+    'auth:sanctum',
+    //  ResearcherMiddleware::class,
+
+
+     ]], function () {
+    // protected routes go here
+    Route::get('test', [ResearcherController::class, 'store']);
+
 });

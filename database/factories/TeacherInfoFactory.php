@@ -53,7 +53,8 @@ class TeacherInfoFactory extends Factory
             'q_9' => fake()->text(),
             'q_10' => fake()->text(),
             'q_11' => fake()->text(),
-            'researcher_id' => rand(1,10),
+            // 'researcher_id' => rand(1,10),
+            'researcher_id' => 1,
 
         ];
     }

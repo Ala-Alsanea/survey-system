@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,9 +20,9 @@ class ResearcherFactory extends Factory
         return [
             //
             'name' => fake()->name(),
-            'phone' => fake()->phoneNumber(),
+            'phone' => '777777777',
             'gender' => fake()->word(),
-            'password' => fake()->password(),
+            'password' => Hash::make('password'),
             'device_id' => fake()->uuid(),
         ];
     }
