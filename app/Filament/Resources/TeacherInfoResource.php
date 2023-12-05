@@ -2,16 +2,20 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\TeacherInfoResource\Pages;
-use App\Filament\Resources\TeacherInfoResource\RelationManagers;
-use App\Models\TeacherInfo;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Models\TeacherInfo;
+use Filament\Resources\Resource;
+use Illuminate\Database\Eloquent\Model;
+use pxlrbt\FilamentExcel\Columns\Column;
 use Illuminate\Database\Eloquent\Builder;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\TeacherInfoResource\Pages;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+use App\Filament\Resources\TeacherInfoResource\RelationManagers;
 
 class TeacherInfoResource extends Resource
 {
@@ -323,6 +327,18 @@ class TeacherInfoResource extends Resource
             ->filters([
                 //
             ])
+            ->headerActions([
+            // ...
+            ExportAction::make()->exports([
+                ExcelExport::make()->withColumns([
+                    Column::make('name')->heading(__('name')),
+                    Column::make('researcher.name'),
+                    Column::make('created_at'),
+                    Column::make('deleted_at'),
+                ]),
+            ])
+
+            ])
             ->actions([
                 // Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
@@ -355,4 +371,11 @@ class TeacherInfoResource extends Resource
     {
         return false;
     }
+
+    public static function canDelete(Model $model): bool
+    {
+        return false;
+    }
+
+
 }

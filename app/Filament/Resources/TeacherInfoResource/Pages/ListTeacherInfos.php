@@ -2,9 +2,11 @@
 
 namespace App\Filament\Resources\TeacherInfoResource\Pages;
 
-use App\Filament\Resources\TeacherInfoResource;
 use Filament\Actions;
+use App\Filament\Widgets\StatsOverview;
 use Filament\Resources\Pages\ListRecords;
+use App\Filament\Resources\TeacherInfoResource;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
 
 class ListTeacherInfos extends ListRecords
 {
@@ -16,4 +18,11 @@ class ListTeacherInfos extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+    // protected function getHeaderWidgets(): array
+    // {
+    //     return [
+    //         StatsOverview::class,
+    //     ];
+    // }
 }

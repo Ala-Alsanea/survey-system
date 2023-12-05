@@ -20,7 +20,8 @@ class TeacherInfoFactory extends Factory
             'name'=>fake()->name(),
             'phone'=>fake()->phoneNumber(),
             'gender'=>fake()->word(),
-            'city'=>fake()->city(),
+            // 'city'=> fake()->city(),
+            'city' => fake()->randomElement(['ibb', 'sana\'a', 'aden']),
             'edu_qual'=>fake()->word(),
             'national_card_id'=>fake()->uuid(),
 
