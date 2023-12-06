@@ -17,6 +17,7 @@ use App\Http\Controllers\ResearcherController;
 */
 
 Route::post('login',[ResearcherController::class,'login']);
+Route::post('signin', [ResearcherController::class, 'signin']);
 
 Route::group(['middleware' => [
 
@@ -26,6 +27,6 @@ Route::group(['middleware' => [
 
      ]], function () {
     // protected routes go here
-    Route::get('test', [ResearcherController::class, 'store']);
+    Route::post('test', [ResearcherController::class, 'store']);
 
 });

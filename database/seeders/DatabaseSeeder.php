@@ -29,6 +29,11 @@ class DatabaseSeeder extends Seeder
 
 
         Researcher::factory()->count(1)->create();
+        Researcher::factory()->create([
+            'name'=>'test',
+            'phone'=>'789456123',
+            'password' => '123',
+        ]);
 
         $this->call([
             SpreadsheetSeeder::class,

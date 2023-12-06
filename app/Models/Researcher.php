@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
+
 class Researcher extends Authenticatable
 {
     use HasApiTokens, Notifiable, HasFactory;
@@ -15,11 +16,15 @@ class Researcher extends Authenticatable
     protected $guard = 'researchers';
 
 
-    public $fillable=[
+    public $fillable = [
         'name',
         'phone',
         'gender',
         'valid',
+        'password',
+        'device_id',
+
+
     ];
 
     protected $hidden = [

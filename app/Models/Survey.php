@@ -16,7 +16,7 @@ class Survey extends Model
         'gov',
         'district',
         'subdistrict',
-        // 'edu_qual',
+        'edu_qual',
 
         'national_card_id',
         'image_national_card_front',
@@ -25,7 +25,7 @@ class Survey extends Model
         'image_contract_direct_work',
 
         'q_1',
-        'q_2',
+        // 'q_2',
         'q_3',
         'q_4',
         'q_5',
