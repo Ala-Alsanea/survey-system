@@ -19,8 +19,11 @@ return new class extends Migration
             $table->string('gender')->nullable();
 
             $table->string('gov')->nullable();
+            $table->string('gov_id')->nullable();
             $table->string('district')->nullable();
+            $table->string('district_id')->nullable();
             $table->string('subdistrict')->nullable();
+            $table->string('subdistrict_id')->nullable();
             $table->string('edu_qual')->nullable();
             $table->string('school')->nullable();
             $table->string('school_id')->nullable();

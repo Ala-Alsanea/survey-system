@@ -23,10 +23,9 @@ Route::group(['middleware' => [
 
     'auth:sanctum',
     //  ResearcherMiddleware::class,
-
-
      ]], function () {
     // protected routes go here
-    Route::post('test', [ResearcherController::class, 'store']);
+    Route::get('profile', [ResearcherController::class, 'getProfile']);
+    Route::post('storeSurvey', [ResearcherController::class, 'storeSurvey']);
 
 });

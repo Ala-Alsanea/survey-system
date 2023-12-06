@@ -40,6 +40,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        Survey::factory()->count(300)->create();
+        // Survey::factory()->count(300)->create();
     }
 }
