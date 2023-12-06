@@ -52,7 +52,7 @@ class TeacherInfoResource extends Resource
                         Forms\Components\Select::make('researcher.name')
                             ->label(__('researcher_name'))
                             ->relationship('researcher', 'name')
-                    ->columnSpanFull()
+                            ->columnSpanFull()
                             ->disabled(),
                     ])
                     ->columns(2),
@@ -60,16 +60,17 @@ class TeacherInfoResource extends Resource
                     ->description('')
                     ->schema([
 
-                        Forms\Components\TextInput::make('name')
+                        Forms\Components\MarkdownEditor::make('name')
                             ->label(__('name'))
                             ->disabled(),
-                        Forms\Components\TextInput::make('phone')
+                        Forms\Components\MarkdownEditor::make('phone')
                             ->label(__('phone'))
                             ->disabled(),
-                        Forms\Components\TextInput::make('gender')
+                        Forms\Components\MarkdownEditor::make('gender')
                             ->label(__('gender'))
                             ->disabled(),
-                        Forms\Components\TextInput::make('city')
+                        Forms\Components\TextInput::make('district.city.id')
+                            // ->relationship('district', 'city_id')
                             ->label(__('city'))
                             ->disabled(),
                     ])
@@ -81,14 +82,14 @@ class TeacherInfoResource extends Resource
                     ->schema([
 
 
-                        // Forms\Components\TextInput::make('edu_qual')
+                        // Forms\Components\MarkdownEditor::make('edu_qual')
                         //     ->label(__('edu_qual'))
                         //     ->disabled(),
-                        Forms\Components\TextInput::make('national_card_id')
+                        Forms\Components\MarkdownEditor::make('national_card_id')
                             ->label(__('national_card_id'))
                             ->disabled(),
 
-                        Forms\Components\TextInput::make('q_3')
+                        Forms\Components\MarkdownEditor::make('q_3')
                             ->label(__('q_3'))
                             ->disabled(),
 
@@ -131,35 +132,35 @@ class TeacherInfoResource extends Resource
                     ->description('')
                     ->schema([
 
-                        Forms\Components\TextInput::make('q_1')
+                        Forms\Components\MarkdownEditor::make('q_1')
                             ->label(__('q_1'))
                             ->disabled(),
-                        Forms\Components\TextInput::make('q_2')
+                        Forms\Components\MarkdownEditor::make('q_2')
                             ->label(__('q_2'))
                             ->disabled(),
 
-                        Forms\Components\TextInput::make('q_4')
+                        Forms\Components\MarkdownEditor::make('q_4')
                             ->label(__('q_4'))
                             ->disabled(),
-                        Forms\Components\TextInput::make('q_5')
+                        Forms\Components\MarkdownEditor::make('q_5')
                             ->label(__('q_5'))
                             ->disabled(),
-                        Forms\Components\TextInput::make('q_6')
+                        Forms\Components\MarkdownEditor::make('q_6')
                             ->label(__('q_6'))
                             ->disabled(),
-                        Forms\Components\TextInput::make('q_7')
+                        Forms\Components\MarkdownEditor::make('q_7')
                             ->label(__('q_7'))
                             ->disabled(),
-                        Forms\Components\TextInput::make('q_8')
+                        Forms\Components\MarkdownEditor::make('q_8')
                             ->label(__('q_8'))
                             ->disabled(),
-                        Forms\Components\TextInput::make('q_9')
+                        Forms\Components\MarkdownEditor::make('q_9')
                             ->label(__('q_9'))
                             ->disabled(),
-                        Forms\Components\TextInput::make('q_10')
+                        Forms\Components\MarkdownEditor::make('q_10')
                             ->label(__('q_10'))
                             ->disabled(),
-                        Forms\Components\TextInput::make('q_11')
+                        Forms\Components\MarkdownEditor::make('q_11')
                             ->label(__('q_11'))
                             ->disabled(),
                     ])
@@ -253,9 +254,9 @@ class TeacherInfoResource extends Resource
                 Tables\Columns\TextColumn::make('gender')
                     ->label(__('gender'))
                     ->searchable(),
-                // Tables\Columns\TextColumn::make('city')
-                //     ->label(__('city'))
-                //     ->searchable(),
+                Tables\Columns\TextColumn::make('district.city.name')
+                    ->label(__('city'))
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('researcher.name')
                     ->label(__('researcher_name'))
                     ->searchable(),
@@ -328,15 +329,15 @@ class TeacherInfoResource extends Resource
                 //
             ])
             ->headerActions([
-            // ...
-            ExportAction::make()->exports([
-                ExcelExport::make()->withColumns([
-                    Column::make('name')->heading(__('name')),
-                    Column::make('researcher.name'),
-                    Column::make('created_at'),
-                    Column::make('deleted_at'),
-                ]),
-            ])
+                // ...
+                ExportAction::make()->exports([
+                    ExcelExport::make()->withColumns([
+                        Column::make('name')->heading(__('name')),
+                        Column::make('researcher.name'),
+                        Column::make('created_at'),
+                        Column::make('deleted_at'),
+                    ]),
+                ])
 
             ])
             ->actions([
@@ -376,6 +377,4 @@ class TeacherInfoResource extends Resource
     {
         return false;
     }
-
-
 }

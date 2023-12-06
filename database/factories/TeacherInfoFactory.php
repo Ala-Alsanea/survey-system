@@ -19,10 +19,10 @@ class TeacherInfoFactory extends Factory
         return [
             'name'=>fake()->name(),
             'phone'=>fake()->phoneNumber(),
-            'gender'=>fake()->word(),
+            'gender'=> fake()->randomElement(['ذكر', 'انثى']),
             // 'city'=> fake()->city(),
-            'city' => fake()->randomElement(['ibb', 'sana\'a', 'aden']),
-            'edu_qual'=>fake()->word(),
+            // 'city' => fake()->randomElement(['ibb', 'sana\'a', 'aden']),
+            // 'edu_qual'=>fake()->word(),
             'national_card_id'=>fake()->uuid(),
 
 
@@ -56,6 +56,7 @@ class TeacherInfoFactory extends Factory
             'q_11' => fake()->text(),
             // 'researcher_id' => rand(1,10),
             'researcher_id' => 1,
+            'district_id'=> fake()->randomElement([1,2,3,4,5,6,7,8,9])
 
         ];
     }

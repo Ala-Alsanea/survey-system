@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
+            $table->integer('siteCode')->nullable();
+            // $table->integer('ParentCode')->nullable();
+            $table->string('Ar_Name')->nullable();
+            $table->string('En_Name')->nullable();
+            // $table->integer('countryID')->nullable()->default( 1);
+
             $table->timestamps();
         });
     }

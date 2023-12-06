@@ -18,6 +18,7 @@
         "pxlrbt/filament-excel": "^2.1"
     },
     "require-dev": {
+        "bfinlay/laravel-excel-seeder": "^3.3",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",

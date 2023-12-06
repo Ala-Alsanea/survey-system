@@ -45,6 +45,7 @@ class TeacherInfo extends Model
 
         'done',
         'researcher_id',
+        'district_id',
 
 
     ];
@@ -53,5 +54,10 @@ class TeacherInfo extends Model
     public function researcher()
     {
         return $this->belongsTo(Researcher::class);
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class);
     }
 }

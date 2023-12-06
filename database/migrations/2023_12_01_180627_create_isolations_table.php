@@ -11,8 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('city_targeteds', function (Blueprint $table) {
+        Schema::create('isolations', function (Blueprint $table) {
             $table->id();
+
+            $table->integer('siteCode')->nullable();
+            $table->foreignId('ParentCode')->nullable()->constrained('districts')->cascadeOnUpdate();
+            $table->string('Ar_Name')->nullable();
+            $table->string('En_Name')->nullable();
+
+
             $table->timestamps();
         });
     }
@@ -22,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('city_targeteds');
+        Schema::dropIfExists('isolations');
     }
 };

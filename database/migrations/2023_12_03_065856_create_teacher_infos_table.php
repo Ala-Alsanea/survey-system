@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('phone')->nullable();
             $table->string('gender')->nullable();
-            $table->string('city')->nullable();
-            $table->string('edu_qual')->nullable();
+
+            // $table->string('edu_qual')->nullable();
 
             // attach
             $table->string('national_card_id')->nullable();
@@ -53,6 +53,7 @@ return new class extends Migration
 
             $table->boolean('done')->default(0);
             $table->foreignId('researcher_id')->nullable()->constrained('researchers')->cascadeOnUpdate();
+            $table->foreignId('district_id')->nullable()->constrained('districts')->cascadeOnUpdate();
 
 
 

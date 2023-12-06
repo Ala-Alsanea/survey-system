@@ -4,9 +4,12 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\City;
+use App\Models\District;
 use App\Models\Researcher;
 use App\Models\TeacherInfo;
 use Illuminate\Database\Seeder;
+use bfinlay\SpreadsheetSeeder\SpreadsheetSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,14 +21,19 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         \App\Models\User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'reviewer',
+            'email' => 'reviewer@reviewer.com',
             'password'=>'123',
         ]);
 
 
-        Researcher::factory()->count(1)->create();
-        TeacherInfo::factory()->count(300)->create();
+        // Researcher::factory()->count(1)->create();
 
+        $this->call([
+            SpreadsheetSeeder::class,
+        ]);
+
+
+        // TeacherInfo::factory()->count(300)->create();
     }
 }

@@ -3,13 +3,11 @@
 namespace App\Filament\Widgets;
 
 use App\Models\TeacherInfo;
-use Flowframe\Trend\Trend;
-use Flowframe\Trend\TrendValue;
 use Filament\Widgets\ChartWidget;
 
-class SchoolByGovernoratesChart extends ChartWidget
+class SchoolByDistrictChart extends ChartWidget
 {
-    protected static ?string $heading = 'School By Governorates';
+    protected static ?string $heading = 'School By district';
 
     protected static ?int $sort = 3;
 
@@ -27,7 +25,7 @@ class SchoolByGovernoratesChart extends ChartWidget
 
         $labels = TeacherInfo::pluck('gender')->unique()->all();
 
-        $data  = array_map(fn($val)=>['data'=>TeacherInfo::where('gender',$val)->count(),'lable'=>str($val)],$labels);
+        $data  = array_map(fn ($val) => ['data' => TeacherInfo::where('gender', $val)->count(), 'lable' => str($val)], $labels);
 
         // sleep(2);
         // dd($data);
@@ -36,7 +34,7 @@ class SchoolByGovernoratesChart extends ChartWidget
             'datasets' => [
                 [
                     'label' => 'targeted',
-                    'data' => [500,500],
+                    'data' => [500, 500],
                     // 'backgroundColor' => '#d4d4d8',
                     // 'borderColor' => '#3f3f46',
                 ],
