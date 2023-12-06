@@ -69,32 +69,29 @@ class SurveyResource extends Resource
                     ->schema([
 
 
-                        // Forms\Components\MarkdownEditor::make('edu_qual')
-                        //     ->label(__('edu_qual'))
-                        //     ->disabled(),
+                        Forms\Components\MarkdownEditor::make('edu_qual')
+                            ->label(__('edu_qual'))
+                            ->disabled(),
                         Forms\Components\MarkdownEditor::make('national_card_id')
                             ->label(__('national_card_id'))
                             ->disabled(),
 
-                        Forms\Components\MarkdownEditor::make('q_3')
-                            ->label(__('q_3'))
-                            ->disabled(),
 
-                        Forms\Components\FileUpload::make('image_national_card_front')
+                            Forms\Components\FileUpload::make('image_national_card_front')
                             ->label(__('image_national_card_front'))
                             ->openable()
                             ->deletable(false)
                             ->disabled()
                             ->image(),
-                        Forms\Components\FileUpload::make('image_national_card_back')
+                            Forms\Components\FileUpload::make('image_national_card_back')
                             ->label(__('image_national_card_back'))
                             ->openable()
                             ->deletable(false)
                             ->disabled()
                             ->image(),
 
-                    ])
-                    ->columns(1),
+                            ])
+                            ->columns(1),
 
                 Forms\Components\Section::make('ملحقات')
                     ->description('')
@@ -122,9 +119,12 @@ class SurveyResource extends Resource
                         Forms\Components\MarkdownEditor::make('q_1')
                             ->label(__('q_1'))
                             ->disabled(),
-                        Forms\Components\MarkdownEditor::make('q_2')
-                            ->label(__('q_2'))
-                            ->disabled(),
+                            // Forms\Components\MarkdownEditor::make('q_2')
+                            // ->label(__('q_2'))
+                            // ->disabled(),
+                            Forms\Components\MarkdownEditor::make('q_3')
+                                ->label(__('q_3'))
+                                ->disabled(),
 
                         Forms\Components\MarkdownEditor::make('q_4')
                             ->label(__('q_4'))

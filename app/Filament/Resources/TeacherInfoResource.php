@@ -52,7 +52,7 @@ class TeacherInfoResource extends Resource
                     ->description('')
                     ->schema([
 
-                        Forms\Components\MarkdownEditor::make('name')
+                        Forms\Components\MarkdownEditor::make('Ar_Name')
                             ->label(__('name'))
                             ->disabled(),
                         Forms\Components\MarkdownEditor::make('phone')
@@ -177,8 +177,8 @@ class TeacherInfoResource extends Resource
 
             ])
             ->actions([
-                // Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
+                // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

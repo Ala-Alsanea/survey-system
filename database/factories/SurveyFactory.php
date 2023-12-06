@@ -26,7 +26,7 @@ class SurveyFactory extends Factory
             'gov' => fake()->randomElement(array_values(TeacherInfo::pluck('gov')->unique()->all())),
             'district' => fake()->randomElement(array_values(TeacherInfo::pluck('district')->unique()->all())),
             'subdistrict' => fake()->randomElement(array_values(TeacherInfo::pluck('subdistrict')->unique()->all())),
-            // 'edu_qual'=>fake()->word(),
+            'edu_qual'=>fake()->word(),
             'national_card_id' => fake()->uuid(),
 
 
@@ -48,7 +48,7 @@ class SurveyFactory extends Factory
             'image_contract_direct_work' => '1cbfac69e28183f40e110017ab3f1e52.jpg',
 
             'q_1' => fake()->text(),
-            'q_2' => fake()->text(),
+            // 'q_2' => fake()->text(),
             'q_3' => fake()->text(),
             'q_4' => fake()->text(),
             'q_5' => fake()->text(),

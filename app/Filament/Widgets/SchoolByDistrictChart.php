@@ -24,21 +24,25 @@ class SchoolByDistrictChart extends ChartWidget
     protected function getData(): array
     {
 
-        $labels = array_values(TeacherInfo::pluck('district')->unique()->all());
-        $targeted  = array_values(array_map(fn ($val) => ['data' => TeacherInfo::where('district', $val)->count(), 'lable' => $val], $labels));
+        $district = array_values(TeacherInfo::pluck('district')->unique()->all());
 
-        $progressed  = array_values(array_map(fn ($val) => ['data' => Survey::where('district', $val)->count(), 'lable' => $val], $labels));
+        $targetedSchool = array_values(array_map(fn ($val) => ['data' => TeacherInfo::where('district', $val)->pluck('school')->unique()->count(), 'lable' => $val],$district));
+
+        $targeted  = array_values(array_map(fn ($val) => ['data' => TeacherInfo::where('district', $val)->count(), 'lable' => $val], $district));
+
+        $progressed  = array_values(array_map(fn ($val) => ['data' => Survey::where('district', $val)->count(), 'lable' => $val], $district));
+        $progressedSchool = array_values(array_map(fn ($val) => ['data' => Survey::where('district', $val)->pluck('school')->count(), 'lable' => $val], $district));
 
 
 
         sleep(1);
-        // dd($labels);
+        // dd($progressedSchool);
 
         return [
             'datasets' => [
                 [
                     'label' => 'targeted',
-                    'data' => array_map(fn ($val) => $val['data'], $targeted),
+                    'data' => array_map(fn ($val) => $val['data'], $targetedSchool),
                     // 'backgroundColor' => '#d4d4d8',
                     // 'borderColor' => '#3f3f46',
                 ],
@@ -50,7 +54,7 @@ class SchoolByDistrictChart extends ChartWidget
                     'borderColor' => '#065f46',
                 ]
             ],
-            'labels' => array_map(fn ($val) => $val['lable'], $targeted),
+            'labels' => array_map(fn ($val) => $val['lable'], $targetedSchool),
         ];
 
         // return[];

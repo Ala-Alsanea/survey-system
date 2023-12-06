@@ -21,7 +21,9 @@ return new class extends Migration
             $table->string('gov')->nullable();
             $table->string('district')->nullable();
             $table->string('subdistrict')->nullable();
-            // $table->string('edu_qual')->nullable();
+            $table->string('edu_qual')->nullable();
+            $table->string('school')->nullable();
+            $table->string('school_id')->nullable();
 
             // attach
             $table->string('national_card_id')->nullable();
@@ -34,7 +36,7 @@ return new class extends Migration
 
             // answer
             $table->string('q_1')->nullable();
-            $table->string('q_2')->nullable();
+            // $table->string('q_2')->nullable();
             $table->string('q_3')->nullable();
             $table->string('q_4')->nullable();
             $table->string('q_5')->nullable();

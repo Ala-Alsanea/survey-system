@@ -3,6 +3,7 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Researcher;
+use App\Models\Survey;
 use App\Models\TeacherInfo;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
@@ -21,49 +22,49 @@ class StatsOverview extends BaseWidget
 
     protected function getStats(): array
     {
-        // $collected = TeacherInfo::all()->count();
-        // $reviewed = TeacherInfo::where('done', 1)->count();
-        // $not_reviewed = TeacherInfo::where('done', 0)->count();
-        // $labels = TeacherInfo::pluck('done')->unique()->all();
-        // $data  = array_map(fn ($val) => ['data' => TeacherInfo::where('done', $val)->count(), 'lable' => str($val)], $labels);
-        // $researcher = Researcher::all()->count();
+        $TeacherCollected = Survey::all()->count();
+        $reviewedSurvey = Survey::where('done', 1)->count();
+        $notReviewedSurvey = Survey::where('done', 0)->count();
+        $labelsDone = Survey::pluck('done')->unique()->all();
+        $data  = array_map(fn ($val) => ['data' => Survey::where('done', $val)->count(), 'lable' => str($val)], $labelsDone);
+        $researcher = Researcher::all()->count();
 
 
-        // sleep(1);
+        sleep(1);
 
 
-        // // dd($data);
+        // dd($data);
 
 
-        // return [
-        //     //
-        //     Stat::make('Researchers', $researcher)
-        //         ->color('success')
-        //         ->description('الباحثيين')
-        //         ->descriptionIcon('heroicon-s-users')
-        //         ->color('success'),
+        return [
+            //
+            Stat::make('Researchers', $researcher)
+                ->color('success')
+                ->description('total')
+                ->descriptionIcon('heroicon-s-users')
+                ->color('success'),
 
-        //     Stat::make('Collected', $collected )
-        //         ->color('success')
-        //         ->description('مستفيد')
-        //         ->descriptionIcon('heroicon-o-circle-stack')
-        //         ->chart(array_map(fn ($val) => $val['data'], $data))
-        //         ->color('success'),
+            Stat::make('Survey ', $TeacherCollected )
+                ->color('success')
+                ->description('Collected')
+                ->descriptionIcon('heroicon-o-circle-stack')
+                ->chart(array_map(fn ($val) => $val['data'], $data))
+                ->color('success'),
 
-        //     Stat::make('Not reviewed yet', $not_reviewed)
-        //         ->description('مستفيد')
-        //         ->descriptionIcon('heroicon-o-x-circle')
-        //         ->color('danger'),
+            Stat::make('Not reviewed', $notReviewedSurvey)
+                ->description('Survey')
+                ->descriptionIcon('heroicon-o-x-circle')
+                ->color('danger'),
 
-        //     Stat::make('Reviewed', $reviewed)
-        //     ->description('مستفيد')
-        //     ->descriptionIcon('heroicon-o-check-circle')
-        //     ->color('success'),
+            Stat::make('Reviewed ', $reviewedSurvey)
+            ->description('Survey')
+            ->descriptionIcon('heroicon-o-check-circle')
+            ->color('success'),
 
 
 
-        // ];
-        return [];
+        ];
+        // return [];
 
 
     }
