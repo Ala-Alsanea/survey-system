@@ -15,10 +15,16 @@ return new class extends Migration
             $table->id();
 
             $table->string('Ar_Name')->nullable();
-            $table->string('city')->nullable();
+
+            $table->string('gov')->nullable();
+            $table->string('gov_id')->nullable();
             $table->string('district')->nullable();
-            $table->string('isolation')->nullable();
+            $table->string('district_id')->nullable();
+            $table->string('subdistrict')->nullable();
+            $table->string('subdistrict_id')->nullable();
             $table->string('school')->nullable();
+            $table->string('school_id')->nullable();
+
             $table->string('edu_qual')->nullable();
             $table->string('major')->nullable();
             $table->string('national_card_id')->nullable();
@@ -26,6 +32,13 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('name_manager_school')->nullable();
             $table->string('phone_manager_school')->nullable();
+
+            $table->string('changed_phone')->nullable();
+            $table->string('changed_national_card_id')->nullable();
+
+            // $table->string('phone_repeated')->nullable();
+
+
 
 
 

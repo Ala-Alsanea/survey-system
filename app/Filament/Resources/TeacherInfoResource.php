@@ -23,7 +23,7 @@ class TeacherInfoResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $label = 'المستفيدين';
+    protected static ?string $label = 'Teacher info';
 
     public static function getNavigationLabel(): string
     {
@@ -37,7 +37,7 @@ class TeacherInfoResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return 'المستفيد';
+        return 'Teacher info';
     }
 
 
@@ -46,16 +46,8 @@ class TeacherInfoResource extends Resource
         return $form
             ->schema([
 
-                Forms\Components\Section::make('معلومات الباحث')
-                    ->description('')
-                    ->schema([
-                        Forms\Components\Select::make('researcher.name')
-                            ->label(__('researcher_name'))
-                            ->relationship('researcher', 'name')
-                            ->columnSpanFull()
-                            ->disabled(),
-                    ])
-                    ->columns(2),
+
+
                 Forms\Components\Section::make('معلومات المستفيد')
                     ->description('')
                     ->schema([
@@ -66,12 +58,15 @@ class TeacherInfoResource extends Resource
                         Forms\Components\MarkdownEditor::make('phone')
                             ->label(__('phone'))
                             ->disabled(),
-                        Forms\Components\MarkdownEditor::make('gender')
-                            ->label(__('gender'))
+
+                        Forms\Components\TextInput::make('gov')
+                            ->label(__('gov'))
                             ->disabled(),
-                        Forms\Components\TextInput::make('district.city.id')
-                            // ->relationship('district', 'city_id')
-                            ->label(__('city'))
+                        Forms\Components\TextInput::make('district')
+                            ->label(__('district'))
+                            ->disabled(),
+                        Forms\Components\TextInput::make('subdistrict')
+                            ->label(__('subdistrict'))
                             ->disabled(),
                     ])
                     ->columns(2),
@@ -81,158 +76,49 @@ class TeacherInfoResource extends Resource
                     ->description('')
                     ->schema([
 
-
-                        // Forms\Components\MarkdownEditor::make('edu_qual')
-                        //     ->label(__('edu_qual'))
-                        //     ->disabled(),
                         Forms\Components\MarkdownEditor::make('national_card_id')
                             ->label(__('national_card_id'))
                             ->disabled(),
-
-                        Forms\Components\MarkdownEditor::make('q_3')
-                            ->label(__('q_3'))
+                        Forms\Components\MarkdownEditor::make('national_card_type')
+                            ->label(__('national_card_type'))
                             ->disabled(),
-
-                        Forms\Components\FileUpload::make('image_national_card_front')
-                            ->label(__('image_national_card_front'))
-                            ->openable()
-                            ->deletable(false)
-                            ->disabled()
-                            ->image(),
-                        Forms\Components\FileUpload::make('image_national_card_back')
-                            ->label(__('image_national_card_back'))
-                            ->openable()
-                            ->deletable(false)
-                            ->disabled()
-                            ->image(),
 
                     ])
                     ->columns(1),
 
-                Forms\Components\Section::make('ملحقات')
+                Forms\Components\Section::make('المؤهل')
                     ->description('')
                     ->schema([
 
-                        Forms\Components\FileUpload::make('image_attend')
-                            ->label(__('image_attend'))
-                            ->openable()
-                            ->deletable(false)
-                            ->disabled()
-                            ->image(),
-                        Forms\Components\FileUpload::make('image_contract_direct_work')
-                            ->label(__('image_contract_direct_work'))
-                            ->openable()
-                            ->deletable(false)
-                            ->disabled()
-                            ->image(),
+                        Forms\Components\MarkdownEditor::make('edu_qual')
+                            ->label(__('edu_qual'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('school')
+                            ->label(__('school'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('major')
+                            ->label(__('major'))
+                            ->disabled(),
+
+
+
                     ])
                     ->columns(1),
 
-                Forms\Components\Section::make('الاسئله')
+
+                Forms\Components\Section::make('التحقق من التكرار')
                     ->description('')
                     ->schema([
+                        Forms\Components\MarkdownEditor::make('changed_phone')
+                            // ->label(__('major'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('changed_national_card_id')
+                            // ->label(__('major'))
+                            ->disabled(),
 
-                        Forms\Components\MarkdownEditor::make('q_1')
-                            ->label(__('q_1'))
-                            ->disabled(),
-                        Forms\Components\MarkdownEditor::make('q_2')
-                            ->label(__('q_2'))
-                            ->disabled(),
-
-                        Forms\Components\MarkdownEditor::make('q_4')
-                            ->label(__('q_4'))
-                            ->disabled(),
-                        Forms\Components\MarkdownEditor::make('q_5')
-                            ->label(__('q_5'))
-                            ->disabled(),
-                        Forms\Components\MarkdownEditor::make('q_6')
-                            ->label(__('q_6'))
-                            ->disabled(),
-                        Forms\Components\MarkdownEditor::make('q_7')
-                            ->label(__('q_7'))
-                            ->disabled(),
-                        Forms\Components\MarkdownEditor::make('q_8')
-                            ->label(__('q_8'))
-                            ->disabled(),
-                        Forms\Components\MarkdownEditor::make('q_9')
-                            ->label(__('q_9'))
-                            ->disabled(),
-                        Forms\Components\MarkdownEditor::make('q_10')
-                            ->label(__('q_10'))
-                            ->disabled(),
-                        Forms\Components\MarkdownEditor::make('q_11')
-                            ->label(__('q_11'))
-                            ->disabled(),
-                    ])
-                    ->columns(1),
-
-
-                Forms\Components\Section::make('التحقق')
-                    ->description('حدد نوع البيانات المتواجدة في العقد او الارساليه مباشرة العمل')
-                    ->schema([
-
-                        Forms\Components\Select::make('val_name')
-                            ->label(__('val_name'))
-                            ->options([
-                                __('yes') => __('yes'),
-                                __('no') => __('no'),
-                            ])
-                            ->required(),
-                        Forms\Components\Select::make('val_job_type')
-                            ->label(__('val_job_type'))
-                            ->options([
-                                __('yes') => __('yes'),
-                                __('no') => __('no'),
-                            ])
-                            ->required(),
-                        Forms\Components\Select::make('val_school')
-                            ->label(__('val_school'))
-                            ->options([
-                                __('yes') => __('yes'),
-                                __('no') => __('no'),
-                            ])
-                            ->required(),
-                        Forms\Components\Select::make('val_location')
-                            ->label(__('val_location'))
-                            ->options([
-                                __('yes') => __('yes'),
-                                __('no') => __('no'),
-                            ])
-                            ->required(),
-                        Forms\Components\Select::make('val_hire_date')
-                            ->label(__('val_hire_date'))
-                            ->options([
-                                __('yes') => __('yes'),
-                                __('no') => __('no'),
-                            ])
-                            ->required(),
-                        Forms\Components\Select::make('val_signature')
-                            ->label(__('val_signature'))
-                            ->options([
-                                __('yes') => __('yes'),
-                                __('no') => __('no'),
-                            ])
-                            ->required(),
-                        Forms\Components\Select::make('val_Seal')
-                            ->label(__('val_Seal'))
-                            ->options([
-                                __('yes') => __('yes'),
-                                __('no') => __('no'),
-                            ])
-                            ->columnSpanFull()
-                            ->required(),
                     ])
                     ->columns(2),
 
-                Forms\Components\Section::make('المراجعه')
-                    ->description('')
-                    ->schema([
-
-                        Forms\Components\Toggle::make('done')
-                            ->label(__('done'))
-                            ->in([true]),
-                    ])
-                    ->columns(2),
 
 
             ]);
@@ -242,7 +128,7 @@ class TeacherInfoResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('Ar_Name')
                     ->label(__('name'))
                     ->searchable(),
                 // Tables\Columns\TextColumn::make('national_card_id')
@@ -251,70 +137,20 @@ class TeacherInfoResource extends Resource
                 Tables\Columns\TextColumn::make('phone')
                     ->label(__('phone'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('gender')
-                    ->label(__('gender'))
+                Tables\Columns\TextColumn::make('gov')
+                    ->label(__('gov'))
+                    ->disabled(),
+                Tables\Columns\TextColumn::make('district')
+                    ->label(__('district'))
+                    ->disabled(),
+                Tables\Columns\TextColumn::make('subdistrict')
+                    ->label(__('subdistrict'))
+                    ->disabled(),
+                Tables\Columns\TextColumn::make('school')
+                    ->label(__('school'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('district.city.name')
-                    ->label(__('city'))
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('researcher.name')
-                    ->label(__('researcher_name'))
-                    ->searchable(),
-                // Tables\Columns\TextColumn::make('edu_qual')
-                //     ->searchable(),
-                // Tables\Columns\ImageColumn::make('image_national_card_front'),
-                // Tables\Columns\ImageColumn::make('image_national_card_back'),
-                // Tables\Columns\ImageColumn::make('image_attend'),
-                // Tables\Columns\ImageColumn::make('image_contract_direct_work'),
-                // Tables\Columns\TextColumn::make('q_1')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('q_2')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('q_3')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('q_4')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('q_5')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('q_6')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('q_7')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('q_8')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('q_9')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('q_10')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('q_11')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('val_name')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('val_job_type')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('val_school')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('val_location')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('val_hire_date')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('val_signature')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('val_Seal')
-                //     ->searchable(),
 
-                Tables\Columns\IconColumn::make('done')
-                    ->label(__('done'))
-                    ->icon(fn (string $state): string => match ($state) {
-                        '1' => 'heroicon-o-check-circle',
-                        '0' => 'heroicon-o-x-circle',
-                    })
-                    ->color(fn (string $state): string => match ($state) {
-                        '1' => 'success',
-                        '0' => 'danger',
-                        default => 'gray',
-                    })
-                    ->sortable(),
+
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -333,7 +169,7 @@ class TeacherInfoResource extends Resource
                 ExportAction::make()->exports([
                     ExcelExport::make()->withColumns([
                         Column::make('name')->heading(__('name')),
-                        Column::make('researcher.name'),
+                        Column::make('city'),
                         Column::make('created_at'),
                         Column::make('deleted_at'),
                     ]),

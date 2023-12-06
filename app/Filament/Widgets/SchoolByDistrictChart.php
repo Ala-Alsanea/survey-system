@@ -10,7 +10,7 @@ class SchoolByDistrictChart extends ChartWidget
 {
     protected static ?string $heading = 'School By district';
 
-    protected static ?int $sort = 3;
+    protected static ?int $sort = 5;
 
     public bool $readyToLoad = false;
 
@@ -32,7 +32,7 @@ class SchoolByDistrictChart extends ChartWidget
 
 
         sleep(1);
-        // dd($targeted);
+        // dd($labels);
 
         return [
             'datasets' => [

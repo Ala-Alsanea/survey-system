@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('isolations', function (Blueprint $table) {
+        Schema::create('govs', function (Blueprint $table) {
             $table->id();
-
             $table->unsignedBigInteger('siteCode')->nullable();
-            $table->unsignedBigInteger('ParentCode')->nullable();
-
-            // $table->foreignId('ParentCode')->nullable()->constrained('districts')->cascadeOnUpdate();
+            // $table->integer('ParentCode')->nullable();
             $table->string('Ar_Name')->nullable();
             $table->string('En_Name')->nullable();
-
+            // $table->integer('countryID')->nullable()->default( 1);
 
             $table->timestamps();
         });
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('isolations');
+        Schema::dropIfExists('cities');
     }
 };

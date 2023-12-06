@@ -23,9 +23,9 @@ class SurveyFactory extends Factory
             'phone' => fake()->phoneNumber(),
             'gender' => fake()->randomElement(['ذكر', 'انثى']),
             // 'city'=> fake()->city(),
-            'city' => fake()->randomElement(array_values(TeacherInfo::pluck('city')->unique()->all())),
+            'gov' => fake()->randomElement(array_values(TeacherInfo::pluck('gov')->unique()->all())),
             'district' => fake()->randomElement(array_values(TeacherInfo::pluck('district')->unique()->all())),
-            'isolation' => fake()->randomElement(array_values(TeacherInfo::pluck('isolation')->unique()->all())),
+            'subdistrict' => fake()->randomElement(array_values(TeacherInfo::pluck('subdistrict')->unique()->all())),
             // 'edu_qual'=>fake()->word(),
             'national_card_id' => fake()->uuid(),
 

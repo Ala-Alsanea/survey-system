@@ -26,12 +26,12 @@ class SchoolByGovernoratesChart extends ChartWidget
     protected function getData(): array
     {
 
-        $labels = array_values(TeacherInfo::pluck('city')->unique()->all());
+        $labels = array_values(TeacherInfo::pluck('gov')->unique()->all());
 
-        $targeted  = array_map(fn ($val) => ['data' => TeacherInfo::where('city', $val)->count(), 'lable' => $val], $labels);
+        $targeted  = array_map(fn ($val) => ['data' => TeacherInfo::where('gov', $val)->count(), 'lable' => $val], $labels);
         $targeted  = array_values($targeted);
 
-        $progressed  = array_values(array_map(fn ($val) => ['data' => Survey::where('city', $val)->count(), 'lable' => $val], $labels));
+        $progressed  = array_values(array_map(fn ($val) => ['data' => Survey::where('gov', $val)->count(), 'lable' => $val], $labels));
 
 
         sleep(1);

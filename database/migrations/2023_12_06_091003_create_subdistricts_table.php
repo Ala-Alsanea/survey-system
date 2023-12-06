@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cities', function (Blueprint $table) {
+        Schema::create('subdistricts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('siteCode')->nullable();
-            // $table->integer('ParentCode')->nullable();
+            $table->unsignedBigInteger('ParentCode')->nullable();
+            // $table->primary(['id', 'siteCode']);
+
             $table->string('Ar_Name')->nullable();
             $table->string('En_Name')->nullable();
-            // $table->integer('countryID')->nullable()->default( 1);
-
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cities');
+        Schema::dropIfExists('subdistricts');
     }
 };

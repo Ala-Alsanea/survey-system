@@ -11,53 +11,40 @@ class TeacherInfo extends Model
 
 
     public $fillable = [
-        'name',
+        'Ar_Name',
+
         'phone',
-        'gender',
-        'city',
-        // 'edu_qual',
-        'national_card_id',
-
-        'image_national_card_front',
-        'image_national_card_back',
-        'image_attend',
-        'image_contract_direct_work',
-
-        'q_1',
-        'q_2',
-        'q_3',
-        'q_4',
-        'q_5',
-        'q_6',
-        'q_7',
-        'q_8',
-        'q_9',
-        'q_10',
-        'q_11',
-
-        'val_name',
-        'val_job_type',
-        'val_school',
-        'val_location',
-        'val_hire_date',
-        'val_signature',
-        'val_Seal',
-
-        'done',
-        'researcher_id',
+        'gov',
+        'gov_id',
         'district_id',
+        'district',
+        'subdistrict',
+        'subdistrict_id',
+        'school',
+        'school_id',
+
+        'edu_qual',
+        'major',
+        'national_card_id',
+        'national_card_type',
+
+        'name_manager_school',
+        'phone_manager_school',
+
+        'changed_phone',
+        'changed_national_card_id',
 
 
     ];
 
 
-    public function researcher()
-    {
-        return $this->belongsTo(Researcher::class);
-    }
+    // public function researcher()
+    // {
+    //     return $this->belongsTo(Researcher::class);
+    // }
 
-    public function district()
-    {
-        return $this->belongsTo(District::class);
-    }
+    // public function district()
+    // {
+    //     return $this->belongsTo(District::class);
+    // }
 }

@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('gender')->nullable();
 
-            $table->string('city')->nullable();
+            $table->string('gov')->nullable();
             $table->string('district')->nullable();
-            $table->string('isolation')->nullable();
+            $table->string('subdistrict')->nullable();
             // $table->string('edu_qual')->nullable();
 
             // attach
