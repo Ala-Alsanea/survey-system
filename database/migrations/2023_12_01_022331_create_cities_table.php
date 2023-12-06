@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
-            $table->integer('siteCode')->nullable();
+            $table->unsignedBigInteger('siteCode')->nullable();
             // $table->integer('ParentCode')->nullable();
             $table->string('Ar_Name')->nullable();
             $table->string('En_Name')->nullable();

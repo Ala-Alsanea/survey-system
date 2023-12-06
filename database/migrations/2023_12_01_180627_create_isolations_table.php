@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('isolations', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('siteCode')->nullable();
-            $table->foreignId('ParentCode')->nullable()->constrained('districts')->cascadeOnUpdate();
+            $table->unsignedBigInteger('siteCode')->nullable();
+            $table->unsignedBigInteger('ParentCode')->nullable();
+
+            // $table->foreignId('ParentCode')->nullable()->constrained('districts')->cascadeOnUpdate();
             $table->string('Ar_Name')->nullable();
             $table->string('En_Name')->nullable();
 
