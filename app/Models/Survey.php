@@ -17,8 +17,8 @@ class Survey extends Model
         'district',
         'subdistrict',
         'edu_qual',
-
         'national_card_id',
+
         'image_national_card_front',
         'image_national_card_back',
         'image_attend',

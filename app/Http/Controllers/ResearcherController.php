@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PhoneRepeat;
 use Validator;
-use App\Models\Researcher;
 use App\Models\Survey;
+use App\Models\Researcher;
+use App\Models\PhoneRepeat;
 use App\Models\TeacherInfo;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Repos\ImageRepository;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
 class ResearcherController extends Controller
@@ -117,6 +120,21 @@ class ResearcherController extends Controller
             'errors' => null
         ];
 
+        $survey = $request->all();
+
+        // decode images base64
+        $survey['image_national_card_front'] = $request->image_national_card_front? $this->upload_image($request->image_national_card_front, ''): null;
+        $survey['image_national_card_back'] = $request->image_national_card_back? $this->upload_image($request->image_national_card_back, ''): null;
+        $survey['image_attend'] = $request->image_attend ? $this->upload_image($request->image_attend, '') : null;
+        $survey['image_contract_direct_work'] = $request->image_contract_direct_work ? $this->upload_image($request->image_contract_direct_work, '') : null;
+
+
+
+        // return response($survey);
+
+        // ##########################
+
+        // cheack repeated phone
         if ($phoneRepeat = PhoneRepeat::where('phone', $request->phone)->first()) {
 
             $phoneRepeat->update(['repeated' => $phoneRepeat->repeated + 1]);
@@ -125,34 +143,31 @@ class ResearcherController extends Controller
                 'phone' => $request->phone,
             ]);
         }
-        // if phone is not exist
+
+        // if national_card_id is not exist
         $teacherInfo = TeacherInfo::where('national_card_id', $request->national_card_id)->first();
         if (!$teacherInfo) {
             if ($teacher = TeacherInfo::where('phone', $request->phone)->first()) {
 
-                $teacher->update(['changed_national_card_id'=> $request->national_card_id]);
+                $teacher->update(['changed_national_card_id' => $request->national_card_id]);
                 // return response($teacher);
 
             }
         }
 
+        // if phone is not exist
         $teacherInfo = TeacherInfo::where('phone', $request->phone)->first();
         if (!$teacherInfo) {
 
             if ($teacher = TeacherInfo::where('national_card_id', $request->national_card_id)->first()) {
-                $teacher->update(['changed_phone'=> $request->phone]);
+                $teacher->update(['changed_phone' => $request->phone]);
                 // return response($teacher);
             }
         }
 
 
-        // if phone is exist
 
-
-        // $survey = $request->all();
-
-
-        $surveySaved = Survey::create($request->all());
+        $surveySaved = Survey::create($survey);
 
         $response['success'] = [
             'saved'
@@ -160,14 +175,6 @@ class ResearcherController extends Controller
         return response($response);
     }
 
-    protected function  reformat($request)
-    {
-
-        $request = (array) $request;
-        $request = array_map(fn ($val) => $val !== null ? gettype(strval($val)) : null, $request);
-        // dd(new Request($request ));
-        return new Request($request);
-    }
 
     public function getProfile()
     {
@@ -176,5 +183,46 @@ class ResearcherController extends Controller
             'researcher' => auth()->user(),
         ];
         return response($response);
+    }
+    protected function  reformat($request)
+    {
+
+        $request = (array) $request;
+        $request = array_map(fn ($val) => $val !== null ? gettype(strval($val)) : null, $request);
+        // dd(new Request($request ));
+        return new Request($request);
+    }
+    public function upload_image($base64_image, $image_path)
+    {
+        //The base64 encoded image data
+        $image_64 = $base64_image;
+        if (str_contains($image_64, ';base64,')) {
+            // exploed the image to get the extension
+            $extension = explode(';base64,', $image_64);
+            //from the first element
+            $extension = explode('/', $extension[0]);
+            // from the 2nd element
+            $extension = $extension[1];
+            $replace = substr($image_64, 0, strpos($image_64, ',') + 1);
+            $image = str_replace($replace, '', $image_64);
+        } else {
+            $extension = 'jpg';
+            $image = $image_64;
+
+        }
+        // finding the substring from
+        // dd($replace);
+        // replace here for example in our case: data:image/png;base64,
+        // replace
+        $image = str_replace(' ', '+', $image);
+        // set the image name using the time and a random string plus
+        // an extension
+        $imageName = time() . '_' . Str::random(20) . '.' . $extension;
+        // save the image in the image path we passed from the
+        // function parameter.
+        Storage::disk('public')->put($image_path . '/' . $imageName, base64_decode($image));
+        // return the image path and feed to the function that requests it
+        // return $image_path . '/'. $imageName;
+        return  $imageName;
     }
 }
