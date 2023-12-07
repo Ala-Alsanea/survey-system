@@ -122,6 +122,8 @@ class ResearcherController extends Controller
 
         $survey = $request->all();
 
+        // return response($survey);
+        // return response(base64_encode(file_get_contents('/home/ala/Documents/Projects/php/softupgrate/survey system/survey-teacher-laravel/storage/app/public/1cbfac69e28183f40e110017ab3f1e52.jpg')));
         // decode images base64
         $survey['image_national_card_front'] = $request->image_national_card_front? $this->upload_image($request->image_national_card_front, ''): null;
         $survey['image_national_card_back'] = $request->image_national_card_back? $this->upload_image($request->image_national_card_back, ''): null;
@@ -130,7 +132,6 @@ class ResearcherController extends Controller
 
 
 
-        // return response($survey);
 
         // ##########################
 
@@ -220,9 +221,15 @@ class ResearcherController extends Controller
         $imageName = time() . '_' . Str::random(20) . '.' . $extension;
         // save the image in the image path we passed from the
         // function parameter.
-        Storage::disk('public')->put($image_path . '/' . $imageName, base64_decode($image));
-        // return the image path and feed to the function that requests it
-        // return $image_path . '/'. $imageName;
-        return  $imageName;
+        // if(base64_decode($image, $strict = true))
+        // {
+            Storage::disk('public')->put( $imageName, base64_decode($image));
+            // return the image path and feed to the function that requests it
+            // return $image_path . '/'. $imageName;
+            return  $imageName;
+
+        // }
+        // return  null;
+
     }
 }
