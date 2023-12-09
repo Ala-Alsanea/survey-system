@@ -166,14 +166,14 @@ class TeacherInfoResource extends Resource
             ])
             ->headerActions([
                 // ...
-                ExportAction::make()->exports([
-                    ExcelExport::make()->withColumns([
-                        Column::make('name')->heading(__('name')),
-                        Column::make('city'),
-                        Column::make('created_at'),
-                        Column::make('deleted_at'),
-                    ]),
-                ])
+                // ExportAction::make()->exports([
+                //     ExcelExport::make()->withColumns([
+                //         Column::make('name')->heading(__('name')),
+                //         Column::make('city'),
+                //         Column::make('created_at'),
+                //         Column::make('deleted_at'),
+                //     ]),
+                // ])
 
             ])
             ->actions([

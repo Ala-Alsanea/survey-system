@@ -60,6 +60,9 @@ class SurveyResource extends Resource
                         Forms\Components\TextInput::make('subdistrict')
                             ->label(__('subdistrict'))
                             ->disabled(),
+                        Forms\Components\TextInput::make('school')
+                            ->label(__('school'))
+                            ->disabled(),
                     ])
                     ->columns(2),
 
@@ -77,21 +80,21 @@ class SurveyResource extends Resource
                             ->disabled(),
 
 
-                            Forms\Components\FileUpload::make('image_national_card_front')
+                        Forms\Components\FileUpload::make('image_national_card_front')
                             ->label(__('image_national_card_front'))
                             ->openable()
                             ->deletable(false)
                             ->disabled()
                             ->image(),
-                            Forms\Components\FileUpload::make('image_national_card_back')
+                        Forms\Components\FileUpload::make('image_national_card_back')
                             ->label(__('image_national_card_back'))
                             ->openable()
                             ->deletable(false)
                             ->disabled()
                             ->image(),
 
-                            ])
-                            ->columns(1),
+                    ])
+                    ->columns(1),
 
                 Forms\Components\Section::make('ملحقات')
                     ->description('')
@@ -119,12 +122,12 @@ class SurveyResource extends Resource
                         Forms\Components\MarkdownEditor::make('q_1')
                             ->label(__('q_1'))
                             ->disabled(),
-                            // Forms\Components\MarkdownEditor::make('q_2')
-                            // ->label(__('q_2'))
-                            // ->disabled(),
-                            Forms\Components\MarkdownEditor::make('q_3')
-                                ->label(__('q_3'))
-                                ->disabled(),
+                        // Forms\Components\MarkdownEditor::make('q_2')
+                        // ->label(__('q_2'))
+                        // ->disabled(),
+                        Forms\Components\MarkdownEditor::make('q_3')
+                            ->label(__('q_3'))
+                            ->disabled(),
 
                         Forms\Components\MarkdownEditor::make('q_4')
                             ->label(__('q_4'))
@@ -330,10 +333,46 @@ class SurveyResource extends Resource
                 ExportAction::make()->exports([
                     ExcelExport::make()->withColumns([
                         Column::make('name')->heading(__('name')),
-                        Column::make('researcher.name'),
-                        Column::make('created_at'),
-                        Column::make('deleted_at'),
-                    ]),
+                        Column::make('phone')->heading(__('phone')),
+                        Column::make('gender')->heading(__('gender')),
+                        Column::make('gov')->heading(__('gov')),
+                        Column::make('district')->heading(__('district')),
+                        Column::make('subdistrict')->heading(__('subdistrict')),
+                        Column::make('school')->heading(__('school')),
+                        Column::make('edu_qual')->heading(__('edu_qual')),
+                        Column::make('national_card_id')->heading(__('national_card_id')),
+
+                        // Column::make('image_national_card_front')->heading(__('image_national_card_front')),
+                        // Column::make('image_national_card_back')->heading(__('image_national_card_back')),
+                        // Column::make('image_attend')->heading(__('image_attend')),
+                        // Column::make('image_contract_direct_work')->heading(__('image_contract_direct_work')),
+
+                        Column::make('q_1')->heading(__('q_1')),
+                        Column::make('q_3')->heading(__('q_3')),
+                        Column::make('q_4')->heading(__('q_4')),
+                        Column::make('q_5')->heading(__('q_5')),
+                        Column::make('q_6')->heading(__('q_6')),
+                        Column::make('q_7')->heading(__('q_7')),
+                        Column::make('q_8')->heading(__('q_8')),
+                        Column::make('q_9')->heading(__('q_9')),
+                        Column::make('q_10')->heading(__('q_10')),
+                        Column::make('q_11')->heading(__('q_11')),
+
+                        Column::make('val_name')->heading(__('val_name')),
+                        Column::make('val_job_type')->heading(__('val_job_type')),
+                        Column::make('val_school')->heading(__('val_school')),
+                        Column::make('val_location')->heading(__('val_location')),
+                        Column::make('val_hire_date')->heading(__('val_hire_date')),
+                        Column::make('val_signature')->heading(__('val_signature')),
+                        Column::make('val_Seal')->heading(__('val_Seal')),
+
+
+                        Column::make('researcher.name')->heading(__('researcher_name')),
+
+                    ])
+                    // ->askForFilename()
+                    // ->withFilename(fn ($filename) => 'prefix-' . $filename)
+
                 ])
 
             ])
