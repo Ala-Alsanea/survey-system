@@ -27,11 +27,11 @@ class SchoolByDistrictChart extends ChartWidget
         $district = array_values(TeacherInfo::pluck('district')->unique()->all());
 
         $targetedSchool = array_values(array_map(fn ($val) => ['data' => TeacherInfo::where('district', $val)->pluck('school')->unique()->count(), 'lable' => $val],$district));
+        $progressedSchool = array_values(array_map(fn ($val) => ['data' => Survey::where('district', $val)->pluck('school')->count(), 'lable' => $val], $district));
 
         $targeted  = array_values(array_map(fn ($val) => ['data' => TeacherInfo::where('district', $val)->count(), 'lable' => $val], $district));
-
         $progressed  = array_values(array_map(fn ($val) => ['data' => Survey::where('district', $val)->count(), 'lable' => $val], $district));
-        $progressedSchool = array_values(array_map(fn ($val) => ['data' => Survey::where('district', $val)->pluck('school')->count(), 'lable' => $val], $district));
+
 
 
 
@@ -49,7 +49,7 @@ class SchoolByDistrictChart extends ChartWidget
 
                 [
                     'label' => 'progress',
-                    'data' =>  array_map(fn ($val) => $val['data'], $progressed),
+                    'data' =>  array_map(fn ($val) => $val['data'], $progressedSchool),
                     'backgroundColor' => '#16a34a',
                     'borderColor' => '#065f46',
                 ]

@@ -28,11 +28,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        Researcher::factory()->count(1)->create();
+        // Researcher::factory()->count(1)->create();
         Researcher::factory()->create([
-            'name'=>'test',
+            'name'=>'test user',
             'phone'=>'789456123',
-            'password' => '123',
+            'password' => '15987532',
         ]);
 
         $this->call([
