@@ -115,6 +115,17 @@ class ResearcherController extends Controller
      */
     public function storeSurvey(Request $request)
     {
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+
+            return response()->json(['error' => $validator->errors()], 401);
+        }
+
+
         $response = [
             'success' => null,
             'errors' => null
@@ -122,13 +133,23 @@ class ResearcherController extends Controller
 
         $survey = $request->all();
 
+
+        $survey['image_national_card_front'] = $this->parse_image($survey['image_national_card_front'] ?? null, "{$survey['name']}_ image_national_card_front");
+        $survey['image_national_card_back'] = $this->parse_image($survey['image_national_card_back']??null, "{$survey['name']}_ image_national_card_back");
+        $survey['image_attend'] = $this->parse_image($survey['image_attend'] ?? null, "{$survey['name']}_ image_attend");
+        $survey['image_contract_direct_work'] = $this->parse_image($survey['image_contract_direct_work']??null, "{$survey['name']}_ image_contract_direct_work");
+
+
+
+        // $survey['image_contract_direct_work'] =
+
         // return response($survey);
         // return response(base64_encode(file_get_contents('/home/ala/Documents/Projects/php/softupgrate/survey system/survey-teacher-laravel/storage/app/public/1cbfac69e28183f40e110017ab3f1e52.jpg')));
         // decode images base64
-        $survey['image_national_card_front'] = $request->image_national_card_front? $this->upload_image($request->image_national_card_front, ''): null;
-        $survey['image_national_card_back'] = $request->image_national_card_back? $this->upload_image($request->image_national_card_back, ''): null;
-        $survey['image_attend'] = $request->image_attend ? $this->upload_image($request->image_attend, '') : null;
-        $survey['image_contract_direct_work'] = $request->image_contract_direct_work ? $this->upload_image($request->image_contract_direct_work, '') : null;
+        // $survey['image_national_card_front'] = $request->image_national_card_front? $this->upload_image_base64($request->image_national_card_front, ''): null;
+        // $survey['image_national_card_back'] = $request->image_national_card_back? $this->upload_image_base64($request->image_national_card_back, ''): null;
+        // $survey['image_attend'] = $request->image_attend ? $this->upload_image_base64($request->image_attend, '') : null;
+        // $survey['image_contract_direct_work'] = $request->image_contract_direct_work ? $this->upload_image_base64($request->image_contract_direct_work, '') : null;
 
 
 
@@ -185,6 +206,7 @@ class ResearcherController extends Controller
         ];
         return response($response);
     }
+
     protected function  reformat($request)
     {
 
@@ -193,7 +215,20 @@ class ResearcherController extends Controller
         // dd(new Request($request ));
         return new Request($request);
     }
-    public function upload_image($base64_image, $image_path)
+
+    public function parse_image($image, $name)
+    {
+        if ($image) {
+            $time = time();
+            $imageName = "{$name}_{$time}.{$image->extension()}";
+            $image->storeAs('public', $imageName);
+
+            return  $imageName;
+        }
+        return  null;
+    }
+
+    public function upload_image_base64($base64_image, $image_path)
     {
         //The base64 encoded image data
         $image_64 = $base64_image;
@@ -209,13 +244,12 @@ class ResearcherController extends Controller
         } else {
             $extension = 'jpg';
             $image = $image_64;
-
         }
         // finding the substring from
         // dd($replace);
         // replace here for example in our case: data:image/png;base64,
         // replace
-        $image = str_replace(' ', '+', $image);
+        // $base64_image = str_replace(' ', '+', $base64_image);
         // set the image name using the time and a random string plus
         // an extension
         $imageName = time() . '_' . Str::random(20) . '.' . $extension;
@@ -223,10 +257,11 @@ class ResearcherController extends Controller
         // function parameter.
         // if(base64_decode($image, $strict = true))
         // {
-            Storage::disk('public')->put( $imageName, base64_decode($image));
-            // return the image path and feed to the function that requests it
-            // return $image_path . '/'. $imageName;
-            return  $imageName;
+        dd($base64_image);
+        Storage::disk('public')->put($imageName, base64_decode($base64_image));
+        // return the image path and feed to the function that requests it
+        // return $image_path . '/'. $imageName;
+        return  $imageName;
 
         // }
         // return  null;
