@@ -30,7 +30,6 @@ class StatsOverview extends BaseWidget
         $researcher = Researcher::all()->count();
 
 
-        sleep(1);
 
 
         // dd($data);
@@ -44,7 +43,7 @@ class StatsOverview extends BaseWidget
                 ->descriptionIcon('heroicon-s-users')
                 ->color('success'),
 
-            Stat::make('Survey ', $TeacherCollected )
+            Stat::make('Survey ', $TeacherCollected)
                 ->color('success')
                 ->description('Collected')
                 ->descriptionIcon('heroicon-o-circle-stack')
@@ -57,9 +56,9 @@ class StatsOverview extends BaseWidget
                 ->color('danger'),
 
             Stat::make('Reviewed ', $reviewedSurvey)
-            ->description('Survey')
-            ->descriptionIcon('heroicon-o-check-circle')
-            ->color('success'),
+                ->description('Survey')
+                ->descriptionIcon('heroicon-o-check-circle')
+                ->color('success'),
 
 
 

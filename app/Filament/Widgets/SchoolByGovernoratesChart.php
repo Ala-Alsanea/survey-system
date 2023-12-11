@@ -16,6 +16,8 @@ class SchoolByGovernoratesChart extends ChartWidget
 
     public bool $readyToLoad = false;
 
+    protected static ?string $maxHeight = '300px';
+
     public function loadData()
     {
         $this->readyToLoad = true;
@@ -28,16 +30,11 @@ class SchoolByGovernoratesChart extends ChartWidget
 
         $gov = array_values(TeacherInfo::pluck('gov')->unique()->all());
         $targetedSchool = array_values(array_map(fn ($val) => ['data' => TeacherInfo::where('gov', $val)->pluck('school')->unique()->count(), 'lable' => $val], $gov));
-
-        $targeted  = array_map(fn ($val) => ['data' => TeacherInfo::where('gov', $val)->count(), 'lable' => $val], $gov);
-        $targeted  = array_values($targeted);
-
-        $progressed  = array_values(array_map(fn ($val) => ['data' => Survey::where('gov', $val)->count(), 'lable' => $val], $gov));
-
         $progressedSchool = array_values(array_map(fn ($val) => ['data' => Survey::where('gov', $val)->pluck('school')->count(), 'lable' => $val], $gov));
 
+        $test = usort($targetedSchool, fn ($a, $b) => $b['data'] <=> $a['data']);
 
-        sleep(1);
+
         // dd($targetedSchool);
 
         return [
@@ -66,5 +63,11 @@ class SchoolByGovernoratesChart extends ChartWidget
     protected function getType(): string
     {
         return 'bar';
+    }
+    protected function getOptions(): array
+    {
+        return [
+            // 'indexAxis' => 'y',
+        ];
     }
 }

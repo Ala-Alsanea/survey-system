@@ -27,6 +27,8 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->brandName('Survey System')
+            // ->brandLogo('https://upload.wikimedia.org/wikipedia/commons/4/4d/Logo_of_the_United_Nations.svg')
             ->colors([
                 'danger' => Color::Rose,
                 'gray' => Color::Gray,

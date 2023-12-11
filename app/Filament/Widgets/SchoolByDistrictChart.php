@@ -13,6 +13,8 @@ class SchoolByDistrictChart extends ChartWidget
     protected static ?int $sort = 5;
 
     public bool $readyToLoad = false;
+    protected static bool $isLazy = true;
+    // protected static ?string $maxHeight = '300px';
 
     public function loadData()
     {
@@ -26,16 +28,15 @@ class SchoolByDistrictChart extends ChartWidget
 
         $district = array_values(TeacherInfo::pluck('district')->unique()->all());
 
-        $targetedSchool = array_values(array_map(fn ($val) => ['data' => TeacherInfo::where('district', $val)->pluck('school')->unique()->count(), 'lable' => $val],$district));
+        $targetedSchool = array_values(array_map(fn ($val) => ['data' => TeacherInfo::where('district', $val)->pluck('school')->unique()->count(), 'lable' => $val], $district));
         $progressedSchool = array_values(array_map(fn ($val) => ['data' => Survey::where('district', $val)->pluck('school')->count(), 'lable' => $val], $district));
 
-        $targeted  = array_values(array_map(fn ($val) => ['data' => TeacherInfo::where('district', $val)->count(), 'lable' => $val], $district));
-        $progressed  = array_values(array_map(fn ($val) => ['data' => Survey::where('district', $val)->count(), 'lable' => $val], $district));
+        $test = usort($targetedSchool, fn ($a, $b)=> $b['data'] <=> $a['data']);
+
+        // dd($targetedSchool);
 
 
 
-
-        sleep(1);
         // dd($progressedSchool);
 
         return [
@@ -63,5 +64,13 @@ class SchoolByDistrictChart extends ChartWidget
     protected function getType(): string
     {
         return 'bar';
+    }
+
+    protected function getOptions(): array
+    {
+        return [
+            //  'indexAxis'=> 'y',
+            'barThickness'=> 10
+        ];
     }
 }

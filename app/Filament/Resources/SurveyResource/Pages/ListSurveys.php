@@ -22,20 +22,21 @@ class ListSurveys extends ListRecords
     public function getTabs(): array
     {
         return [
+            'all' => Tab::make('all')
+                ->badge(Survey::count()),
+
             'reviewed' => Tab::make('reviewed')
-            ->badge(Survey::where('done',1)->count())
-            ->modifyQueryUsing(function ($query){
-               return $query->where('done',1);
-            }),
+                ->badge(Survey::where('done', 1)->count())
+                ->modifyQueryUsing(function ($query) {
+                    return $query->where('done', 1);
+                }),
             'not reviewed' => Tab::make('not reviewed')
                 ->badge(Survey::where('done', 0)->count())
 
-            ->modifyQueryUsing(function ($query) {
-                return $query->where('done', 0);
-            })
-                ,
-            'all' => Tab::make('all')
-            ->badge(Survey::count()),
+                ->modifyQueryUsing(function ($query) {
+                    return $query->where('done', 0);
+                }),
+
         ];
     }
 }
