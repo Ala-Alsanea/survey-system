@@ -332,15 +332,15 @@ class SurveyResource extends Resource
                 // ...
                 ExportAction::make()->exports([
                     ExcelExport::make()->withColumns([
-                        Column::make('name')->heading(__('name')),
-                        Column::make('phone')->heading(__('phone')),
+                        Column::make('name')->heading('Teacher_info-PQ[الأسم الرباعي]'),
+                        Column::make('phone')->heading('Teacher_info-PQ[رقم التلفون]'),
                         Column::make('gender')->heading(__('gender')),
-                        Column::make('gov')->heading(__('gov')),
-                        Column::make('district')->heading(__('district')),
-                        Column::make('subdistrict')->heading(__('subdistrict')),
-                        Column::make('school')->heading(__('school')),
-                        Column::make('edu_qual')->heading(__('edu_qual')),
-                        Column::make('national_card_id')->heading(__('national_card_id')),
+                        Column::make('gov')->heading('Teacher_info-PQ[المحافظة]'),
+                        Column::make('district')->heading('Teacher_info-PQ[المديرية]'),
+                        Column::make('subdistrict')->heading('Teacher_info-PQ[الغزلة]'),
+                        Column::make('school')->heading('Teacher_info-PQ[المدرسة]'),
+                        Column::make('edu_qual')->heading('Teacher_info-PQ[المؤهل]'),
+                        Column::make('national_card_id')->heading('Teacher_info-PQ[رقم البطاقة]'),
 
                         // Column::make('image_national_card_front')->heading(__('image_national_card_front')),
                         // Column::make('image_national_card_back')->heading(__('image_national_card_back')),
@@ -348,7 +348,7 @@ class SurveyResource extends Resource
                         // Column::make('image_contract_direct_work')->heading(__('image_contract_direct_work')),
 
                         Column::make('q_1')->heading(__('q_1')),
-                        Column::make('q_3')->heading(__('q_3')),
+                        Column::make('q_3')->heading('Teacher_info-PQ[نوع الهوية]'),
                         Column::make('q_4')->heading(__('q_4')),
                         Column::make('q_5')->heading(__('q_5')),
                         Column::make('q_6')->heading(__('q_6')),
