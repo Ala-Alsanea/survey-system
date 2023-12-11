@@ -119,15 +119,15 @@ class ResearcherController extends Controller
             'success' => null,
             'errors' => null
         ];
-        if(auth()->user()->valid==1)
-        {
+
+        if (auth()->user()->valid) {
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
             ]);
 
             if ($validator->fails()) {
 
-                $response['errors']= $validator->errors();
+                $response['errors'] = $validator->errors();
                 return response()->json($response, 401);
             }
 
@@ -190,7 +190,7 @@ class ResearcherController extends Controller
             }
 
 
-
+            $survey['researcher_id'] = auth()->user()->id;
             $surveySaved = Survey::create($survey);
 
             $response['success'] = [
