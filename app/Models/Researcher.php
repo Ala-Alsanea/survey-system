@@ -28,7 +28,7 @@ class Researcher extends Authenticatable
     ];
 
     protected $hidden = [
-        'password',
+        // 'password',
         // 'device_id',
         'remember_token',
     ];

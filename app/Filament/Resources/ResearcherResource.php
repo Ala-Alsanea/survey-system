@@ -29,19 +29,24 @@ class ResearcherResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('phone')
                     ->tel()
+                    ->step(9)
                     ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('gender')
-                    ->maxLength(255),
-                // Forms\Components\TextInput::make('password')
-                //     ->password()
-                //     ->required()
-                //     ->disabled()
+                    ->unique(ignorable: fn ($record) => $record)
+                    ->maxLength(9),
+                // Forms\Components\TextInput::make('gender')
                 //     ->maxLength(255),
-                Forms\Components\TextInput::make('device_id')
-                ->disabled()
+                Forms\Components\TextInput::make('password')
+                    ->password()
+                    ->required()
+                    // ->disabled()
                     ->maxLength(255),
-            ]);
+                Forms\Components\Toggle::make('valid')
+                    ->onColor('success')
+                    ->offColor('danger'),
+                // Forms\Components\TextInput::make('device_id')
+                // ->disabled()
+                //     ->maxLength(255),
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
@@ -52,12 +57,12 @@ class ResearcherResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('gender')
+                // Tables\Columns\TextColumn::make('gender')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('device_id')
+                //     ->searchable(),
+                Tables\Columns\ToggleColumn::make('valid')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('device_id')
-                    ->searchable(),
-            Tables\Columns\ToggleColumn::make('valid')
-                ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -72,7 +77,7 @@ class ResearcherResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                // Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -92,20 +97,20 @@ class ResearcherResource extends Resource
     {
         return [
             'index' => Pages\ListResearchers::route('/'),
-            'create' => Pages\CreateResearcher::route('/create'),
+            // 'create' => Pages\CreateResearcher::route('/create'),
             // 'view' => Pages\ViewResearcher::route('/{record}'),
             // 'edit' => Pages\EditResearcher::route('/{record}/edit'),
         ];
     }
 
 
-    public static function canCreate(): bool
-    {
-        return false;
-    }
+    // public static function canCreate(): bool
+    // {
+    //     return false;
+    // }
 
-    public static function canDelete(Model $model): bool
-    {
-        return false;
-    }
+    // public static function canDelete(Model $model): bool
+    // {
+    //     return false;
+    // }
 }
