@@ -22,9 +22,21 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         \App\Models\User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password'=>'654321',
+        ]);
+
+        \App\Models\User::factory()->create([
             'name' => 'reviewer',
             'email' => 'reviewer@reviewer.com',
-            'password'=>'123',
+            'password' => '123',
+        ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'viewer',
+            'email' => 'viewer@viewer.com',
+            'password' => '123',
         ]);
 
 

@@ -20,7 +20,7 @@ class SurveyFactory extends Factory
         return [
             //
             'name' => fake()->name(),
-            'phone' => fake()->phoneNumber(),
+            'phone' => fake()->randomElement(['789456123', '777777777']),
             'gender' => fake()->randomElement(['ذكر', 'انثى']),
             // 'city'=> fake()->city(),
             'gov' => fake()->randomElement(array_values(TeacherInfo::pluck('gov')->unique()->all())),

@@ -237,9 +237,6 @@ class SurveyResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->label(__('name'))
                     ->searchable(),
-                // Tables\Columns\TextColumn::make('national_card_id')
-                //     ->label(__('national_card_id'))
-                //     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
                     ->label(__('phone'))
                     ->searchable(),
@@ -261,6 +258,11 @@ class SurveyResource extends Resource
                 Tables\Columns\TextColumn::make('researcher.name')
                     ->label(__('researcher_name'))
                     ->searchable(),
+                Tables\Columns\TextColumn::make('national_card_id')
+                    ->label(__('national_card_id'))
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    // ->searchable()
+                    ->sortable(),
                 // Tables\Columns\TextColumn::make('edu_qual')
                 //     ->searchable(),
                 // Tables\Columns\ImageColumn::make('image_national_card_front'),
@@ -331,45 +333,47 @@ class SurveyResource extends Resource
             ])->headerActions([
                 // ...
                 ExportAction::make()->exports([
-                    ExcelExport::make()->withColumns([
-                        Column::make('name')->heading('Teacher_info-PQ[الأسم الرباعي]'),
-                        Column::make('phone')->heading('Teacher_info-PQ[رقم التلفون]'),
-                        Column::make('gender')->heading(__('gender')),
-                        Column::make('gov')->heading('Teacher_info-PQ[المحافظة]'),
-                        Column::make('district')->heading('Teacher_info-PQ[المديرية]'),
-                        Column::make('subdistrict')->heading('Teacher_info-PQ[الغزلة]'),
-                        Column::make('school')->heading('Teacher_info-PQ[المدرسة]'),
-                        Column::make('edu_qual')->heading('Teacher_info-PQ[المؤهل]'),
-                        Column::make('national_card_id')->heading('Teacher_info-PQ[رقم البطاقة]'),
+                    ExcelExport::make()
+                        ->withFilename(fn ($resource) => $resource::getLabel())
+                        ->withColumns([
+                            Column::make('name')->heading('Teacher_info-PQ[الأسم الرباعي]'),
+                            Column::make('phone')->heading('Teacher_info-PQ[رقم التلفون]'),
+                            Column::make('gender')->heading(__('gender')),
+                            Column::make('gov')->heading('Teacher_info-PQ[المحافظة]'),
+                            Column::make('district')->heading('Teacher_info-PQ[المديرية]'),
+                            Column::make('subdistrict')->heading('Teacher_info-PQ[الغزلة]'),
+                            Column::make('school')->heading('Teacher_info-PQ[المدرسة]'),
+                            Column::make('edu_qual')->heading('Teacher_info-PQ[المؤهل]'),
+                            Column::make('national_card_id')->heading('Teacher_info-PQ[رقم البطاقة]'),
 
-                        // Column::make('image_national_card_front')->heading(__('image_national_card_front')),
-                        // Column::make('image_national_card_back')->heading(__('image_national_card_back')),
-                        // Column::make('image_attend')->heading(__('image_attend')),
-                        // Column::make('image_contract_direct_work')->heading(__('image_contract_direct_work')),
+                            // Column::make('image_national_card_front')->heading(__('image_national_card_front')),
+                            // Column::make('image_national_card_back')->heading(__('image_national_card_back')),
+                            // Column::make('image_attend')->heading(__('image_attend')),
+                            // Column::make('image_contract_direct_work')->heading(__('image_contract_direct_work')),
 
-                        Column::make('q_1')->heading(__('q_1')),
-                        Column::make('q_3')->heading('Teacher_info-PQ[نوع الهوية]'),
-                        Column::make('q_4')->heading(__('q_4')),
-                        Column::make('q_5')->heading(__('q_5')),
-                        Column::make('q_6')->heading(__('q_6')),
-                        Column::make('q_7')->heading(__('q_7')),
-                        Column::make('q_8')->heading(__('q_8')),
-                        Column::make('q_9')->heading(__('q_9')),
-                        Column::make('q_10')->heading(__('q_10')),
-                        Column::make('q_11')->heading(__('q_11')),
+                            Column::make('q_1')->heading(__('q_1')),
+                            Column::make('q_3')->heading('Teacher_info-PQ[نوع الهوية]'),
+                            Column::make('q_4')->heading(__('q_4')),
+                            Column::make('q_5')->heading(__('q_5')),
+                            Column::make('q_6')->heading(__('q_6')),
+                            Column::make('q_7')->heading(__('q_7')),
+                            Column::make('q_8')->heading(__('q_8')),
+                            Column::make('q_9')->heading(__('q_9')),
+                            Column::make('q_10')->heading(__('q_10')),
+                            Column::make('q_11')->heading(__('q_11')),
 
-                        Column::make('val_name')->heading(__('val_name')),
-                        Column::make('val_job_type')->heading(__('val_job_type')),
-                        Column::make('val_school')->heading(__('val_school')),
-                        Column::make('val_location')->heading(__('val_location')),
-                        Column::make('val_hire_date')->heading(__('val_hire_date')),
-                        Column::make('val_signature')->heading(__('val_signature')),
-                        Column::make('val_Seal')->heading(__('val_Seal')),
+                            Column::make('val_name')->heading(__('val_name')),
+                            Column::make('val_job_type')->heading(__('val_job_type')),
+                            Column::make('val_school')->heading(__('val_school')),
+                            Column::make('val_location')->heading(__('val_location')),
+                            Column::make('val_hire_date')->heading(__('val_hire_date')),
+                            Column::make('val_signature')->heading(__('val_signature')),
+                            Column::make('val_Seal')->heading(__('val_Seal')),
 
 
-                        Column::make('researcher.name')->heading(__('researcher_name')),
+                            Column::make('researcher.name')->heading(__('researcher_name')),
 
-                    ])
+                        ])
                     // ->askForFilename()
                     // ->withFilename(fn ($filename) => 'prefix-' . $filename)
 
