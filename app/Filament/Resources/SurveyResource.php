@@ -122,6 +122,9 @@ class SurveyResource extends Resource
                         Forms\Components\MarkdownEditor::make('q_1')
                             ->label(__('q_1'))
                             ->disabled(),
+                        Forms\Components\MarkdownEditor::make('note')
+                            ->label(__('note'))
+                            ->disabled(),
                         // Forms\Components\MarkdownEditor::make('q_2')
                         // ->label(__('q_2'))
                         // ->disabled(),
@@ -361,6 +364,7 @@ class SurveyResource extends Resource
                             Column::make('q_9')->heading(__('q_9')),
                             Column::make('q_10')->heading(__('q_10')),
                             Column::make('q_11')->heading(__('q_11')),
+                            Column::make('note')->heading(__('note')),
 
                             Column::make('val_name')->heading(__('val_name')),
                             Column::make('val_job_type')->heading(__('val_job_type')),

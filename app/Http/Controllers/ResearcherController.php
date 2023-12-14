@@ -191,6 +191,7 @@ class ResearcherController extends Controller
 
 
             $survey['researcher_id'] = auth()->user()->id;
+            // return response($survey);
             $surveySaved = Survey::create($survey);
 
             $response['success'] = [

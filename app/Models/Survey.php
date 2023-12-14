@@ -35,6 +35,7 @@ class Survey extends Model
         'q_9',
         'q_10',
         'q_11',
+        'note',
 
         'val_name',
         'val_job_type',

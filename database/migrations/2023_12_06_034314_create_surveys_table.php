@@ -50,6 +50,8 @@ return new class extends Migration
             $table->string('q_10')->nullable();
             $table->string('q_11')->nullable();
 
+            $table->string('note',1000)->nullable();
+
             // validation
             $table->string('val_name')->nullable();
             $table->string('val_job_type')->nullable();
