@@ -14,8 +14,13 @@ class Survey extends Model
         'gender',
 
         'gov',
+        'gov_id',
         'district',
+        'district_id',
         'subdistrict',
+        'subdistrict_id',
+        'school',
+        'school_id',
         'edu_qual',
         'national_card_id',
 
@@ -47,7 +52,6 @@ class Survey extends Model
 
         'done',
         'researcher_id',
-        // 'district_id',
 
 
     ];
