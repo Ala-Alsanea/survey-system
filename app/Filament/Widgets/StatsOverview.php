@@ -36,29 +36,30 @@ class StatsOverview extends BaseWidget
 
 
         return [
-            //
-            Stat::make('Researchers', $researcher)
-                ->color('success')
-                ->description('total')
-                ->descriptionIcon('heroicon-s-users')
-                ->color('success'),
 
-            Stat::make('Survey ', $TeacherCollected)
-                ->color('success')
-                ->description('Collected')
-                ->descriptionIcon('heroicon-o-circle-stack')
-                ->chart(array_map(fn ($val) => $val['data'], $data))
-                ->color('success'),
 
-            Stat::make('Not reviewed', $notReviewedSurvey)
-                ->description('Survey')
-                ->descriptionIcon('heroicon-o-x-circle')
-                ->color('danger'),
+            // Stat::make('Researchers', $researcher)
+            //     ->color('success')
+            //     ->description('total')
+            //     ->descriptionIcon('heroicon-s-users')
+            //     ->color('success'),
 
-            Stat::make('Reviewed ', $reviewedSurvey)
-                ->description('Survey')
-                ->descriptionIcon('heroicon-o-check-circle')
-                ->color('success'),
+            // Stat::make('Survey ', $TeacherCollected)
+            //     ->color('success')
+            //     ->description('Collected')
+            //     ->descriptionIcon('heroicon-o-circle-stack')
+            //     ->chart(array_map(fn ($val) => $val['data'], $data))
+            //     ->color('success'),
+
+            // Stat::make('Not reviewed', $notReviewedSurvey)
+            //     ->description('Survey')
+            //     ->descriptionIcon('heroicon-o-x-circle')
+            //     ->color('danger'),
+
+            // Stat::make('Reviewed ', $reviewedSurvey)
+            //     ->description('Survey')
+            //     ->descriptionIcon('heroicon-o-check-circle')
+            //     ->color('success'),
 
 
 

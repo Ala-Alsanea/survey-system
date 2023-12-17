@@ -61,6 +61,9 @@ class ResearcherResource extends Resource
                 //     ->searchable(),
                 // Tables\Columns\TextColumn::make('device_id')
                 //     ->searchable(),
+                Tables\Columns\TextColumn::make('surveys_count')
+                    ->counts('surveys')
+                    ->searchable(),
                 Tables\Columns\ToggleColumn::make('valid')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')

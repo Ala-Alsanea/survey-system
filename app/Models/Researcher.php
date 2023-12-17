@@ -38,7 +38,7 @@ class Researcher extends Authenticatable
     ];
 
 
-    public function survey()
+    public function surveys()
     {
         return $this->hasMany(Survey::class);
     }
