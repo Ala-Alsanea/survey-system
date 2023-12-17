@@ -18,11 +18,17 @@ class ListImage extends Component implements HasForms, HasTable
     use InteractsWithTable;
     use InteractsWithForms;
 
+    public function getStorageName($name)
+    {
+        return asset('storage/'.$name);
+    }
+
     public function table(Table $table): Table
     {
         return $table
             ->query(Survey::query())
             ->columns([
+
                 ImageColumn::make('image_national_card_front')
                     ->size(200)
                      ->extraImgAttributes(['loading' => 'lazy']),
@@ -49,6 +55,7 @@ class ListImage extends Component implements HasForms, HasTable
 
     public function render()
     {
-        return view('livewire.list-image');
+        $images = Survey::select('image_national_card_front', 'image_national_card_back', 'image_attend', 'image_contract_direct_work')->get() ;
+        return view('livewire.list-image',['images'=>$images]);
     }
 }
