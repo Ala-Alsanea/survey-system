@@ -13,6 +13,7 @@ class StatsOverview extends BaseWidget
     protected static ?int $sort = 1;
 
     public bool $readyToLoad = false;
+
     protected int | string | array $columnSpan = 'full';
 
     public function loadData()
@@ -22,44 +23,53 @@ class StatsOverview extends BaseWidget
 
     protected function getStats(): array
     {
-        $TeacherCollected = Survey::all()->count();
-        $reviewedSurvey = Survey::where('done', 1)->count();
-        $notReviewedSurvey = Survey::where('done', 0)->count();
-        $labelsDone = Survey::pluck('done')->unique()->all();
-        $data  = array_map(fn ($val) => ['data' => Survey::where('done', $val)->count(), 'lable' => str($val)], $labelsDone);
-        $researcher = Researcher::all()->count();
+        $SchoolCollected = Survey::pluck('school')->unique()->count();
+        $Schools = TeacherInfo::pluck('school')->unique()->count();
+        $SchoolNotCollected = $Schools - $SchoolCollected;
 
+        $TeacherExist = Survey::where('q_1', 'نعم')->count();
+        $TeacherNotExist = Survey::where('q_1', 'لا')->count();
 
-
-
-        // dd($data);
-
+        $percentageOfCollectedSchools = number_format((float)(($SchoolCollected / $Schools) * 100), 2, '.', '');
+        $percentageOfNotCollectedSchools = number_format((float)(($SchoolNotCollected / $Schools) * 100), 2, '.', '');
+        // dd()
 
         return [
 
 
-            // Stat::make('Researchers', $researcher)
-            //     ->color('success')
-            //     ->description('total')
-            //     ->descriptionIcon('heroicon-s-users')
-            //     ->color('success'),
+            Stat::make('School', $Schools)
+                // ->color('success')
+                ->description('all')
+                ->descriptionIcon('heroicon-s-building-office-2')
+                ->color('success')
+                ->extraAttributes([
+                    'class' => 'col-span-2',
+                ]),
 
-            // Stat::make('Survey ', $TeacherCollected)
-            //     ->color('success')
-            //     ->description('Collected')
-            //     ->descriptionIcon('heroicon-o-circle-stack')
-            //     ->chart(array_map(fn ($val) => $val['data'], $data))
-            //     ->color('success'),
+            Stat::make('School', $SchoolCollected)
+                // ->color('success')
+                ->description("$percentageOfCollectedSchools% collected")
+                ->descriptionIcon('heroicon-s-building-office')
+                ->color('success'),
 
-            // Stat::make('Not reviewed', $notReviewedSurvey)
-            //     ->description('Survey')
-            //     ->descriptionIcon('heroicon-o-x-circle')
-            //     ->color('danger'),
+            Stat::make('School', $SchoolNotCollected)
+                // ->color('success')
+                ->description("$percentageOfNotCollectedSchools% not collected")                ->descriptionIcon('heroicon-s-building-office')
+                ->color('danger'),
 
-            // Stat::make('Reviewed ', $reviewedSurvey)
-            //     ->description('Survey')
-            //     ->descriptionIcon('heroicon-o-check-circle')
-            //     ->color('success'),
+
+            Stat::make('Teacher', $TeacherExist)
+                // ->color('success')
+                ->description('Exist')
+                ->descriptionIcon('heroicon-s-user')
+                ->color('success'),
+
+            Stat::make('Teacher', $TeacherNotExist)
+                // ->color('success')
+                ->description('Not Exist')
+                ->descriptionIcon('heroicon-s-user')
+                ->color('danger'),
+
 
 
 
