@@ -34,8 +34,14 @@ class SchoolByGovernoratesChart extends ChartWidget
 
         $test = usort($targetedSchool, fn ($a, $b) => $b['data'] <=> $a['data']);
 
+        // $num =0;
+        // for($i=0; $i < count($targetedSchool);$i++)
+        // {
+        //     $num+= $targetedSchool[$i]['data'];
+        //     // echo $num;
+        // }
 
-        // dd($targetedSchool);
+        // dd($num);
 
         return [
             'datasets' => [

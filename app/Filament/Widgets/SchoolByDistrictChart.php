@@ -35,6 +35,13 @@ class SchoolByDistrictChart extends ChartWidget
 
         // dd($targetedSchool);
 
+        // $num = 0;
+        // for ($i = 0; $i < count($targetedSchool); $i++) {
+        //     $num += $targetedSchool[$i]['data'];
+        //     // echo $num;
+        // }
+
+        // dd($targetedSchool);
 
 
         // dd($progressedSchool);
