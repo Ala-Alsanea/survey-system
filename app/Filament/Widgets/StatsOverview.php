@@ -32,7 +32,9 @@ class StatsOverview extends BaseWidget
 
         $percentageOfCollectedSchools = number_format((float)(($SchoolCollected / $Schools) * 100), 2, '.', '');
         $percentageOfNotCollectedSchools = number_format((float)(($SchoolNotCollected / $Schools) * 100), 2, '.', '');
-        // dd()
+
+
+        // dd(TeacherInfo::pluck('school')->unique()->all());
 
         return [
 
