@@ -1,5 +1,7 @@
 <?php
 
+use App\Filament\Widgets\Map;
+use App\Livewire\MapIfram;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect('/admin/login');
 });
+
+Route::get('/map', MapIfram::class);
 

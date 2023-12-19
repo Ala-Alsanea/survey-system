@@ -20,6 +20,8 @@
         {{ filament()->getBrandName() }}
     </title>
 
+
+
     {{ \Filament\Support\Facades\FilamentView::renderHook('panels::styles.before') }}
 
     <style>
@@ -83,9 +85,16 @@
     @endif
 
     {{ \Filament\Support\Facades\FilamentView::renderHook('panels::head.end') }}
+
+    <script defer src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <style type="text/css">
+        #map {
+            height: 400px;
+        }
+    </style>
 </head>
 
-<body class="fi-body min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white">
+<body class="min-h-screen antialiased font-normal fi-body bg-gray-50 text-gray-950 dark:bg-gray-950 dark:text-white">
     {{ \Filament\Support\Facades\FilamentView::renderHook('panels::body.start') }}
 
     {{ $slot }}
@@ -106,9 +115,12 @@
 
     @stack('scripts')
 
+
     {{ \Filament\Support\Facades\FilamentView::renderHook('panels::scripts.after') }}
 
     {{ \Filament\Support\Facades\FilamentView::renderHook('panels::body.end') }}
+
+    <script type="text/javascript"   src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initMap"></script>
 </body>
 
 </html>
