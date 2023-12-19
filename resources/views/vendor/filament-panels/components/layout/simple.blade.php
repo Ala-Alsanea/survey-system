@@ -10,13 +10,13 @@
     ])
     <div style="background-color: #0198F1">
 
-        <img src="/img/logo_1.jpeg" width="400" style="position: fixed; z-index:10; bottom: 60px" alt="">
-        <img src="/img/logo_2.jpeg" width="400" style="position: fixed; z-index:10; bottom: 30px; right:1px ;"
+        <img src="/img/logo_1.jpeg" width="100" style="position: fixed; z-index:10; bottom: 60px" alt="">
+        <img src="/img/logo_2.jpeg" width="100" style="position: fixed; z-index:9; bottom: 60px; right:1px ;"
             alt="">
 
-        <div class="fi-simple-layout flex min-h-screen flex-col items-center">
+        <div style="z-index:11;" class="flex flex-col items-center min-h-screen fi-simple-layout">
             @if (filament()->auth()->check())
-                <div class="absolute end-0 top-0 flex h-16 items-center gap-x-4 pe-4 md:pe-6 lg:pe-8">
+                <div class="absolute top-0 flex items-center h-16 end-0 gap-x-4 pe-4 md:pe-6 lg:pe-8">
                     @if (filament()->hasDatabaseNotifications())
                         @livewire(Filament\Livewire\DatabaseNotifications::class, ['lazy' => true])
                     @endif
@@ -25,7 +25,7 @@
                 </div>
             @endif
 
-            <div class="fi-simple-main-ctn flex w-full flex-grow items-center justify-center">
+            <div class="flex items-center justify-center flex-grow w-full fi-simple-main-ctn">
                 <main @class([
                     'fi-simple-main my-16 w-full bg-white px-6 py-12 shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10 sm:rounded-xl sm:px-12',
                     match ($maxWidth ?? null) {

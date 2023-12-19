@@ -10,6 +10,8 @@ class Map extends Widget
 
     protected int | string | array $columnSpan = 'full';
 
+    protected static ?int $sort = 2;
+
 
     public  $locations = [
         ['Mumbai', 19.0760, 72.8777],
