@@ -63,6 +63,12 @@ class SurveyResource extends Resource
                         Forms\Components\TextInput::make('school')
                             ->label(__('school'))
                             ->disabled(),
+                        Forms\Components\FileUpload::make('school_image')
+                            ->label(__('school_image'))
+                            ->openable()
+                            ->deletable(false)
+                            ->disabled()
+                            ->image(),
                     ])
                     ->columns(2),
 
@@ -80,6 +86,12 @@ class SurveyResource extends Resource
                             ->disabled(),
 
 
+                        Forms\Components\FileUpload::make('eduqual_image')
+                            ->label(__('eduqual_image'))
+                            ->openable()
+                            ->deletable(false)
+                            ->disabled()
+                            ->image(),
                         Forms\Components\FileUpload::make('image_national_card_front')
                             ->label(__('image_national_card_front'))
                             ->openable()
@@ -106,6 +118,27 @@ class SurveyResource extends Resource
                             ->deletable(false)
                             ->disabled()
                             ->image(),
+
+                        Forms\Components\FileUpload::make('oct_image_attend')
+                            ->label(__('oct_image_attend'))
+                            ->openable()
+                            ->deletable(false)
+                            ->disabled()
+                            ->image(),
+                        Forms\Components\FileUpload::make('nov_image_attend')
+                            ->label(__('nov_image_attend'))
+                            ->openable()
+                            ->deletable(false)
+                            ->disabled()
+                            ->image(),
+                        Forms\Components\FileUpload::make('dec_image_attend')
+                            ->label(__('dec_image_attend'))
+                            ->openable()
+                            ->deletable(false)
+                            ->disabled()
+                            ->image(),
+
+
                         Forms\Components\FileUpload::make('image_contract_direct_work')
                             ->label(__('image_contract_direct_work'))
                             ->openable()
@@ -156,68 +189,131 @@ class SurveyResource extends Resource
                         Forms\Components\MarkdownEditor::make('q_11')
                             ->label(__('q_11'))
                             ->disabled(),
+
+
+                        Forms\Components\MarkdownEditor::make('teaching_days_num_oct')
+                            ->label(__('teaching_days_num_oct'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('teaching_days_num_nov')
+                            ->label(__('teaching_days_num_nov'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('teaching_days_num_dec')
+                            ->label(__('teaching_days_num_dec'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('teacher_birth_date')
+                            ->label(__('teacher_birth_date'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('oct_teacher_sinature')
+                            ->label(__('oct_teacher_sinature'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('nov_teacher_sinature')
+                            ->label(__('nov_teacher_sinature'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('dec_teacher_sinature')
+                            ->label(__('dec_teacher_sinature'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('school_status')
+                            ->label(__('school_status'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('Low_eduqual')
+                            ->label(__('Low_eduqual'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('gain_money')
+                            ->label(__('gain_money'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('checked_teacher_name')
+                            ->label(__('checked_teacher_name'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('checked_job_type')
+                            ->label(__('checked_job_type'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('checked_school_name')
+                            ->label(__('checked_school_name'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('checked_location')
+                            ->label(__('checked_location'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('checked_hiring_date')
+                            ->label(__('checked_hiring_date'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('checked_management_signature')
+                            ->label(__('checked_management_signature'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('checked_teacher_signature')
+                            ->label(__('checked_teacher_signature'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('checked_stamp')
+                            ->label(__('checked_stamp'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('researcher_notes')
+                            ->label(__('researcher_notes'))
+                            ->disabled(),
+
+
+
                     ])
                     ->columns(1),
 
 
-                Forms\Components\Section::make('التحقق')
-                    ->description('حدد نوع البيانات المتواجدة في العقد او الارساليه مباشرة العمل')
-                    ->schema([
+                // Forms\Components\Section::make('التحقق')
+                //     ->description('حدد نوع البيانات المتواجدة في العقد او الارساليه مباشرة العمل')
+                //     ->schema([
 
-                        Forms\Components\Select::make('val_name')
-                            ->label(__('val_name'))
-                            ->options([
-                                __('yes') => __('yes'),
-                                __('no') => __('no'),
-                            ])
-                            ->required(),
-                        Forms\Components\Select::make('val_job_type')
-                            ->label(__('val_job_type'))
-                            ->options([
-                                __('yes') => __('yes'),
-                                __('no') => __('no'),
-                            ])
-                            ->required(),
-                        Forms\Components\Select::make('val_school')
-                            ->label(__('val_school'))
-                            ->options([
-                                __('yes') => __('yes'),
-                                __('no') => __('no'),
-                            ])
-                            ->required(),
-                        Forms\Components\Select::make('val_location')
-                            ->label(__('val_location'))
-                            ->options([
-                                __('yes') => __('yes'),
-                                __('no') => __('no'),
-                            ])
-                            ->required(),
-                        Forms\Components\Select::make('val_hire_date')
-                            ->label(__('val_hire_date'))
-                            ->options([
-                                __('yes') => __('yes'),
-                                __('no') => __('no'),
-                            ])
-                            ->required(),
-                        Forms\Components\Select::make('val_signature')
-                            ->label(__('val_signature'))
-                            ->options([
-                                __('yes') => __('yes'),
-                                __('no') => __('no'),
-                            ])
-                            ->required(),
-                        Forms\Components\Select::make('val_Seal')
-                            ->label(__('val_Seal'))
-                            ->options([
-                                __('yes') => __('yes'),
-                                __('no') => __('no'),
-                            ])
-                            ->columnSpanFull()
-                            ->required(),
-                    ])
-                    ->columns(2),
+                //         Forms\Components\Select::make('val_name')
+                //             ->label(__('val_name'))
+                //             ->options([
+                //                 __('yes') => __('yes'),
+                //                 __('no') => __('no'),
+                //             ])
+                //             ->required(),
+                //         Forms\Components\Select::make('val_job_type')
+                //             ->label(__('val_job_type'))
+                //             ->options([
+                //                 __('yes') => __('yes'),
+                //                 __('no') => __('no'),
+                //             ])
+                //             ->required(),
+                //         Forms\Components\Select::make('val_school')
+                //             ->label(__('val_school'))
+                //             ->options([
+                //                 __('yes') => __('yes'),
+                //                 __('no') => __('no'),
+                //             ])
+                //             ->required(),
+                //         Forms\Components\Select::make('val_location')
+                //             ->label(__('val_location'))
+                //             ->options([
+                //                 __('yes') => __('yes'),
+                //                 __('no') => __('no'),
+                //             ])
+                //             ->required(),
+                //         Forms\Components\Select::make('val_hire_date')
+                //             ->label(__('val_hire_date'))
+                //             ->options([
+                //                 __('yes') => __('yes'),
+                //                 __('no') => __('no'),
+                //             ])
+                //             ->required(),
+                //         Forms\Components\Select::make('val_signature')
+                //             ->label(__('val_signature'))
+                //             ->options([
+                //                 __('yes') => __('yes'),
+                //                 __('no') => __('no'),
+                //             ])
+                //             ->required(),
+                //         Forms\Components\Select::make('val_Seal')
+                //             ->label(__('val_Seal'))
+                //             ->options([
+                //                 __('yes') => __('yes'),
+                //                 __('no') => __('no'),
+                //             ])
+                //             ->columnSpanFull()
+                //             ->required(),
+                //     ])
+                //     ->columns(2),
 
-                Forms\Components\Section::make('المراجعه')
+
+                    Forms\Components\Section::make('المراجعه')
                     ->description('')
                     ->schema([
 

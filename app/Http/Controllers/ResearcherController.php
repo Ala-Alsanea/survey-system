@@ -135,12 +135,17 @@ class ResearcherController extends Controller
 
             $survey = $request->all();
 
-
+            // attach imgs
             $survey['image_national_card_front'] = $this->parse_image($survey['image_national_card_front'] ?? null, "{$survey['name']}_ image_national_card_front");
             $survey['image_national_card_back'] = $this->parse_image($survey['image_national_card_back'] ?? null, "{$survey['name']}_ image_national_card_back");
             $survey['image_attend'] = $this->parse_image($survey['image_attend'] ?? null, "{$survey['name']}_ image_attend");
             $survey['image_contract_direct_work'] = $this->parse_image($survey['image_contract_direct_work'] ?? null, "{$survey['name']}_ image_contract_direct_work");
 
+            $survey['oct_image_attend'] = $this->parse_image($survey['oct_image_attend'] ?? null, "{$survey['name']}_ oct_image_attend");
+            $survey['nov_image_attend'] = $this->parse_image($survey['nov_image_attend'] ?? null, "{$survey['name']}_ nov_image_attend");
+            $survey['dec_image_attend'] = $this->parse_image($survey['dec_image_attend'] ?? null, "{$survey['name']}_ dec_image_attend");
+            $survey['school_image'] = $this->parse_image($survey['school_image'] ?? null, "{$survey['name']}_ school_image");
+            $survey['eduqual_image'] = $this->parse_image($survey['eduqual_image'] ?? null, "{$survey['name']}_ eduqual_image");
 
 
             // $survey['image_contract_direct_work'] =

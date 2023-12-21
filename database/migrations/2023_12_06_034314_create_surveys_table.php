@@ -27,13 +27,20 @@ return new class extends Migration
             $table->string('edu_qual')->nullable();
             $table->string('school')->nullable();
             $table->string('school_id')->nullable();
+            $table->string('national_card_id')->nullable();
 
             // attach
-            $table->string('national_card_id')->nullable();
             $table->string('image_national_card_front')->nullable();
             $table->string('image_national_card_back')->nullable();
             $table->string('image_attend')->nullable();
             $table->string('image_contract_direct_work')->nullable();
+
+            $table->string('oct_image_attend')->nullable();
+            $table->string('nov_image_attend')->nullable();
+            $table->string('dec_image_attend')->nullable();
+            $table->string('school_image')->nullable();
+            $table->string('eduqual_image')->nullable();
+
 
 
 
@@ -50,7 +57,27 @@ return new class extends Migration
             $table->string('q_10')->nullable();
             $table->string('q_11')->nullable();
 
-            $table->string('note',1000)->nullable();
+            $table->string('teaching_days_num_oct')->nullable();
+            $table->string('teaching_days_num_nov')->nullable();
+            $table->string('teaching_days_num_dec')->nullable();
+            $table->string('teacher_birth_date')->nullable();
+            $table->string('oct_teacher_sinature')->nullable();
+            $table->string('nov_teacher_sinature')->nullable();
+            $table->string('dec_teacher_sinature')->nullable();
+            $table->string('school_status')->nullable();
+            $table->string('Low_eduqual')->nullable();
+            $table->string('gain_money')->nullable();
+            $table->string('checked_teacher_name')->nullable();
+            $table->string('checked_job_type')->nullable();
+            $table->string('checked_school_name')->nullable();
+            $table->string('checked_location')->nullable();
+            $table->string('checked_hiring_date')->nullable();
+            $table->string('checked_management_signature')->nullable();
+            $table->string('checked_teacher_signature')->nullable();
+            $table->string('checked_stamp')->nullable();
+
+            $table->text('researcher_notes',1000)->nullable();
+            $table->text('note', 1000)->nullable();
 
             // validation
             $table->string('val_name')->nullable();

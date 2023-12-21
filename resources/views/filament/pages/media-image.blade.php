@@ -1,6 +1,6 @@
 <x-filament-panels::page>
 
-@livewire('list-image')
+    @livewire('list-image')
 
 
 
