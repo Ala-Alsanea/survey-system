@@ -109,7 +109,8 @@ class Survey extends Model
         'researcher_id',
         'done',
 
-
+        'long',
+        'lat',
 
         'gov_id',
         'district_id',

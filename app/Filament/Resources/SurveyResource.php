@@ -36,6 +36,12 @@ class SurveyResource extends Resource
                             ->relationship('researcher', 'name')
                             ->columnSpanFull()
                             ->disabled(),
+                        Forms\Components\MarkdownEditor::make('lat')
+                            ->label(__('lat'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('long')
+                            ->label(__('long'))
+                            ->disabled(),
                     ])
                     ->columns(2),
                 Forms\Components\Section::make('معلومات المستفيد')
@@ -313,7 +319,7 @@ class SurveyResource extends Resource
                 //     ->columns(2),
 
 
-                    Forms\Components\Section::make('المراجعه')
+                Forms\Components\Section::make('المراجعه')
                     ->description('')
                     ->schema([
 
@@ -432,48 +438,93 @@ class SurveyResource extends Resource
             ])->headerActions([
                 // ...
                 ExportAction::make()->exports([
-                    ExcelExport::make()
-                        ->withFilename(fn ($resource) => $resource::getLabel())
-                        ->withColumns([
-                            Column::make('name')->heading('Teacher_info-PQ[الأسم الرباعي]'),
-                            Column::make('phone')->heading('Teacher_info-PQ[رقم التلفون]'),
-                            Column::make('gender')->heading(__('gender')),
-                            Column::make('gov')->heading('Teacher_info-PQ[المحافظة]'),
-                            Column::make('district')->heading('Teacher_info-PQ[المديرية]'),
-                            Column::make('subdistrict')->heading('Teacher_info-PQ[الغزلة]'),
-                            Column::make('school')->heading('Teacher_info-PQ[المدرسة]'),
-                            Column::make('edu_qual')->heading('Teacher_info-PQ[المؤهل]'),
-                            Column::make('national_card_id')->heading('Teacher_info-PQ[رقم البطاقة]'),
-
-                            // Column::make('image_national_card_front')->heading(__('image_national_card_front')),
-                            // Column::make('image_national_card_back')->heading(__('image_national_card_back')),
-                            // Column::make('image_attend')->heading(__('image_attend')),
-                            // Column::make('image_contract_direct_work')->heading(__('image_contract_direct_work')),
-
-                            Column::make('q_1')->heading(__('q_1')),
-                            Column::make('q_3')->heading('Teacher_info-PQ[نوع الهوية]'),
-                            Column::make('q_4')->heading(__('q_4')),
-                            Column::make('q_5')->heading(__('q_5')),
-                            Column::make('q_6')->heading(__('q_6')),
-                            Column::make('q_7')->heading(__('q_7')),
-                            Column::make('q_8')->heading(__('q_8')),
-                            Column::make('q_9')->heading(__('q_9')),
-                            Column::make('q_10')->heading(__('q_10')),
-                            Column::make('q_11')->heading(__('q_11')),
-                            Column::make('note')->heading(__('note')),
-
-                            Column::make('val_name')->heading(__('val_name')),
-                            Column::make('val_job_type')->heading(__('val_job_type')),
-                            Column::make('val_school')->heading(__('val_school')),
-                            Column::make('val_location')->heading(__('val_location')),
-                            Column::make('val_hire_date')->heading(__('val_hire_date')),
-                            Column::make('val_signature')->heading(__('val_signature')),
-                            Column::make('val_Seal')->heading(__('val_Seal')),
-
-
-                            Column::make('researcher.name')->heading(__('researcher_name')),
-
+                    ExcelExport::make('form')
+                        ->fromForm()
+                        ->except([
+                            'created_at',
+                            'updated_at',
+                            'oct_image_attend',
+                            'nov_image_attend',
+                            'dec_image_attend',
+                            'image_contract_direct_work',
+                            'image_attend',
+                            'image_national_card_front',
+                            'image_national_card_back',
+                            'school_image',
+                            'eduqual_image',
+                            // '',
                         ])
+                        ->withWriterType(\Maatwebsite\Excel\Excel::XLSX),
+                    // ExcelExport::make()
+                    // ->withFilename(fn ($resource) => $resource::getLabel())
+                    // ->withColumns([
+                    //     Column::make('name')->heading('Teacher_info-PQ[الأسم الرباعي]'),
+                    //     Column::make('phone')->heading('Teacher_info-PQ[رقم التلفون]'),
+                    //     Column::make('gender')->heading(__('gender')),
+                    //     Column::make('gov')->heading('Teacher_info-PQ[المحافظة]'),
+                    //     Column::make('district')->heading('Teacher_info-PQ[المديرية]'),
+                    //     Column::make('subdistrict')->heading('Teacher_info-PQ[الغزلة]'),
+                    //     Column::make('school')->heading('Teacher_info-PQ[المدرسة]'),
+                    //     Column::make('edu_qual')->heading('Teacher_info-PQ[المؤهل]'),
+                    //     Column::make('national_card_id')->heading('Teacher_info-PQ[رقم البطاقة]'),
+
+                    //     // Column::make('image_national_card_front')->heading(__('image_national_card_front')),
+                    //     // Column::make('image_national_card_back')->heading(__('image_national_card_back')),
+                    //     // Column::make('image_attend')->heading(__('image_attend')),
+                    //     // Column::make('image_contract_direct_work')->heading(__('image_contract_direct_work')),
+
+                    //     Column::make('q_1')->heading(__('q_1')),
+                    //     Column::make('q_3')->heading('Teacher_info-PQ[نوع الهوية]'),
+                    //     Column::make('q_4')->heading(__('q_4')),
+                    //     Column::make('q_5')->heading(__('q_5')),
+                    //     Column::make('q_6')->heading(__('q_6')),
+                    //     Column::make('q_7')->heading(__('q_7')),
+                    //     Column::make('q_8')->heading(__('q_8')),
+                    //     Column::make('q_9')->heading(__('q_9')),
+                    //     Column::make('q_10')->heading(__('q_10')),
+                    //     Column::make('q_11')->heading(__('q_11')),
+
+                    //     Column::make('note')->heading(__('note')),
+                    //     Column::make('teaching_days_num_oct')->heading(__('teaching_days_num_oct')),
+                    //     Column::make('teaching_days_num_nov')->heading(__('teaching_days_num_nov')),
+                    //     Column::make('teaching_days_num_dec')->heading(__('teaching_days_num_dec')),
+                    //     Column::make('teacher_birth_date')->heading(__('teacher_birth_date')),
+                    //     Column::make('oct_teacher_sinature')->heading(__('oct_teacher_sinature')),
+                    //     Column::make('nov_teacher_sinature')->heading(__('nov_teacher_sinature')),
+                    //     Column::make('dec_teacher_sinature')->heading(__('dec_teacher_sinature')),
+                    //     Column::make('school_status')->heading(__('school_status')),
+                    //     Column::make('Low_eduqual')->heading(__('Low_eduqual')),
+                    //     Column::make('gain_money')->heading(__('gain_money')),
+                    //     Column::make('checked_teacher_name')->heading(__('checked_teacher_name')),
+                    //     Column::make('checked_job_type')->heading(__('checked_job_type')),
+                    //     Column::make('checked_school_name')->heading(__('checked_school_name')),
+                    //     Column::make('checked_location')->heading(__('checked_location')),
+                    //     Column::make('checked_hiring_date')->heading(__('checked_hiring_date')),
+                    //     Column::make('checked_management_signature')->heading(__('checked_management_signature')),
+                    //     Column::make('checked_teacher_signature')->heading(__('checked_teacher_signature')),
+                    //     Column::make('checked_stamp')->heading(__('checked_stamp')),
+                    //     Column::make('researcher_notes')->heading(__('researcher_notes')),
+
+                    //     Column::make('long')->heading(__('long')),
+                    //     Column::make('lat')->heading(__('lat')),
+
+                    //     // Column::make('val_name')->heading(__('val_name')),
+                    //     // Column::make('val_job_type')->heading(__('val_job_type')),
+                    //     // Column::make('val_school')->heading(__('val_school')),
+                    //     // Column::make('val_location')->heading(__('val_location')),
+                    //     // Column::make('val_hire_date')->heading(__('val_hire_date')),
+                    //     // Column::make('val_signature')->heading(__('val_signature')),
+                    //     // Column::make('val_Seal')->heading(__('val_Seal')),
+
+
+
+
+
+                    //     Column::make('researcher.name')->heading(__('researcher_name')),
+
+
+
+                    // ])
                     // ->askForFilename()
                     // ->withFilename(fn ($filename) => 'prefix-' . $filename)
 

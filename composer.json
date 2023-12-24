@@ -12,12 +12,13 @@
         "bezhansalleh/filament-shield": "^3.1",
         "cheesegrits/filament-google-maps": "^3.0",
         "filament/filament": "^3.0-stable",
+        "filament/spatie-laravel-media-library-plugin": "^3.1",
         "flowframe/laravel-trend": "^0.1.5",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
-        "pxlrbt/filament-excel": "^2.1"
+        "pxlrbt/filament-excel": "^2.2"
     },
     "require-dev": {
         "bfinlay/laravel-excel-seeder": "^3.3",

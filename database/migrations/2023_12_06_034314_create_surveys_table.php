@@ -88,6 +88,10 @@ return new class extends Migration
             $table->string('val_signature')->nullable();
             $table->string('val_Seal')->nullable();
 
+            $table->string('long')->nullable();
+            $table->string('lat')->nullable();
+
+
             $table->boolean('done')->default(0);
             $table->foreignId('researcher_id')->nullable()->constrained('researchers')->cascadeOnUpdate();
             // $table->foreignId('district_id')->nullable()->constrained('districts')->cascadeOnUpdate();
