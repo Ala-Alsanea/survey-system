@@ -13,6 +13,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Tables\Concerns\InteractsWithTable;
+use Livewire\Attributes\Computed;
 
 class ListImage extends Component
 // class ListImage extends Component implements HasForms, HasTable
@@ -48,17 +49,16 @@ class ListImage extends Component
         // )->paginate(5);
     }
 
-    public function updated()
-    {
-        // $this->quary = Survey::select(
-        //     'id',
-        //     'name',
-        // )->select(
-        //     $this->selected
-        // )->paginate(5);
-        $this->selected = $this->images_selected;
-
-    }
+    // public function updated()
+    // {
+    //     // $this->quary = Survey::select(
+    //     //     'id',
+    //     //     'name',
+    //     // )->select(
+    //     //     $this->selected
+    //     // )->paginate(5);
+    //     $this->selected = $this->images_selected;
+    // }
 
 
     public function getStorageName($name)
@@ -147,20 +147,31 @@ class ListImage extends Component
             ]);
     }
 
+    #[Computed()]
+    public function images()
+    {
+        return Survey::select(
+            'id',
+            'name',
+        )->select(
+            $this->selected
+        )->paginate(2);
+    }
+
     public function render()
     {
 
 
         return view(
             'livewire.list-image',
-            [
-                'images' => Survey::select(
-                    'id',
-                    'name',
-                )->select(
-                    $this->selected
-                )->paginate(5),
-            ]
+            // [
+            //     'images' => Survey::select(
+            //         'id',
+            //         'name',
+            //     )->select(
+            //         $this->selected
+            //     )->paginate(5),
+            // ]
         );
     }
 
