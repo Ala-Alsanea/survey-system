@@ -35,30 +35,24 @@ class ListImage extends Component
         'eduqual_image',
     ];
 
-    public $selected;
+    public $_selected;
     public $quary;
 
     public function mount()
     {
-        $this->selected = $this->images_selected;
-        // $this->quary = Survey::select(
-        //     'id',
-        //     'name',
-        // )->select(
-        //     $this->selected
-        // )->paginate(5);
+        $this->reset_select();
+
     }
 
-    // public function updated()
-    // {
-    //     // $this->quary = Survey::select(
-    //     //     'id',
-    //     //     'name',
-    //     // )->select(
-    //     //     $this->selected
-    //     // )->paginate(5);
-    //     $this->selected = $this->images_selected;
-    // }
+    public function reset_select()
+    {
+        $this->_selected = $this->images_selected;
+
+        // dd($this->selected);
+
+    }
+
+
 
 
     public function getStorageName($name)
@@ -150,11 +144,14 @@ class ListImage extends Component
     #[Computed()]
     public function images()
     {
+        if($this->_selected == 'select all')
+            $this->reset_select();
+
         return Survey::select(
             'id',
             'name',
         )->select(
-            $this->selected
+            $this->_selected
         )->paginate(2);
     }
 

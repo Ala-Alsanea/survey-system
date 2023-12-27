@@ -4,13 +4,12 @@
     @php
         // dd($this->images);
     @endphp
-{{-- select filter --}}
+    {{-- select filter --}}
     <div class="m-4 mb-6">
         <x-filament::input.wrapper>
-            <x-filament::input.select wire:model.live="selected">
-                    <option value="id" selected="selected">select</option>
-                    {{-- <option value="{{$images_selected}}" selected="selected">all</option> --}}
+            <x-filament::input.select wire:model.live="_selected">
 
+                <option onclick="reset_select()" selected>select all</option>
                 @foreach ($images_selected as $option)
                     <option value="{{ $option }}">{{ __($option) }}</option>
                 @endforeach
@@ -24,7 +23,8 @@
         <!--Card 1-->
         @foreach ($this->images as $img)
             @if ($img->image_national_card_front)
-                <a wire:key='{{$img->id}}' target="_blank" href="{{ $this->getStorageName($img->image_national_card_front) }}">
+                <a wire:key='{{ $img->id }}' target="_blank"
+                    href="{{ $this->getStorageName($img->image_national_card_front) }}">
                     <div class="overflow-hidden rounded shadow-lg">
                         <img class="w-full" src="{{ $this->getStorageName($img->image_national_card_front) }}"
                             alt="{{ $img->image_national_card_front }}">
@@ -39,7 +39,8 @@
             @endif
 
             @if ($img->image_national_card_back)
-                <a wire:key='{{$img->id}}' target="_blank" href="{{ $this->getStorageName($img->image_national_card_back) }}">
+                <a wire:key='{{ $img->id }}' target="_blank"
+                    href="{{ $this->getStorageName($img->image_national_card_back) }}">
 
                     <div class="overflow-hidden rounded shadow-lg">
                         <img class="w-full" src="{{ $this->getStorageName($img->image_national_card_back) }}"
@@ -56,7 +57,8 @@
             @endif
 
             @if ($img->image_attend)
-                <a wire:key='{{$img->id}}' target="_blank" href="{{ $this->getStorageName($img->image_attend) }}">
+                <a wire:key='{{ $img->id }}' target="_blank"
+                    href="{{ $this->getStorageName($img->image_attend) }}">
 
                     <div class="overflow-hidden rounded shadow-lg">
                         <img class="w-full" src="{{ $this->getStorageName($img->image_attend) }}"
@@ -73,7 +75,8 @@
             @endif
 
             @if ($img->image_contract_direct_work)
-                <a wire:key='{{$img->id}}' target="_blank" href="{{ $this->getStorageName($img->image_contract_direct_work) }}">
+                <a wire:key='{{ $img->id }}' target="_blank"
+                    href="{{ $this->getStorageName($img->image_contract_direct_work) }}">
                     <div class="overflow-hidden rounded shadow-lg">
                         <img class="w-full" src="{{ $this->getStorageName($img->image_contract_direct_work) }}"
                             alt="{{ $img->image_contract_direct_work }}">
@@ -91,7 +94,8 @@
             {{-- new --}}
 
             @if ($img->oct_image_attend)
-                <a wire:key='{{$img->id}}' target="_blank" href="{{ $this->getStorageName($img->oct_image_attend) }}">
+                <a wire:key='{{ $img->id }}' target="_blank"
+                    href="{{ $this->getStorageName($img->oct_image_attend) }}">
                     <div class="overflow-hidden rounded shadow-lg">
                         <img class="w-full" src="{{ $this->getStorageName($img->oct_image_attend) }}"
                             alt="{{ $img->oct_image_attend }}">
@@ -107,7 +111,8 @@
             @endif
 
             @if ($img->nov_image_attend)
-                <a wire:key='{{$img->id}}' target="_blank" href="{{ $this->getStorageName($img->nov_image_attend) }}">
+                <a wire:key='{{ $img->id }}' target="_blank"
+                    href="{{ $this->getStorageName($img->nov_image_attend) }}">
                     <div class="overflow-hidden rounded shadow-lg">
                         <img class="w-full" src="{{ $this->getStorageName($img->nov_image_attend) }}"
                             alt="{{ $img->nov_image_attend }}">
@@ -123,7 +128,8 @@
             @endif
 
             @if ($img->dec_image_attend)
-                <a wire:key='{{$img->id}}' target="_blank" href="{{ $this->getStorageName($img->dec_image_attend) }}">
+                <a wire:key='{{ $img->id }}' target="_blank"
+                    href="{{ $this->getStorageName($img->dec_image_attend) }}">
                     <div class="overflow-hidden rounded shadow-lg">
                         <img class="w-full" src="{{ $this->getStorageName($img->dec_image_attend) }}"
                             alt="{{ $img->dec_image_attend }}">
@@ -139,7 +145,8 @@
             @endif
 
             @if ($img->school_image)
-                <a wire:key='{{$img->id}}' target="_blank" href="{{ $this->getStorageName($img->school_image) }}">
+                <a wire:key='{{ $img->id }}' target="_blank"
+                    href="{{ $this->getStorageName($img->school_image) }}">
                     <div class="overflow-hidden rounded shadow-lg">
                         <img class="w-full" src="{{ $this->getStorageName($img->school_image) }}"
                             alt="{{ $img->school_image }}">
@@ -155,7 +162,8 @@
             @endif
 
             @if ($img->eduqual_image)
-                <a wire:key='{{$img->id}}' target="_blank" href="{{ $this->getStorageName($img->eduqual_image) }}">
+                <a wire:key='{{ $img->id }}' target="_blank"
+                    href="{{ $this->getStorageName($img->eduqual_image) }}">
                     <div class="overflow-hidden rounded shadow-lg">
                         <img class="w-full" src="{{ $this->getStorageName($img->eduqual_image) }}"
                             alt="{{ $img->eduqual_image }}">
