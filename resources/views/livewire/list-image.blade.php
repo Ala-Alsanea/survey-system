@@ -8,16 +8,17 @@
     <div class="m-4 mb-6">
         <x-filament::input.wrapper>
             <x-filament::input.select wire:model.live="_selected">
+                <option wire:click="reset_select" selected>select all</option>
 
-                <option onclick="reset_select()" selected>select all</option>
                 @foreach ($images_selected as $option)
                     <option value="{{ $option }}">{{ __($option) }}</option>
                 @endforeach
+
             </x-filament::input.select>
         </x-filament::input.wrapper>
     </div>
 
-    {{-- {{ collect($this->selected)->implode('-')}} --}}
+    {{-- {{ collect($this->_selected)->implode('-')}} --}}
 
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
         <!--Card 1-->

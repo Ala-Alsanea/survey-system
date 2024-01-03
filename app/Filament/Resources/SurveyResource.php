@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use App\Filament\Resources\SurveyResource\RelationManagers;
+use App\Models\TeacherInfo;
 
 class SurveyResource extends Resource
 {
@@ -343,6 +344,7 @@ class SurveyResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->label(__('name'))
                     ->searchable(),
+
                 Tables\Columns\TextColumn::make('phone')
                     ->label(__('phone'))
                     ->searchable(),
@@ -356,6 +358,7 @@ class SurveyResource extends Resource
                 Tables\Columns\TextColumn::make('district')
                     ->label(__('district'))
                     ->searchable(),
+
 
                 Tables\Columns\TextColumn::make('subdistrict')
                     ->label(__('subdistrict'))
@@ -438,10 +441,93 @@ class SurveyResource extends Resource
                 //
             ])->headerActions([
                 // ...
-                  ExportAction::make('form')->exports([
-                    ExcelExport::make('form')
+                ExportAction::make('all')->exports([
+                    ExcelExport::make()
                         ->withFilename('all')
-                        ->fromForm()
+                        // ->fromForm()
+                        ->withColumns([
+                            Column::make('gov')->heading('المحافظة'),
+                            Column::make('district')->heading('المديرية'),
+                            Column::make('subdistrict')->heading('الغزلة'),
+                            Column::make('school')->heading('المدرسة'),
+                            Column::make('researcher.name')->heading('الأسم الباحث'),
+
+                            Column::make('long')->heading('long'),
+                            Column::make('lat')->heading('lat'),
+
+                            Column::make('school_status')->heading('school_status'),
+                            Column::make('name')->heading('اسم المستفيد'),
+                            Column::make('q_1')->heading(__('q_1')),
+                            Column::make('note')->heading(__('note')),
+                            Column::make('gender')->heading(__('gender')),
+                            Column::make('phone')->heading(__('phone')),
+                            Column::make('q_3')->heading(__('q_3')),
+                            Column::make('national_card_id')->heading(__('national_card_id')),
+                            Column::make('q_4')->heading(__('q_4')),
+                            Column::make('teacher_birth_date')->heading(__('teacher_birth_date')),
+                            Column::make('edu_qual')->heading(__('edu_qual')),
+                            Column::make('Low_eduqual')->heading(__('Low_eduqual')),
+                            Column::make('q_5')->heading(__('q_5')),
+                            Column::make('q_6')->heading(__('q_6')),
+
+                            Column::make('q_7')->heading(__('q_7')),
+                            Column::make('teaching_days_num_oct')->heading(__('teaching_days_num_oct')),
+                            Column::make('teaching_days_num_nov ')->heading(__('teaching_days_num_nov    ')),
+                            Column::make('teaching_days_num_dec')->heading(__('teaching_days_num_dec')),
+
+
+                            Column::make('q_8')->heading(__('q_8')),
+                            Column::make('oct_teacher_sinature')->heading(__('oct_teacher_sinature')),
+                            Column::make('nov_teacher_sinature')->heading(__('nov_teacher_sinature')),
+                            Column::make('dec_teacher_sinature')->heading(__('dec_teacher_sinature')),
+
+
+                            Column::make('q_9')->heading(__('q_9')),
+
+
+                            Column::make('q_10')->heading(__('q_10')),
+                            // Column::make('q_11')->heading(__('q_11')),
+
+                            // Column::make('gain_money')->heading(__('gain_money')),
+                            // Column::make('checked_teacher_name')->heading(__('checked_teacher_name')),
+                            // Column::make('checked_job_type')->heading(__('checked_job_type')),
+                            // Column::make('checked_school_name')->heading(__('checked_school_name')),
+                            // Column::make('checked_location')->heading(__('checked_location')),
+                            // Column::make('checked_hiring_date')->heading(__('checked_hiring_date')),
+                            // Column::make('checked_management_signature')->heading(__('checked_management_signature')),
+                            // Column::make('checked_teacher_signature')->heading(__('checked_teacher_signature')),
+                            // Column::make('checked_stamp')->heading(__('checked_stamp')),
+                            // Column::make('researcher_notes')->heading(__('researcher_notes')),
+
+                            // Column::make('long')->heading(__('long')),
+                            // Column::make('lat')->heading(__('lat')),
+
+                            // Column::make('val_name')->heading(__('val_name')),
+                            // Column::make('val_job_type')->heading(__('val_job_type')),
+                            // Column::make('val_school')->heading(__('val_school')),
+                            // Column::make('val_location')->heading(__('val_location')),
+                            // Column::make('val_hire_date')->heading(__('val_hire_date')),
+                            // Column::make('val_signature')->heading(__('val_signature')),
+                            // Column::make('val_Seal')->heading(__('val_Seal')),
+
+
+
+
+
+                            // Column::make('researcher.name')->heading(__('researcher_name')),
+
+                            // Column::make('school')
+                            //     ->formatStateUsing(fn ($record) => TeacherInfo::where('school', 'LIKE', '%' . $record . '%')->first()->name_manager_school)
+                            //     ->heading(__('maneger_name')),
+
+                            Column::make('school')
+                                ->tableColumn(Tables\Columns\TextColumn::make('school'))
+                                // ->formatStateUsing(fn ($record) => TeacherInfo::where('school', $record)->first()->phone_manager_school ?? "null")
+                                ->heading(__('maneger_phone')),
+
+
+
+                        ])
                         ->except([
                             // 'created_at',
                             // 'updated_at',
@@ -457,6 +543,7 @@ class SurveyResource extends Resource
                             // '',
                         ])
                         ->withWriterType(\Maatwebsite\Excel\Excel::XLSX),
+
                 ])
                     ->label('Export All'),
 

@@ -47,12 +47,12 @@ class ListImage extends Component
     public function reset_select()
     {
         $this->_selected = $this->images_selected;
+        // array_push($this->_selected, 'select all');
+
 
         // dd($this->selected);
 
     }
-
-
 
 
     public function getStorageName($name)
@@ -60,99 +60,27 @@ class ListImage extends Component
         return asset('storage/' . $name);
     }
 
-    public function table(Table $table): Table
-    {
-        return $table
-            ->query(Survey::query())
-            ->columns([
-
-                Split::make([
-
-                    TextColumn::make('name')
-                        ->label(__('name'))
-                        ->toggleable(isToggledHiddenByDefault: false)
-                        ->searchable(),
-
-                    TextColumn::make('national_card_id')
-                        ->label(__('national_card_id'))
-                        ->toggleable(isToggledHiddenByDefault: false)
-                        // ->searchable()
-                        ->sortable(),
-
-                    // old
-                    ImageColumn::make('image_national_card_front')
-                        // ->size(200)
-                        ->extraImgAttributes(['loading' => 'lazy'])
-                        ->toggleable(isToggledHiddenByDefault: true),
-                    ImageColumn::make('image_national_card_back')
-                        // ->size(200)
-                        ->extraImgAttributes(['loading' => 'lazy'])
-                        ->toggleable(isToggledHiddenByDefault: true),
-                    ImageColumn::make('image_attend')
-                        // ->size(200)
-                        ->extraImgAttributes(['loading' => 'lazy'])
-                        ->toggleable(isToggledHiddenByDefault: true),
-                    ImageColumn::make('image_contract_direct_work')
-                        // ->size(200)
-                        ->extraImgAttributes(['loading' => 'lazy'])
-                        ->toggleable(isToggledHiddenByDefault: true),
-
-                    // new
-                    ImageColumn::make('oct_image_attend')
-                        // ->size(200)
-                        ->extraImgAttributes(['loading' => 'lazy'])
-                        ->toggleable(isToggledHiddenByDefault: true),
-
-                    ImageColumn::make('nov_image_attend')
-                        // ->size(200)
-                        ->extraImgAttributes(['loading' => 'lazy'])
-                        ->toggleable(isToggledHiddenByDefault: true),
-
-                    ImageColumn::make('dec_image_attend')
-                        // ->size(200)
-                        ->extraImgAttributes(['loading' => 'lazy'])
-                        ->toggleable(isToggledHiddenByDefault: true),
-
-                    ImageColumn::make('school_image')
-                        // ->size(200)
-                        ->extraImgAttributes(['loading' => 'lazy'])
-                        ->toggleable(isToggledHiddenByDefault: true),
-
-                    ImageColumn::make('eduqual_image')
-                        // ->size(200)
-                        ->extraImgAttributes(['loading' => 'lazy'])
-                        ->toggleable(isToggledHiddenByDefault: true),
-
-                ]),
-
-            ])
-            ->contentGrid([
-                'md' => 2,
-                'xl' => 3,
-            ])
-            ->filters([
-                // ...
-            ])
-            ->actions([
-                // ...
-            ])
-            ->bulkActions([
-                // ...
-            ]);
-    }
 
     #[Computed()]
     public function images()
     {
         if($this->_selected == 'select all')
+        {
             $this->reset_select();
+        }
 
-        return Survey::select(
+
+        $images = Survey::select(
             'id',
             'name',
         )->select(
             $this->_selected
         )->paginate(2);
+
+
+        // array_push($this->_selected, 'select all');
+
+        return $images;
     }
 
     public function render()
@@ -172,8 +100,8 @@ class ListImage extends Component
         );
     }
 
-    public function search()
-    {
-        $this->resetPage();
-    }
+//     public function search()
+//     {
+//         $this->resetPage();
+//     }
 }
