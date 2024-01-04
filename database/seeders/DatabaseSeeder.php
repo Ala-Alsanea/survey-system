@@ -45,6 +45,7 @@ class DatabaseSeeder extends Seeder
             'name'=>'test user',
             'phone'=>'789456123',
             'password' => '15987532',
+            'valid'=>1,
         ]);
 
         $this->call([

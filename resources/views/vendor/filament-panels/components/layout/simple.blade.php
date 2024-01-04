@@ -8,11 +8,10 @@
         'heading' => null,
         'subheading' => null,
     ])
-    <div style="background-color: #0198F1">
+    <div style="background: url({{asset('/img/bg.jpg')}}); ">
 
-        <img src="/img/logo_1.jpeg" width="100" style="position: fixed; z-index:10; bottom: 0px" alt="">
-        <img src="/img/logo_2.jpeg" width="100" style="position: fixed; z-index:9; bottom: 0px; right:1px ;"
-            alt="">
+        {{-- <img src="/img/logo_1.jpeg" width="100" style="position: fixed; z-index:10; bottom: 0px" alt=""> --}}
+        {{-- <img src="/img/logo_2.jpeg" width="100" style="position: fixed; z-index:9; bottom: 0px; right:1px ;" alt=""> --}}
 
         <div style="z-index:11;" class="flex flex-col items-center min-h-screen fi-simple-layout">
             @if (filament()->auth()->check())

@@ -134,6 +134,9 @@ class ResearcherController extends Controller
 
 
             $survey = $request->all();
+            // add manager info
+            // $survey['name_manager_school'] = TeacherInfo::where('school', 'LIKE', '%' . $survey['school'] . '%')->first()->name_manager_school;
+            // $survey['phone_manager_school'] = TeacherInfo::where('school', 'LIKE', '%' . $survey['school'] . '%')->first()->phone_manager_school;
 
             // attach imgs
             $survey['image_national_card_front'] = $this->parse_image($survey['image_national_card_front'] ?? null, "{$survey['name']}_ image_national_card_front");

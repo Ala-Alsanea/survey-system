@@ -66,6 +66,17 @@ class Survey extends Model
         'checked_stamp',
         'researcher_notes',
 
+        'village_name',
+        'school_name_as_on_user_contract_work',
+        'school_name_on_vistiting_and_contract_identical',
+        'check_school_location',
+        'teacher_name_as_on_real_life',
+        'exact_teacher_job_type',
+        'teacher_job_type',
+        'teacher_signature_comparison',
+        'teacher_cotract_type',
+        'contract_date',
+
 
         // // old
         // 'name',
@@ -116,6 +127,10 @@ class Survey extends Model
         'district_id',
         'subdistrict_id',
         'school_id',
+
+        'name_manager_school',
+        'phone_manager_school',
+
 
     ];
 

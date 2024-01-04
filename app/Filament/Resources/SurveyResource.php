@@ -257,6 +257,37 @@ class SurveyResource extends Resource
                             ->label(__('researcher_notes'))
                             ->disabled(),
 
+                        // new
+                        Forms\Components\MarkdownEditor::make('village_name')
+                            ->label(__('village_name'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('school_name_as_on_user_contract_work')
+                            ->label(__('school_name_as_on_user_contract_work'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('school_name_on_vistiting_and_contract_identical')
+                            ->label(__('school_name_on_vistiting_and_contract_identical'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('check_school_location')
+                            ->label(__('check_school_location'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('teacher_name_as_on_real_life')
+                            ->label(__('teacher_name_as_on_real_life'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('exact_teacher_job_type')
+                            ->label(__('exact_teacher_job_type'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('teacher_job_type')
+                            ->label(__('teacher_job_type'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('teacher_signature_comparison')
+                            ->label(__('teacher_signature_comparison'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('teacher_cotract_type')
+                            ->label(__('teacher_cotract_type'))
+                            ->disabled(),
+                        Forms\Components\MarkdownEditor::make('contract_date')
+                            ->label(__('contract_date'))
+                            ->disabled(),
 
 
                     ])
@@ -486,6 +517,7 @@ class SurveyResource extends Resource
 
 
                             Column::make('q_10')->heading(__('q_10')),
+
                             // Column::make('q_11')->heading(__('q_11')),
 
                             // Column::make('gain_money')->heading(__('gain_money')),
@@ -516,14 +548,18 @@ class SurveyResource extends Resource
 
                             // Column::make('researcher.name')->heading(__('researcher_name')),
 
-                            // Column::make('school')
-                            //     ->formatStateUsing(fn ($record) => TeacherInfo::where('school', 'LIKE', '%' . $record . '%')->first()->name_manager_school)
-                            //     ->heading(__('maneger_name')),
+                            Column::make('maneger_name')
+                                ->getStateUsing(fn ($record) => TeacherInfo::where('school', 'LIKE', '%' . $record->school . '%')->first()->name_manager_school)
+                                ->heading(__('maneger_name')),
 
-                            Column::make('school')
+                            Column::make('maneger_phone')
                                 ->tableColumn(Tables\Columns\TextColumn::make('school'))
-                                // ->formatStateUsing(fn ($record) => TeacherInfo::where('school', $record)->first()->phone_manager_school ?? "null")
+                                ->getStateUsing(fn ($record) => TeacherInfo::where('school', 'LIKE', '%' . $record->school . '%')->first()->phone_manager_school)
                                 ->heading(__('maneger_phone')),
+
+                            // Column::make('name_1')->getStateUsing(fn ($record) => $record->name)->heading('Teacher'),
+                            // Column::make('name_2')->getStateUsing(fn ($record) => $record->name)->heading('Teacher'),
+                            // Column::make('name_3')->getStateUsing(fn ($record) => $record->name)->heading('Teacher'),
 
 
 

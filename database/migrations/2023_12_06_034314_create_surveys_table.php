@@ -91,6 +91,21 @@ return new class extends Migration
             $table->string('long')->nullable();
             $table->string('lat')->nullable();
 
+            // $table->string('name_manager_school')->nullable();
+            // $table->string('phone_manager_school')->nullable();
+
+            $table->string('village_name')->nullable();
+            $table->string('school_name_as_on_user_contract_work')->nullable();
+            $table->text('school_name_on_vistiting_and_contract_identical')->nullable();
+            $table->string('check_school_location')->nullable();
+            $table->string('teacher_name_as_on_real_life')->nullable();
+            $table->string('exact_teacher_job_type')->nullable();
+
+            $table->text('teacher_job_type')->nullable();
+            $table->text('teacher_signature_comparison')->nullable();
+            $table->text('teacher_cotract_type')->nullable();
+            $table->text('contract_date')->nullable();
+
 
             $table->boolean('done')->default(0);
             $table->foreignId('researcher_id')->nullable()->constrained('researchers')->cascadeOnUpdate();
