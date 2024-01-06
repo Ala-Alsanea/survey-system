@@ -139,30 +139,25 @@ class ResearcherController extends Controller
             // $survey['phone_manager_school'] = TeacherInfo::where('school', 'LIKE', '%' . $survey['school'] . '%')->first()->phone_manager_school;
 
             // attach imgs
-            $survey['image_national_card_front'] = $this->parse_image($survey['image_national_card_front'] ?? null, "{$survey['name']}_ image_national_card_front");
-            $survey['image_national_card_back'] = $this->parse_image($survey['image_national_card_back'] ?? null, "{$survey['name']}_ image_national_card_back");
-            $survey['image_attend'] = $this->parse_image($survey['image_attend'] ?? null, "{$survey['name']}_ image_attend");
-            $survey['image_contract_direct_work'] = $this->parse_image($survey['image_contract_direct_work'] ?? null, "{$survey['name']}_ image_contract_direct_work");
 
-            $survey['oct_image_attend'] = $this->parse_image($survey['oct_image_attend'] ?? null, "{$survey['name']}_ oct_image_attend");
-            $survey['nov_image_attend'] = $this->parse_image($survey['nov_image_attend'] ?? null, "{$survey['name']}_ nov_image_attend");
-            $survey['dec_image_attend'] = $this->parse_image($survey['dec_image_attend'] ?? null, "{$survey['name']}_ dec_image_attend");
-            $survey['school_image'] = $this->parse_image($survey['school_image'] ?? null, "{$survey['name']}_ school_image");
-            $survey['eduqual_image'] = $this->parse_image($survey['eduqual_image'] ?? null, "{$survey['name']}_ eduqual_image");
+            $name = trim($survey['name']);
+            $name= str_replace(' ', '_', $survey['name']);
 
+            $survey['image_national_card_front'] = $this->parse_image($survey['image_national_card_front'] ?? null, "{$name}_image_national_card_front");
+            $survey['image_national_card_back'] = $this->parse_image($survey['image_national_card_back'] ?? null, "{$name}_image_national_card_back");
+            $survey['image_attend'] = $this->parse_image($survey['image_attend'] ?? null, "{$name}_ image_attend");
+            $survey['image_contract_direct_work'] = $this->parse_image($survey['image_contract_direct_work'] ?? null, "{$name}_image_contract_direct_work");
 
-            // $survey['image_contract_direct_work'] =
-
-            // return response($survey);
-            // return response(base64_encode(file_get_contents('/home/ala/Documents/Projects/php/softupgrate/survey system/survey-teacher-laravel/storage/app/public/1cbfac69e28183f40e110017ab3f1e52.jpg')));
-            // decode images base64
-            // $survey['image_national_card_front'] = $request->image_national_card_front? $this->upload_image_base64($request->image_national_card_front, ''): null;
-            // $survey['image_national_card_back'] = $request->image_national_card_back? $this->upload_image_base64($request->image_national_card_back, ''): null;
-            // $survey['image_attend'] = $request->image_attend ? $this->upload_image_base64($request->image_attend, '') : null;
-            // $survey['image_contract_direct_work'] = $request->image_contract_direct_work ? $this->upload_image_base64($request->image_contract_direct_work, '') : null;
+            $survey['oct_image_attend'] = $this->parse_image($survey['oct_image_attend'] ?? null, "{$name}_oct_image_attend");
+            $survey['nov_image_attend'] = $this->parse_image($survey['nov_image_attend'] ?? null, "{$name}_nov_image_attend");
+            $survey['dec_image_attend'] = $this->parse_image($survey['dec_image_attend'] ?? null, "{$name}_dec_image_attend");
+            $survey['school_image'] = $this->parse_image($survey['school_image'] ?? null, "{$name}_school_image");
+            $survey['eduqual_image'] = $this->parse_image($survey['eduqual_image'] ?? null, "{$name}_eduqual_image");
 
 
-
+            //  loc pars
+            // $survey['name']
+            // $survey['name']
 
             // ##########################
 

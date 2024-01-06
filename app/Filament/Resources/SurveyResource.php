@@ -487,6 +487,16 @@ class SurveyResource extends Resource
                             Column::make('lat')->heading('lat'),
 
                             Column::make('school_status')->heading('school_status'),
+
+                            Column::make('maneger_name')
+                                ->getStateUsing(fn ($record) => TeacherInfo::where('school', 'LIKE', '%' . $record->school . '%')->first()->name_manager_school??"null")
+                                ->heading(__('maneger_name')),
+
+                            Column::make('maneger_phone')
+                                ->tableColumn(Tables\Columns\TextColumn::make('school'))
+                                ->getStateUsing(fn ($record) => TeacherInfo::where('school', 'LIKE', '%' . $record->school . '%')->first()-> phone_manager_school ?? "null")
+                                ->heading(__('maneger_phone')),
+
                             Column::make('name')->heading('اسم المستفيد'),
                             Column::make('q_1')->heading(__('q_1')),
                             Column::make('note')->heading(__('note')),
@@ -517,19 +527,34 @@ class SurveyResource extends Resource
 
 
                             Column::make('q_10')->heading(__('q_10')),
+                            Column::make('checked_teacher_name')->heading(__('checked_teacher_name')),
+                            Column::make('checked_job_type')->heading(__('checked_job_type')),
+                            Column::make('checked_school_name')->heading(__('checked_school_name')),
+                            Column::make('checked_location')->heading(__('checked_location')),
+                            Column::make('checked_hiring_date')->heading(__('checked_hiring_date')),
+                            Column::make('checked_management_signature')->heading(__('checked_management_signature')),
+                            Column::make('checked_teacher_signature')->heading(__('checked_teacher_signature')),
+                            Column::make('checked_stamp')->heading(__('checked_stamp')),
 
-                            // Column::make('q_11')->heading(__('q_11')),
+                            Column::make('q_11')->heading(__('q_11')),
 
-                            // Column::make('gain_money')->heading(__('gain_money')),
-                            // Column::make('checked_teacher_name')->heading(__('checked_teacher_name')),
-                            // Column::make('checked_job_type')->heading(__('checked_job_type')),
-                            // Column::make('checked_school_name')->heading(__('checked_school_name')),
-                            // Column::make('checked_location')->heading(__('checked_location')),
-                            // Column::make('checked_hiring_date')->heading(__('checked_hiring_date')),
-                            // Column::make('checked_management_signature')->heading(__('checked_management_signature')),
-                            // Column::make('checked_teacher_signature')->heading(__('checked_teacher_signature')),
-                            // Column::make('checked_stamp')->heading(__('checked_stamp')),
-                            // Column::make('researcher_notes')->heading(__('researcher_notes')),
+                            Column::make('gain_money')->heading(__('gain_money')),
+                            Column::make('researcher_notes')->heading(__('researcher_notes')),
+
+                            Column::make('done')->heading(__('done')),
+
+                            Column::make('village_name')->heading(__('village_name')),
+                            Column::make('school_name_as_on_user_contract_work')->heading(__('school_name_as_on_user_contract_work')),
+                            Column::make('school_name_on_vistiting_and_contract_identical')->heading(__('school_name_on_vistiting_and_contract_identical')),
+                            Column::make('check_school_location')->heading(__('check_school_location')),
+                            Column::make('teacher_name_as_on_real_life')->heading(__('teacher_name_as_on_real_life')),
+                            Column::make('exact_teacher_job_type')->heading(__('exact_teacher_job_type')),
+                            Column::make('teacher_job_type')->heading(__('teacher_job_type')),
+                            Column::make('teacher_signature_comparison')->heading(__('teacher_signature_comparison')),
+                            Column::make('teacher_cotract_type')->heading(__('teacher_cotract_type')),
+                            Column::make('contract_date')->heading(__('contract_date')),
+
+
 
                             // Column::make('long')->heading(__('long')),
                             // Column::make('lat')->heading(__('lat')),
@@ -546,20 +571,9 @@ class SurveyResource extends Resource
 
 
 
-                            // Column::make('researcher.name')->heading(__('researcher_name')),
 
-                            Column::make('maneger_name')
-                                ->getStateUsing(fn ($record) => TeacherInfo::where('school', 'LIKE', '%' . $record->school . '%')->first()->name_manager_school)
-                                ->heading(__('maneger_name')),
 
-                            Column::make('maneger_phone')
-                                ->tableColumn(Tables\Columns\TextColumn::make('school'))
-                                ->getStateUsing(fn ($record) => TeacherInfo::where('school', 'LIKE', '%' . $record->school . '%')->first()->phone_manager_school)
-                                ->heading(__('maneger_phone')),
 
-                            // Column::make('name_1')->getStateUsing(fn ($record) => $record->name)->heading('Teacher'),
-                            // Column::make('name_2')->getStateUsing(fn ($record) => $record->name)->heading('Teacher'),
-                            // Column::make('name_3')->getStateUsing(fn ($record) => $record->name)->heading('Teacher'),
 
 
 

@@ -7,6 +7,8 @@
     <title>Laravel Google Maps Multiple Markers Example - ItSolutionStuff.com</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+      <script src="https://cdn.tailwindcss.com"></script>
+
     <style type="text/css">
         #map {
           height: 400px;

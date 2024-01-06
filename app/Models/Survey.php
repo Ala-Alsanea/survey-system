@@ -106,7 +106,7 @@ class Survey extends Model
         // 'q_9',
         // 'q_10',
         // 'q_11',
-        // 'note',
+        'note',
 
         // not api
         'val_name',
