@@ -2,27 +2,39 @@
 
 namespace App\Filament\Widgets;
 
-use App\Models\Researcher;
 use App\Models\Survey;
+use App\Models\Researcher;
 use App\Models\TeacherInfo;
 use Filament\Widgets\StatsOverviewWidget\Stat;
+use Filament\Pages\Dashboard\Concerns\HasFiltersAction;
+use Filament\Widgets\Concerns\InteractsWithPageFilters;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
+
+use function PHPUnit\Framework\isEmpty;
 
 class StatsOverview extends BaseWidget
 {
+    use InteractsWithPageFilters;
+    // use HasFiltersAction;
+
+
     protected static ?int $sort = 1;
 
-    public bool $readyToLoad = false;
+    // public bool $readyToLoad = false;
 
-    protected int | string | array $columnSpan = 'full';
+    // protected int | string | array $columnSpan = 'full';
 
-    public function loadData()
-    {
-        $this->readyToLoad = true;
-    }
+    // public function loadData()
+    // {
+    //     $this->readyToLoad = true;
+    // }
 
     protected function getStats(): array
     {
+
+        // dd($this->filters);
+
+
         $SchoolCollected = Survey::pluck('school')->unique()->count();
         $Schools = TeacherInfo::pluck('school')->unique()->count();
         $SchoolNotCollected = $Schools - $SchoolCollected;
@@ -36,8 +48,24 @@ class StatsOverview extends BaseWidget
 
         // dd(TeacherInfo::pluck('school')->unique()->all());
 
+        // ! fix filter is "" not null
+        $disLabel = !isEmpty($this->filters['district'])  ? $this->filters['district'] : 'all';
+        $subLabel = !isEmpty($this->filters['subdistrict'])  ? $this->filters['subdistrict'] : 'all';
+        $desc = $disLabel. ' - ' .$subLabel;
+        // dd($this->filters);
+
+
         return [
 
+
+            Stat::make('filter', !isEmpty($this->filters['gov'])  ? $this->filters['gov']: 'all')
+                // ->color('success')
+                ->description($desc)
+                // ->descriptionIcon('heroicon-s-building-office-2')
+                // ->color('success')
+                ->extraAttributes([
+                    // 'class' => 'col-span-2',
+                ]),
 
             Stat::make('School', $Schools)
                 // ->color('success')
@@ -45,7 +73,7 @@ class StatsOverview extends BaseWidget
                 ->descriptionIcon('heroicon-s-building-office-2')
                 ->color('success')
                 ->extraAttributes([
-                    'class' => 'col-span-2',
+                    // 'class' => 'col-span-2',
                 ]),
 
             Stat::make('School', $SchoolCollected)
@@ -56,7 +84,8 @@ class StatsOverview extends BaseWidget
 
             Stat::make('School', $SchoolNotCollected)
                 // ->color('success')
-                ->description("$percentageOfNotCollectedSchools% not collected")                ->descriptionIcon('heroicon-s-building-office')
+                ->description("$percentageOfNotCollectedSchools% not collected")
+                ->descriptionIcon('heroicon-s-building-office')
                 ->color('danger'),
 
 
