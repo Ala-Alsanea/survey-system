@@ -52,7 +52,7 @@ class Dashboard extends BaseDashboard
     {
         return [
             StatsOverview::make(['filters' => $this->filters]),
-            // Map::make(),
+            Map::make(),
             SchoolByGovernoratesChart::make(),
             SchoolByDistrictChart::make()
         ];
