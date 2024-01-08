@@ -51,38 +51,38 @@ class StatsOverview extends BaseWidget
             if (!isEmpty($this->filters['district']) || $this->filters['district'] != null) {
 
 
-                if (!isEmpty($this->filters['subdistrict']) || $this->filters['subdistrict'] != null) {
+                if (!isEmpty($this->filters['school']) || $this->filters['school'] != null) {
 
                     $SchoolCollected = $survey
                     ->where('gov', $this->filters['gov'])
                     ->where('district', $this->filters['district'])
-                    ->where('subdistrict', $this->filters['subdistrict'])->pluck('school')->unique()->count();
+                    ->where('school', $this->filters['school'])->pluck('school')->unique()->count();
                     $Schools = $teacherInfo
                     ->where('gov', $this->filters['gov'])
                     ->where('district', $this->filters['district'])
-                    ->where('subdistrict', $this->filters['subdistrict'])->pluck('school')->unique()->count();
+                    ->where('school', $this->filters['school'])->pluck('school')->unique()->count();
                     $SchoolNotCollected = $Schools - $SchoolCollected;
 
                     $TeacherExist = $survey
                     ->where('gov', $this->filters['gov'])
                     ->where('district', $this->filters['district'])
-                    ->where('subdistrict', $this->filters['subdistrict'])
+                    ->where('school', $this->filters['school'])
                     ->where('q_1', 'نعم')->count();
                     $TeacherNotExist = $survey
                     ->where('gov', $this->filters['gov'])
                     ->where('district', $this->filters['district'])
-                    ->where('subdistrict', $this->filters['subdistrict'])
+                    ->where('school', $this->filters['school'])
                     ->where('q_1', 'لا')->count();
 
                     $openSchools = $survey
                     ->where('gov', $this->filters['gov'])
                     ->where('district', $this->filters['district'])
-                    ->where('subdistrict', $this->filters['subdistrict'])
+                    ->where('school', $this->filters['school'])
                     ->where('school_status', 'مفتوحة')->count();
                     $closeSchools = $survey
                     ->where('gov', $this->filters['gov'])
                     ->where('district', $this->filters['district'])
-                    ->where('subdistrict', $this->filters['subdistrict'])
+                    ->where('school', $this->filters['school'])
                     ->where('school_status', 'مغلقه')->count();
 
 
@@ -178,7 +178,7 @@ class StatsOverview extends BaseWidget
 
         // ! fix filter is "" not null
         $disLabel = !isEmpty($this->filters['district']) || $this->filters['district'] != null  ? $this->filters['district'] : 'all';
-        $subLabel = !isEmpty($this->filters['subdistrict']) || $this->filters['subdistrict'] != null ? $this->filters['subdistrict'] : 'all';
+        $subLabel = !isEmpty($this->filters['school']) || $this->filters['school'] != null ? $this->filters['school'] : 'all';
         $desc = $disLabel . ' - ' . $subLabel;
 
         // dd($this->filters);

@@ -73,11 +73,11 @@ class Dashboard extends BaseDashboard
                 TeacherInfo::where('gov', $this->filters['gov'])->where('district', $this->filters['district'])->pluck('district')->count() !== 0
             ) {
 
-                $subdistrict = array_values(TeacherInfo::where('district', $this->filters['district'])->pluck('subdistrict')->unique()->all());
+                $school = array_values(TeacherInfo::where('district', $this->filters['district'])->pluck('school')->unique()->all());
             } else {
-                $subdistrict = [];
+                $school = [];
                 $this->filters['district'] =  null;
-                $this->filters['subdistrict'] =  null;
+                $this->filters['school'] =  null;
             }
 
             // dd($district);
@@ -88,9 +88,9 @@ class Dashboard extends BaseDashboard
         } else {
 
             $district = array_values(TeacherInfo::pluck('district')->unique()->all());
-            $subdistrict = array_values(TeacherInfo::pluck('subdistrict')->unique()->all());
+            $school = array_values(TeacherInfo::pluck('school')->unique()->all());
             $this->filters['district'] =  null;
-            $this->filters['subdistrict'] =  null;
+            $this->filters['school'] =  null;
             $this->filters['gov'] =  null;
         }
 
@@ -118,12 +118,12 @@ class Dashboard extends BaseDashboard
             }
         );
 
-        $subdistrictArr = array();
+        $schoolArr = array();
         array_walk(
-            $subdistrict,
-            function (&$val, $key) use (&$subdistrictArr) {
+            $school,
+            function (&$val, $key) use (&$schoolArr) {
                 $key = $val;
-                $subdistrictArr[$key] = $val;
+                $schoolArr[$key] = $val;
             }
         );
 
@@ -144,10 +144,10 @@ class Dashboard extends BaseDashboard
                         //  : Select::make('')
                         ,
 
-                        // $this->filters['subdistrict'] ?
-                        Select::make('subdistrict')
-                            ->options($subdistrictArr)
-                            ->label('subdistrict')
+                        // $this->filters['school'] ?
+                        Select::make('school')
+                            ->options($schoolArr)
+                            ->label('school')
                         // : Select::make('')
                         ,
                     ])
