@@ -19,5 +19,13 @@ Route::get('/', function () {
     return redirect('/admin/login');
 });
 
-Route::get('/map', MapIfram::class);
+Route::group([
+    'middleware' => [
 
+        'auth',
+        //  ResearcherMiddleware::class,
+    ]
+], function () {
+
+    Route::get('/map', MapIfram::class);
+});
