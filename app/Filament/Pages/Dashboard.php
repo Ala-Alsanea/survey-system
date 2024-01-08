@@ -62,41 +62,39 @@ class Dashboard extends BaseDashboard
     public function filtersForm(Form $form): Form
     {
         $gov = array_values(TeacherInfo::pluck('gov')->unique()->all());
-        // $this->filters['gov'] =  null;
 
+        // filter
+        // ?? it can be implemented in another way ,but the time could not help 😢😢
         if (isset($this->filters['gov'])) {
 
             $district = array_values(TeacherInfo::where('gov', $this->filters['gov'])->pluck('district')->unique()->all());
 
+
+            // filter if is set and district is in gov
             if (
                 $this->filters['district'] &&
                 TeacherInfo::where('gov', $this->filters['gov'])->where('district', $this->filters['district'])->pluck('district')->count() !== 0
             ) {
 
-                $subdistrict = array_values(TeacherInfo::where('district', $this->filters['district'])->pluck('subdistrict')->unique()->all());
+                $school = array_values(TeacherInfo::where('district', $this->filters['district'])->pluck('school')->unique()->all());
+
+                // filter school is not in district to clear filter
+                if (TeacherInfo::where('district', $this->filters['district'])->where('school', $this->filters['school'])->pluck('school')->count() === 0)
+                    $this->filters['school'] =  null;
             } else {
-                $subdistrict = [];
+                $school = [];
+                // dd($this->filters['school']);
                 $this->filters['district'] =  null;
-                $this->filters['subdistrict'] =  null;
+                $this->filters['school'] =  null;
             }
-
-            // dd($district);
-
-
-
-
         } else {
 
             $district = array_values(TeacherInfo::pluck('district')->unique()->all());
-            $subdistrict = array_values(TeacherInfo::pluck('subdistrict')->unique()->all());
+            $school = array_values(TeacherInfo::pluck('school')->unique()->all());
             $this->filters['district'] =  null;
-            $this->filters['subdistrict'] =  null;
+            $this->filters['school'] =  null;
             $this->filters['gov'] =  null;
         }
-
-        // if ($this->filters['gov'])
-        //     dd($this->filters['gov']);
-
 
 
         // formate to ['val'=>'val']
@@ -118,19 +116,19 @@ class Dashboard extends BaseDashboard
             }
         );
 
-        $subdistrictArr = array();
+        $schoolArr = array();
         array_walk(
-            $subdistrict,
-            function (&$val, $key) use (&$subdistrictArr) {
+            $school,
+            function (&$val, $key) use (&$schoolArr) {
                 $key = $val;
-                $subdistrictArr[$key] = $val;
+                $schoolArr[$key] = $val;
             }
         );
 
 
         return $form
             ->schema([
-            Fieldset::make('Filter')
+                Fieldset::make('Filter')
                     ->schema([
                         Select::make('gov')
                             ->options($govArr)
@@ -144,10 +142,10 @@ class Dashboard extends BaseDashboard
                         //  : Select::make('')
                         ,
 
-                        // $this->filters['subdistrict'] ?
-                        Select::make('subdistrict')
-                            ->options($subdistrictArr)
-                            ->label('subdistrict')
+                        // $this->filters['school'] ?
+                        Select::make('school')
+                            ->options($schoolArr)
+                            ->label('school')
                         // : Select::make('')
                         ,
                     ])
