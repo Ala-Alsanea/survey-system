@@ -62,29 +62,31 @@ class Dashboard extends BaseDashboard
     public function filtersForm(Form $form): Form
     {
         $gov = array_values(TeacherInfo::pluck('gov')->unique()->all());
-        // $this->filters['gov'] =  null;
 
+        // filter
+        // ?? it can be implemented in another way ,but the time could not help 😢😢
         if (isset($this->filters['gov'])) {
 
             $district = array_values(TeacherInfo::where('gov', $this->filters['gov'])->pluck('district')->unique()->all());
 
+
+            // filter if is set and district is in gov
             if (
                 $this->filters['district'] &&
                 TeacherInfo::where('gov', $this->filters['gov'])->where('district', $this->filters['district'])->pluck('district')->count() !== 0
             ) {
 
                 $school = array_values(TeacherInfo::where('district', $this->filters['district'])->pluck('school')->unique()->all());
+
+                // filter school is not in district to clear filter
+                if (TeacherInfo::where('district', $this->filters['district'])->where('school', $this->filters['school'])->pluck('school')->count() === 0)
+                    $this->filters['school'] =  null;
             } else {
                 $school = [];
+                // dd($this->filters['school']);
                 $this->filters['district'] =  null;
                 $this->filters['school'] =  null;
             }
-
-            // dd($district);
-
-
-
-
         } else {
 
             $district = array_values(TeacherInfo::pluck('district')->unique()->all());
@@ -93,10 +95,6 @@ class Dashboard extends BaseDashboard
             $this->filters['school'] =  null;
             $this->filters['gov'] =  null;
         }
-
-        // if ($this->filters['gov'])
-        //     dd($this->filters['gov']);
-
 
 
         // formate to ['val'=>'val']
@@ -130,7 +128,7 @@ class Dashboard extends BaseDashboard
 
         return $form
             ->schema([
-            Fieldset::make('Filter')
+                Fieldset::make('Filter')
                     ->schema([
                         Select::make('gov')
                             ->options($govArr)
