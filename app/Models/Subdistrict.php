@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Subdistrict extends Model
 {
     use HasFactory;
+
+    public $fillable = [
+        'siteCode',
+        'ParentCode',
+        'Ar_Name',
+        'En_Name',
+    ];
 }
