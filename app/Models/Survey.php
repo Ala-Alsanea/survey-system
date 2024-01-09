@@ -2,12 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Survey extends Model
 {
     use HasFactory;
+    use LogsActivity;
+
+    // protected static $recordEvents = ['deleted'];
+
+
     public $fillable = [
 
         // api
@@ -134,6 +141,15 @@ class Survey extends Model
 
 
     ];
+
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            // ->logOnly(['*'])
+            ->logFillable();
+        // Chain fluent methods for configuration options
+    }
 
     public function researcher()
     {

@@ -20,7 +20,9 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
-        "pxlrbt/filament-excel": "^2.2"
+        "pxlrbt/filament-excel": "^2.2",
+        "saade/filament-laravel-log": "^3.0",
+        "spatie/laravel-activitylog": "^4.7"
     },
     "require-dev": {
         "bfinlay/laravel-excel-seeder": "^3.3",
