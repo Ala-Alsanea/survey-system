@@ -11,6 +11,7 @@ class Survey extends Model
     public $fillable = [
 
         // api
+        'id',
         'name',
         'phone',
         'gender',
