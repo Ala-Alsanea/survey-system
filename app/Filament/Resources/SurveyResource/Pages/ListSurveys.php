@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\SurveyResource\Pages;
 
+use Exception;
 use App\Models\Gov;
 use Filament\Actions;
 use App\Models\Survey;
@@ -14,7 +15,6 @@ use Spatie\Activitylog\Models\Activity;
 use pxlrbt\FilamentExcel\Columns\Column;
 use Filament\Resources\Pages\ListRecords;
 use App\Filament\Resources\SurveyResource;
-use EightyNine\ExcelImport\ExcelImportAction;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Konnco\FilamentImport\Actions\ImportField;
 use Konnco\FilamentImport\Actions\ImportAction;
@@ -28,7 +28,9 @@ class ListSurveys extends ListRecords
     {
         $activity = Activity::all()->last();
 
-        dd($activity->changes);
+        // dd($activity->changes());
+        // dd(Survey::find(150));
+
         return [
             Actions\CreateAction::make(),
 
@@ -293,15 +295,29 @@ class ListSurveys extends ListRecords
 
 
                     ])
-
                     ->withWriterType(\Maatwebsite\Excel\Excel::XLSX),
-
             ])
                 ->label('Export All'),
 
 
             ImportAction::make()
-                ->uniqueField('id')
+                // ->uniqueField('id')
+                ->handleRecordCreation(function ($data) {
+
+                    if($survey =  Survey::where('id', $data['id'])->first()) {
+                        $survey->update($data);
+                        return $survey;
+                    } else {
+                        activity()
+                            ->causedBy(auth()->user())
+                            ->performedOn((new Survey))
+                            ->event('not-updated')
+                        ->withProperties(['attributes'=>$data])
+                            ->log('not-updated');
+
+                        return (new Survey);
+                    }
+                })
                 ->fields([
 
 
@@ -312,16 +328,16 @@ class ListSurveys extends ListRecords
                     ,
 
                     ImportField::make('researcher_id')
-                    // ->required()
-                    ->mutateBeforeCreate(function ($value) {
-                        // dd($value);
-                        return  Researcher::where('name', $value)->first()->id ?? 1;
-                    })
+                        // ->required()
+                        ->mutateBeforeCreate(function ($value) {
+                            // dd($value);
+                            return  Researcher::where('name', $value)->first()->id ?? 1;
+                        })
                         ->label('الأسم الباحث'),
 
                     ImportField::make('researcher.phone')
-                    // ->required()
-                    ->label('رقم هاتف الباحث'),
+                        // ->required()
+                        ->label('رقم هاتف الباحث'),
 
                     ImportField::make('lat')
                         // ->required()
@@ -344,24 +360,24 @@ class ListSurveys extends ListRecords
                         ->label('المحافظة'),
 
                     ImportField::make('district_id')
-                    // ->required()
-                    ->label(__('district_id')),
+                        // ->required()
+                        ->label(__('district_id')),
 
                     ImportField::make('district')
                         // ->required()
                         ->label('المديرية'),
 
                     ImportField::make('subdistrict_id')
-                    // ->required()
-                    ->label(__('subdistrict_id')),
+                        // ->required()
+                        ->label(__('subdistrict_id')),
 
                     ImportField::make('subdistrict')
-                    // ->required()
-                    ->label('الغزلة'),
+                        // ->required()
+                        ->label('الغزلة'),
 
                     ImportField::make('village_name')
-                    // ->required()
-                    ->label(__('village_name')),
+                        // ->required()
+                        ->label(__('village_name')),
 
                     ImportField::make('school')
                         // ->required()
@@ -369,28 +385,28 @@ class ListSurveys extends ListRecords
                     // img
 
                     ImportField::make('school_image')
-                    // ->required()
-                    ->label(__('school_image')),
+                        // ->required()
+                        ->label(__('school_image')),
 
-                    ImportField::make('maneger_name')
-                    // ->required()
-                    ->label(__('maneger_name')),
+                    // ImportField::make('maneger_name')
+                    //     // ->required()
+                    //     ->label(__('maneger_name')),
 
-                    ImportField::make('maneger_phone')
-                    // ->required()
-                    ->label(__('maneger_phone')),
+                    // ImportField::make('maneger_phone')
+                    //     // ->required()
+                    //     ->label(__('maneger_phone')),
 
                     ImportField::make('school_status')
-                    // ->required()
-                    ->label('school_status'),
+                        // ->required()
+                        ->label('school_status'),
 
                     ImportField::make('name')
                         // ->required()
                         ->label('اسم المستفيد'),
 
                     ImportField::make('teacher_name_as_on_real_life')
-                    // ->required()
-                    ->label(__('teacher_name_as_on_real_life')),
+                        // ->required()
+                        ->label(__('teacher_name_as_on_real_life')),
 
                     ImportField::make('q_1')
                         // ->required()
@@ -413,39 +429,39 @@ class ListSurveys extends ListRecords
                         ->label(__('q_3')),
 
                     ImportField::make('national_card_id')
-                    // ->required()
-                    ->label(__('national_card_id')),
+                        // ->required()
+                        ->label(__('national_card_id')),
                     // img
 
                     ImportField::make('image_national_card_front')
-                    // ->required()
-                    ->label(__('image_national_card_front')),
+                        // ->required()
+                        ->label(__('image_national_card_front')),
                     // img
 
                     ImportField::make('image_national_card_back')
-                    // ->required()
-                    ->label(__('image_national_card_back')),
+                        // ->required()
+                        ->label(__('image_national_card_back')),
 
                     ImportField::make('q_4')
                         // ->required()
                         ->label(__('q_4')),
 
                     ImportField::make('teacher_birth_date')
-                    // ->required()
-                    ->label(__('teacher_birth_date')),
+                        // ->required()
+                        ->label(__('teacher_birth_date')),
 
                     ImportField::make('edu_qual')
                         // ->required()
                         ->label(__('edu_qual')),
 
                     ImportField::make('Low_eduqual')
-                    // ->required()
-                    ->label(__('Low_eduqual')),
+                        // ->required()
+                        ->label(__('Low_eduqual')),
                     // img
 
                     ImportField::make('eduqual_image')
-                    // ->required()
-                    ->label(__('صوره موهل المستفيد')),
+                        // ->required()
+                        ->label(__('صوره موهل المستفيد')),
 
                     ImportField::make('q_5')
                         // ->required()
@@ -461,51 +477,51 @@ class ListSurveys extends ListRecords
                     // img
 
                     ImportField::make('image_attend')
-                    // ->required()
-                    ->label(__('image_attend')),
+                        // ->required()
+                        ->label(__('image_attend')),
 
                     ImportField::make('teaching_days_num_oct')
-                    // ->required()
-                    ->label(__('teaching_days_num_oct')),
+                        // ->required()
+                        ->label(__('teaching_days_num_oct')),
                     // img
 
                     ImportField::make('oct_image_attend')
-                    // ->required()
-                    ->label(__('oct_image_attend')),
+                        // ->required()
+                        ->label(__('oct_image_attend')),
 
                     ImportField::make('teaching_days_num_nov')
-                    // ->required()
-                    ->label(__('teaching_days_num_nov')),
+                        // ->required()
+                        ->label(__('teaching_days_num_nov')),
                     // img
 
                     ImportField::make('nov_image_attend')
-                    // ->required()
-                    ->label(__('nov_image_attend')),
+                        // ->required()
+                        ->label(__('nov_image_attend')),
 
                     ImportField::make('teaching_days_num_dec')
-                    // ->required()
-                    ->label(__('teaching_days_num_dec')),
+                        // ->required()
+                        ->label(__('teaching_days_num_dec')),
                     // img
 
                     ImportField::make('dec_image_attend')
-                    // ->required()
-                    ->label(__('dec_image_attend')),
+                        // ->required()
+                        ->label(__('dec_image_attend')),
 
                     ImportField::make('q_8')
                         // ->required()
                         ->label(__('q_8')),
 
                     ImportField::make('oct_teacher_sinature')
-                    // ->required()
-                    ->label(__('oct_teacher_sinature')),
+                        // ->required()
+                        ->label(__('oct_teacher_sinature')),
 
                     ImportField::make('nov_teacher_sinature')
-                    // ->required()
-                    ->label(__('nov_teacher_sinature')),
+                        // ->required()
+                        ->label(__('nov_teacher_sinature')),
 
                     ImportField::make('dec_teacher_sinature')
-                    // ->required()
-                    ->label(__('dec_teacher_sinature')),
+                        // ->required()
+                        ->label(__('dec_teacher_sinature')),
 
                     ImportField::make('q_9')
                         // ->required()
@@ -516,73 +532,73 @@ class ListSurveys extends ListRecords
                         ->label(__('q_10')),
 
                     ImportField::make('checked_teacher_name')
-                    // ->required()
-                    ->label(__('checked_teacher_name')),
+                        // ->required()
+                        ->label(__('checked_teacher_name')),
 
                     ImportField::make('checked_job_type')
-                    // ->required()
-                    ->label(__('checked_job_type')),
+                        // ->required()
+                        ->label(__('checked_job_type')),
 
                     ImportField::make('teacher_job_type')
-                    // ->required()
-                    ->label(__('teacher_job_type')),
+                        // ->required()
+                        ->label(__('teacher_job_type')),
 
                     ImportField::make('exact_teacher_job_type')
-                    // ->required()
-                    ->label(__('exact_teacher_job_type')),
+                        // ->required()
+                        ->label(__('exact_teacher_job_type')),
 
                     ImportField::make('checked_school_name')
-                    // ->required()
-                    ->label(__('checked_school_name')),
+                        // ->required()
+                        ->label(__('checked_school_name')),
 
                     ImportField::make('school_name_as_on_user_contract_work')
-                    // ->required()
-                    ->label(__('school_name_as_on_user_contract_work')),
+                        // ->required()
+                        ->label(__('school_name_as_on_user_contract_work')),
 
                     ImportField::make('school_name_on_vistiting_and_contract_identical')
-                    // ->required()
-                    ->label(__('school_name_on_vistiting_and_contract_identical')),
+                        // ->required()
+                        ->label(__('school_name_on_vistiting_and_contract_identical')),
 
                     ImportField::make('checked_location')
-                    // ->required()
-                    ->label(__('checked_location')),
+                        // ->required()
+                        ->label(__('checked_location')),
 
                     ImportField::make('check_school_location')
-                    // ->required()
-                    ->label(__('check_school_location')),
+                        // ->required()
+                        ->label(__('check_school_location')),
 
                     ImportField::make('checked_hiring_date')
-                    // ->required()
-                    ->label(__('checked_hiring_date')),
+                        // ->required()
+                        ->label(__('checked_hiring_date')),
 
                     ImportField::make('contract_date')
-                    // ->required()
-                    ->label(__('contract_date')),
+                        // ->required()
+                        ->label(__('contract_date')),
 
                     ImportField::make('checked_management_signature')
-                    // ->required()
-                    ->label(__('checked_management_signature')),
+                        // ->required()
+                        ->label(__('checked_management_signature')),
 
                     ImportField::make('checked_teacher_signature')
-                    // ->required()
-                    ->label(__('checked_teacher_signature')),
+                        // ->required()
+                        ->label(__('checked_teacher_signature')),
 
                     ImportField::make('teacher_signature_comparison')
-                    // ->required()
-                    ->label(__('teacher_signature_comparison')),
+                        // ->required()
+                        ->label(__('teacher_signature_comparison')),
 
                     ImportField::make('checked_stamp')
-                    // ->required()
-                    ->label(__('checked_stamp')),
+                        // ->required()
+                        ->label(__('checked_stamp')),
                     // img
 
                     ImportField::make('image_contract_direct_work')
-                    // ->required()
-                    ->label(__('صوره العقد')),
+                        // ->required()
+                        ->label(__('صوره العقد')),
 
                     ImportField::make('teacher_cotract_type')
-                    // ->required()
-                    ->label(__('teacher_cotract_type')),
+                        // ->required()
+                        ->label(__('teacher_cotract_type')),
 
                     ImportField::make('q_11')
                         // ->required()
@@ -593,8 +609,8 @@ class ListSurveys extends ListRecords
                         ->label(__('gain_money')),
 
                     ImportField::make('researcher_notes')
-                    // ->required()
-                    ->label(__('researcher_notes')),
+                        // ->required()
+                        ->label(__('researcher_notes')),
 
                     ImportField::make('done')
                         // ->required()
@@ -602,14 +618,7 @@ class ListSurveys extends ListRecords
 
 
 
-                ])->mutateBeforeCreate(function ($row) {
-                    // do something with the model
-
-                    // ddd($row);
-                    Survey::where('id', $row['id'])->first()->delete();
-                    // dd($model);
-                    return $row;
-                }),
+                ]),
         ];
     }
 

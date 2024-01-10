@@ -1,7 +1,8 @@
-## to do
+### New quation
 
-* [ ] rebuild table of teacher_info to teacher_info, city, district
-* [ ] add table for targeted (schoole, )
-* [ ] widgets of states
-* [ ] api auth test
-* [ ] api resorces
+* added to migration
+* added to model
+* added to api
+* added to form and table (dashboard)
+* added to excel export
+* added to excel import

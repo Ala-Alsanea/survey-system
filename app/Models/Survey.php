@@ -5,12 +5,14 @@ namespace App\Models;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\Traits\CausesActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Survey extends Model
 {
     use HasFactory;
     use LogsActivity;
+    use CausesActivity;
 
     // protected static $recordEvents = ['deleted'];
 
@@ -142,6 +144,7 @@ class Survey extends Model
 
     ];
 
+    // protected static $recordEvents = ['deleted','updated'];
 
     public function getActivitylogOptions(): LogOptions
     {
@@ -149,6 +152,11 @@ class Survey extends Model
             // ->logOnly(['*'])
             ->logFillable();
         // Chain fluent methods for configuration options
+    }
+
+    public function getDescriptionForEvent(string $eventName): string
+    {
+        return $eventName;
     }
 
     public function researcher()

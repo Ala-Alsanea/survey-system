@@ -141,7 +141,7 @@ class ResearcherController extends Controller
             // attach imgs
 
             $name = trim($survey['name']);
-            $name= str_replace(' ', '_', $survey['name']);
+            $name = str_replace(' ', '_', $survey['name']);
 
             $survey['image_national_card_front'] = $this->parse_image($survey['image_national_card_front'] ?? null, "{$name}_image_national_card_front");
             $survey['image_national_card_back'] = $this->parse_image($survey['image_national_card_back'] ?? null, "{$name}_image_national_card_back");
@@ -195,7 +195,13 @@ class ResearcherController extends Controller
 
             $survey['researcher_id'] = auth()->user()->id;
             // return response($survey);
-            $surveySaved = Survey::create($survey);
+            $surveySaved = new Survey();
+
+            $surveySaved
+                // ->disableLogging()
+                ->create($survey);
+
+            // dd($surveySaved->activity);
 
             $response['success'] = [
                 'saved'
