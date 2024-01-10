@@ -149,8 +149,9 @@ class Survey extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-            // ->logOnly(['*'])
-            ->logFillable();
+            ->logOnly(['*'])
+            // ->logFillable()
+            ;
         // Chain fluent methods for configuration options
     }
 
