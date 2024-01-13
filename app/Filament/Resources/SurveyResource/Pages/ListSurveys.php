@@ -86,6 +86,12 @@ class ListSurveys extends ListRecords
 
                         Column::make('school')
                             ->heading('المدرسة'),
+
+                        Column::make('school_id')
+                            ->getStateUsing(fn ($record) => TeacherInfo::where('school', 'LIKE', '%' . $record->school . '%')->first()->school_id ?? "null")
+                            ->heading(__('school_id')),
+
+
                         // img
 
                         Column::make('school_image')
@@ -105,6 +111,10 @@ class ListSurveys extends ListRecords
 
                         Column::make('name')
                             ->heading('اسم المستفيد'),
+
+                        Column::make('tch_id')
+                            ->getStateUsing(fn ($record) => TeacherInfo::where('Ar_Name', 'LIKE', '%' . $record->name . '%')->first()->tch_id ?? "null")
+                            ->heading(__('tch_id')),
 
                         Column::make('teacher_name_as_on_real_life')
                             ->heading(__('teacher_name_as_on_real_life')),
@@ -641,7 +651,8 @@ class ListSurveys extends ListRecords
 
 
 
-                ]),
+                ])
+                ->label('Import'),
         ];
     }
 

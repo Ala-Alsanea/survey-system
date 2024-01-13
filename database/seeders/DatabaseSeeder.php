@@ -21,32 +21,32 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password'=>'654321',
-        ]);
+        // \App\Models\User::factory()->create([
+        //     'name' => 'admin',
+        //     'email' => 'admin@admin.com',
+        //     'password'=>'654321',
+        // ]);
 
-        \App\Models\User::factory()->create([
-            'name' => 'reviewer',
-            'email' => 'reviewer@reviewer.com',
-            'password' => '123',
-        ]);
+        // \App\Models\User::factory()->create([
+        //     'name' => 'reviewer',
+        //     'email' => 'reviewer@reviewer.com',
+        //     'password' => '123',
+        // ]);
 
-        \App\Models\User::factory()->create([
-            'name' => 'viewer',
-            'email' => 'viewer@viewer.com',
-            'password' => '123',
-        ]);
+        // \App\Models\User::factory()->create([
+        //     'name' => 'viewer',
+        //     'email' => 'viewer@viewer.com',
+        //     'password' => '123',
+        // ]);
 
 
-        // Researcher::factory()->count(1)->create();
-        Researcher::factory()->create([
-            'name'=>'test user',
-            'phone'=>'789456123',
-            'password' => '15987532',
-            'valid'=>1,
-        ]);
+        // // Researcher::factory()->count(1)->create();
+        // Researcher::factory()->create([
+        //     'name'=>'test user',
+        //     'phone'=>'789456123',
+        //     'password' => '15987532',
+        //     'valid'=>1,
+        // ]);
 
         $this->call([
             SpreadsheetSeeder::class,
