@@ -30,10 +30,10 @@ class StatsOverview extends BaseWidget
     // }
 
 
-    protected function calpercentage($partSchool,$allSchools)
+    protected function calpercentage($partSchool, $allSchools)
     {
 
-        return $allSchools !==0? number_format((float)(($partSchool / $allSchools) * 100), 2, '.', ''):0;
+        return $allSchools !== 0 ? number_format((float)(($partSchool / $allSchools) * 100), 2, '.', '') : 0;
     }
 
     protected function getStats(): array
@@ -54,103 +54,92 @@ class StatsOverview extends BaseWidget
                 if (!isEmpty($this->filters['school']) || $this->filters['school'] != null) {
 
                     $SchoolCollected = $survey
-                    ->where('gov', $this->filters['gov'])
-                    ->where('district', $this->filters['district'])
-                    ->where('school', $this->filters['school'])->pluck('school')->unique()->count();
+                        ->where('gov', $this->filters['gov'])
+                        ->where('district', $this->filters['district'])
+                        ->where('school', $this->filters['school'])->pluck('school')->unique()->count();
                     $Schools = $teacherInfo
-                    ->where('gov', $this->filters['gov'])
-                    ->where('district', $this->filters['district'])
-                    ->where('school', $this->filters['school'])->pluck('school')->unique()->count();
+                        ->where('gov', $this->filters['gov'])
+                        ->where('district', $this->filters['district'])
+                        ->where('school', $this->filters['school'])->pluck('school')->unique()->count();
                     $SchoolNotCollected = $Schools - $SchoolCollected;
 
                     $TeacherExist = $survey
-                    ->where('gov', $this->filters['gov'])
-                    ->where('district', $this->filters['district'])
-                    ->where('school', $this->filters['school'])
-                    ->where('q_1', 'نعم')->count();
+                        ->where('gov', $this->filters['gov'])
+                        ->where('district', $this->filters['district'])
+                        ->where('school', $this->filters['school'])
+                        ->where('q_1', 'نعم')->count();
                     $TeacherNotExist = $survey
-                    ->where('gov', $this->filters['gov'])
-                    ->where('district', $this->filters['district'])
-                    ->where('school', $this->filters['school'])
-                    ->where('q_1', 'لا')->count();
-
-                    $openSchools = $survey
-                    ->where('gov', $this->filters['gov'])
-                    ->where('district', $this->filters['district'])
-                    ->where('school', $this->filters['school'])
-                    ->where('school_status', 'مفتوحة')->count();
-                    $closeSchools = $survey
-                    ->where('gov', $this->filters['gov'])
-                    ->where('district', $this->filters['district'])
-                    ->where('school', $this->filters['school'])
-                    ->where('school_status', 'مغلقه')->count();
+                        ->where('gov', $this->filters['gov'])
+                        ->where('district', $this->filters['district'])
+                        ->where('school', $this->filters['school'])
+                        ->where('q_1', 'لا')->count();
 
 
 
-                    $percentageOfCollectedSchools = $this->calpercentage($SchoolCollected , $Schools) ;
-                    $percentageOfNotCollectedSchools = $this->calpercentage($SchoolNotCollected , $Schools) ;
+                    $percentageOfCollectedSchools = $this->calpercentage($SchoolCollected, $Schools);
+                    $percentageOfNotCollectedSchools = $this->calpercentage($SchoolNotCollected, $Schools);
                 } else {
 
 
 
                     $SchoolCollected = $survey
-                    ->where('gov', $this->filters['gov'])
-                    ->where('district', $this->filters['district'])->pluck('school')->unique()->count();
+                        ->where('gov', $this->filters['gov'])
+                        ->where('district', $this->filters['district'])->pluck('school')->unique()->count();
                     $Schools = $teacherInfo
-                    ->where('gov', $this->filters['gov'])
-                    ->where('district', $this->filters['district'])->pluck('school')->unique()->count();
+                        ->where('gov', $this->filters['gov'])
+                        ->where('district', $this->filters['district'])->pluck('school')->unique()->count();
                     $SchoolNotCollected = $Schools - $SchoolCollected;
 
                     $TeacherExist = $survey
-                    ->where('gov', $this->filters['gov'])
-                    ->where('district', $this->filters['district'])
-                    ->where('q_1', 'نعم')->count();
+                        ->where('gov', $this->filters['gov'])
+                        ->where('district', $this->filters['district'])
+                        ->where('q_1', 'نعم')->count();
                     $TeacherNotExist = $survey
-                    ->where('gov', $this->filters['gov'])
-                    ->where('district', $this->filters['district'])
-                    ->where('q_1', 'لا')->count();
+                        ->where('gov', $this->filters['gov'])
+                        ->where('district', $this->filters['district'])
+                        ->where('q_1', 'لا')->count();
 
 
 
                     $openSchools = $survey
-                    ->where('gov', $this->filters['gov'])
-                    ->where('district', $this->filters['district'])
-                    ->where('school_status', 'مفتوحة')->count();
+                        ->where('gov', $this->filters['gov'])
+                        ->where('district', $this->filters['district'])
+                        ->where('school_status', 'مفتوحة')->count();
                     $closeSchools = $survey
-                    ->where('gov', $this->filters['gov'])
-                    ->where('district', $this->filters['district'])
-                    ->where('school_status', 'مغلقه')->count();
+                        ->where('gov', $this->filters['gov'])
+                        ->where('district', $this->filters['district'])
+                        ->where('school_status', 'مغلقه')->count();
 
 
-                    $percentageOfCollectedSchools = $this->calpercentage($SchoolCollected , $Schools) ;
-                    $percentageOfNotCollectedSchools = $this->calpercentage($SchoolNotCollected , $Schools) ;
+                    $percentageOfCollectedSchools = $this->calpercentage($SchoolCollected, $Schools);
+                    $percentageOfNotCollectedSchools = $this->calpercentage($SchoolNotCollected, $Schools);
                 }
             } else {
 
 
                 $SchoolCollected = $survey
-                ->where('gov', $this->filters['gov'])->pluck('school')->unique()->count();
+                    ->where('gov', $this->filters['gov'])->pluck('school')->unique()->count();
                 $Schools = $teacherInfo
-                ->where('gov', $this->filters['gov'])->pluck('school')->unique()->count();
+                    ->where('gov', $this->filters['gov'])->pluck('school')->unique()->count();
                 $SchoolNotCollected = $Schools - $SchoolCollected;
 
                 $TeacherExist = $survey
-                ->where('gov', $this->filters['gov'])
-                ->where('q_1', 'نعم')->count();
+                    ->where('gov', $this->filters['gov'])
+                    ->where('q_1', 'نعم')->count();
                 $TeacherNotExist = $survey
-                ->where('gov', $this->filters['gov'])
-                ->where('q_1', 'لا')->count();
+                    ->where('gov', $this->filters['gov'])
+                    ->where('q_1', 'لا')->count();
 
 
                 $openSchools = $survey
-                ->where('gov', $this->filters['gov'])
-                ->where('school_status', 'مفتوحة')->count();
+                    ->where('gov', $this->filters['gov'])
+                    ->where('school_status', 'مفتوحة')->count();
                 $closeSchools = $survey
-                ->where('gov', $this->filters['gov'])
-                ->where('school_status', 'مغلقه')->count();
+                    ->where('gov', $this->filters['gov'])
+                    ->where('school_status', 'مغلقه')->count();
 
-                $percentageOfCollectedSchools = $this->calpercentage($SchoolCollected , $Schools) ;
-                $percentageOfNotCollectedSchools = $this->calpercentage($SchoolNotCollected , $Schools) ;
+                $percentageOfCollectedSchools = $this->calpercentage($SchoolCollected, $Schools);
+                $percentageOfNotCollectedSchools = $this->calpercentage($SchoolNotCollected, $Schools);
             }
         } else {
 
@@ -159,22 +148,64 @@ class StatsOverview extends BaseWidget
             $SchoolNotCollected = $Schools - $SchoolCollected;
 
             $TeacherExist = $survey
-            ->where('q_1', 'نعم')->count();
+                ->where('q_1', 'نعم')->count();
             $TeacherNotExist = $survey
-            ->where('q_1', 'لا')->count();
+                ->where('q_1', 'لا')->count();
 
             $openSchools = $survey
-            ->where('school_status', 'مفتوحة')->count();
+                ->where('school_status', 'مفتوحة')->count();
             $closeSchools = $survey
-            ->where('school_status', 'مغلقه')->count();
+                ->where('school_status', 'مغلقه')->count();
 
 
-            $percentageOfCollectedSchools = $this->calpercentage($SchoolCollected , $Schools) ;
-            $percentageOfNotCollectedSchools = $this->calpercentage($SchoolNotCollected , $Schools) ;
+            $percentageOfCollectedSchools = $this->calpercentage($SchoolCollected, $Schools);
+            $percentageOfNotCollectedSchools = $this->calpercentage($SchoolNotCollected, $Schools);
         }
 
 
-        // dd(TeacherInfo::pluck('school')->unique()->all());
+        // ?#######################(new)#############################
+        $openSchools = $survey
+            // ->where('gov', $this->filters['gov'])
+            // ->where('district', $this->filters['district'])
+            // ->where('school', $this->filters['school'])
+            ->where('school_status', 'مفتوحة')
+            ->count();
+        $closeSchools = $survey
+            // ->where('gov', $this->filters['gov'])
+            // ->where('district', $this->filters['district'])
+            // ->where('school', $this->filters['school'])
+            ->where('school_status', 'مغلقه')
+            ->count();
+
+        $totalNationalCardId = $survey
+            // ->where('gov', $this->filters['gov'])
+            // ->where('district', $this->filters['district'])
+            // ->where('school', $this->filters['school'])
+            ->where('q_3', 'بطاقة شخصية جديدة (إلكترونية)')
+            ->count();
+
+        $totalEduQual = $survey
+            // ->where('gov', $this->filters['gov'])
+            // ->where('district', $this->filters['district'])
+            // ->where('school', $this->filters['school'])
+            ->where('edu_qual', '!=','غير محدد')
+            ->count();
+
+        $male = $survey
+            // ->where('gov', $this->filters['gov'])
+            // ->where('district', $this->filters['district'])
+            // ->where('school', $this->filters['school'])
+            ->where('gender', 'ذكر')
+            ->count();
+
+        $famale = $survey
+            // ->where('gov', $this->filters['gov'])
+            // ->where('district', $this->filters['district'])
+            // ->where('school', $this->filters['school'])
+            ->where('gender', 'أنثى')
+            ->count();
+
+
 
         // ! fix filter is "" not null
         $disLabel = !isEmpty($this->filters['district']) || $this->filters['district'] != null  ? $this->filters['district'] : 'all';
@@ -228,6 +259,37 @@ class StatsOverview extends BaseWidget
                 // ->color('success')
                 ->description('Not Exist')
                 ->descriptionIcon('heroicon-s-user')
+                ->color('danger'),
+
+            // ?#######################(new)#############################
+            Stat::make('open', $openSchools)
+                ->description('Schools')
+                // ->descriptionIcon('heroicon-s-user')
+                ->color('success'),
+
+            Stat::make('close', $closeSchools)
+                ->description('Schools')
+                // ->descriptionIcon('heroicon-s-user')
+                ->color('danger'),
+
+            Stat::make('total', $totalNationalCardId)
+                ->description('National Card Id')
+                // ->descriptionIcon('heroicon-s-user')
+                ->color('success'),
+
+            Stat::make('total', $totalEduQual)
+                ->description('Education Qualification')
+                // ->descriptionIcon('heroicon-s-user')
+                ->color('success'),
+
+            Stat::make('total', $male)
+                ->description('male')
+                // ->descriptionIcon('heroicon-s-user')
+                ->color('info'),
+
+            Stat::make('total', $famale)
+                ->description('famale')
+                // ->descriptionIcon('heroicon-s-user')
                 ->color('danger'),
 
 

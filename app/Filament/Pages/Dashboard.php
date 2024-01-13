@@ -14,7 +14,11 @@ use Filament\Forms\Components\Section;
 use App\Filament\Widgets\StatsOverview;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\DatePicker;
+use App\Filament\Widgets\EduQualTypeChart;
+use App\Filament\Widgets\TeachersByGovChart;
+use App\Filament\Widgets\NationalIdTypeChart;
 use Filament\Pages\Dashboard as BaseDashboard;
+use App\Filament\Widgets\GenderByDistrictChart;
 use App\Filament\Widgets\SchoolByDistrictChart;
 use Filament\Pages\Dashboard\Actions\FilterAction;
 use App\Filament\Widgets\SchoolByGovernoratesChart;
@@ -54,7 +58,11 @@ class Dashboard extends BaseDashboard
             StatsOverview::make(['filters' => $this->filters]),
             Map::make(),
             SchoolByGovernoratesChart::make(),
-            SchoolByDistrictChart::make()
+            SchoolByDistrictChart::make(),
+            NationalIdTypeChart::make(),
+            GenderByDistrictChart::make(),
+            TeachersByGovChart::make(),
+            EduQualTypeChart::make(),
         ];
     }
 
