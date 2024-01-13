@@ -12,9 +12,14 @@ use Filament\Tables\Table;
 use App\Models\Subdistrict;
 use App\Models\TeacherInfo;
 use Filament\Resources\Resource;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Filters\Filter;
 use Illuminate\Database\Eloquent\Model;
+use Filament\Notifications\Notification;
 use pxlrbt\FilamentExcel\Columns\Column;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Enums\ActionsPosition;
+use Illuminate\Database\Eloquent\Collection;
 use EightyNine\ExcelImport\ExcelImportAction;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use App\Filament\Resources\SurveyResource\Pages;
@@ -22,6 +27,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use App\Filament\Resources\SurveyResource\RelationManagers;
+
+
 
 class SurveyResource extends Resource
 {
@@ -298,64 +305,6 @@ class SurveyResource extends Resource
                     ->columns(1),
 
 
-                // Forms\Components\Section::make('التحقق')
-                //     ->description('حدد نوع البيانات المتواجدة في العقد او الارساليه مباشرة العمل')
-                //     ->schema([
-
-                //         Forms\Components\Select::make('val_name')
-                //             ->label(__('val_name'))
-                //             ->options([
-                //                 __('yes') => __('yes'),
-                //                 __('no') => __('no'),
-                //             ])
-                //             ->required(),
-                //         Forms\Components\Select::make('val_job_type')
-                //             ->label(__('val_job_type'))
-                //             ->options([
-                //                 __('yes') => __('yes'),
-                //                 __('no') => __('no'),
-                //             ])
-                //             ->required(),
-                //         Forms\Components\Select::make('val_school')
-                //             ->label(__('val_school'))
-                //             ->options([
-                //                 __('yes') => __('yes'),
-                //                 __('no') => __('no'),
-                //             ])
-                //             ->required(),
-                //         Forms\Components\Select::make('val_location')
-                //             ->label(__('val_location'))
-                //             ->options([
-                //                 __('yes') => __('yes'),
-                //                 __('no') => __('no'),
-                //             ])
-                //             ->required(),
-                //         Forms\Components\Select::make('val_hire_date')
-                //             ->label(__('val_hire_date'))
-                //             ->options([
-                //                 __('yes') => __('yes'),
-                //                 __('no') => __('no'),
-                //             ])
-                //             ->required(),
-                //         Forms\Components\Select::make('val_signature')
-                //             ->label(__('val_signature'))
-                //             ->options([
-                //                 __('yes') => __('yes'),
-                //                 __('no') => __('no'),
-                //             ])
-                //             ->required(),
-                //         Forms\Components\Select::make('val_Seal')
-                //             ->label(__('val_Seal'))
-                //             ->options([
-                //                 __('yes') => __('yes'),
-                //                 __('no') => __('no'),
-                //             ])
-                //             ->columnSpanFull()
-                //             ->required(),
-                //     ])
-                //     ->columns(2),
-
-
                 Forms\Components\Section::make('المراجعه')
                     ->description('')
                     ->schema([
@@ -374,12 +323,15 @@ class SurveyResource extends Resource
     {
         return $table
             ->columns([
-            //
+                //
 
-            Tables\Columns\TextColumn::make('id')
-                ->label(__('id'))
-                ->searchable(),
+                Tables\Columns\TextColumn::make('is_deleted')
+                    ->label(__('is_deleted'))
+                    ->searchable(),
 
+                Tables\Columns\TextColumn::make('id')
+                    ->label(__('id'))
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->label(__('name'))
                     ->searchable(),
@@ -438,39 +390,65 @@ class SurveyResource extends Resource
             ])
             ->filters([
                 //
+                // Filter::make('is_deleted')
+                //     ->label('is_deleted')
+                //     ->query(fn (Builder $query): Builder => $query->where('is_deleted', true))
             ])->headerActions([
                 // ...
 
             ])
             ->actions([
                 // Tables\Actions\ViewAction::make(),
+                Action::make('delete')
+                    ->color('danger')
+                    // ->after(
+                    //     function (Survey $record) {
+                    //     $record->is_deleted = 0;
+                    //     $record->save();
+                    //     return $record;
+                    // })
+                    ->action(
+                        function (Survey $record) {
+                            $record->is_deleted = 0;
+                            $record->save();
+                            return $record;
+                        }
+                    )
+                    ->requiresConfirmation()
+                    ->successNotification(
+                        Notification::make()
+                            ->success()
+                            ->title('Survey deleted')
+                            ->body('The Survey has been deleted successfully.'),
+                    ),
+                Tables\Actions\RestoreAction::make(),
                 Tables\Actions\EditAction::make(),
-            ])
+            ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
-
-                // ExportBulkAction::make()->exports([ExcelExport::make('form')
-                //     ->withFilename('all')
-                //     ->fromForm()
-                //     ->except([
-                //         'created_at',
-                //         'updated_at',
-                //         'oct_image_attend',
-                //         'nov_image_attend',
-                //         'dec_image_attend',
-                //         'image_contract_direct_work',
-                //         'image_attend',
-                //         'image_national_card_front',
-                //         'image_national_card_back',
-                //         'school_image',
-                //         'eduqual_image',
-                //         // '',
-                //     ])
-                //     ->withWriterType(\Maatwebsite\Excel\Excel::XLSX),
+                // Tables\Actions\BulkActionGroup::make([
+                Tables\Actions\DeleteBulkAction::make()
+                    ->action(
+                        function (Collection $records) {
+                            $records->each(
+                                function ($record, $key) {
+                                    $record->update(['is_deleted' => 0]);
+                                }
+                            );
+                            // dd($records);
+                            // $records->each->save();
+                            return $records;
+                        }
+                    )
+                    ->requiresConfirmation()
+                    ->successNotification(
+                        Notification::make()
+                            ->success()
+                            ->title('Survey deleted')
+                            ->body('The Survey has been deleted successfully.'),
+                    ),
                 // ]),
-                Tables\Actions\BulkActionGroup::make([
-                    // Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+            ])
+            ->modifyQueryUsing(fn (Builder $query) => $query->where('is_deleted', true));
     }
 
     public static function getRelations(): array
@@ -496,10 +474,10 @@ class SurveyResource extends Resource
         return false;
     }
 
-    public static function canDelete(Model $model): bool
-    {
-        return false;
-    }
+    // public static function canDelete(Model $model): bool
+    // {
+    //     return false;
+    // }
 
     public static function getStorageName($name)
     {

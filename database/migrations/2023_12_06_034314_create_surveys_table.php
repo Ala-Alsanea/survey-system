@@ -12,6 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('surveys', function (Blueprint $table) {
+            // there new 16 column added but added here.
+            // contact your manager for more info.
             $table->id();
             // info
             $table->string('name')->nullable();

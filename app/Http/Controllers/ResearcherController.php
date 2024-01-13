@@ -155,6 +155,23 @@ class ResearcherController extends Controller
             $survey['eduqual_image'] = $this->parse_image($survey['eduqual_image'] ?? null, "{$name}_eduqual_image");
 
 
+
+
+            $survey['sep_second_week_image_attend'] = $this->parse_image($survey['sep_second_week_image_attend'] ?? null, "{$name}_sep_second_week_image_attend");
+            $survey['sep_third_week_image_attend'] = $this->parse_image($survey['sep_third_week_image_attend'] ?? null, "{$name}_sep_third_week_image_attend");
+            $survey['sep_four_week_image_attend'] = $this->parse_image($survey['sep_four_week_image_attend'] ?? null, "{$name}_sep_four_week_image_attend");
+            $survey['oct_second_week_image_attend'] = $this->parse_image($survey['oct_second_week_image_attend'] ?? null, "{$name}_oct_second_week_image_attend");
+            $survey['oct_third_week_image_attend'] = $this->parse_image($survey['oct_third_week_image_attend'] ?? null, "{$name}_oct_third_week_image_attend");
+            $survey['oct_Fourth_week_image_attend'] = $this->parse_image($survey['oct_Fourth_week_image_attend'] ?? null, "{$name}_oct_Fourth_week_image_attend");
+            $survey['nov_second_week_image_attend'] = $this->parse_image($survey['nov_second_week_image_attend'] ?? null, "{$name}_nov_second_week_image_attend");
+            $survey['nov_third_week_image_attend'] = $this->parse_image($survey['nov_third_week_image_attend'] ?? null, "{$name}_nov_third_week_image_attend");
+            $survey['nov_fourth_week_image_attend'] = $this->parse_image($survey['nov_fourth_week_image_attend'] ?? null, "{$name}_nov_fourth_week_image_attend");
+            $survey['dec_second_week_image_attend'] = $this->parse_image($survey['dec_second_week_image_attend'] ?? null, "{$name}_dec_second_week_image_attend");
+            $survey['dec_third_week_image_attend'] = $this->parse_image($survey['dec_third_week_image_attend'] ?? null, "{$name}_dec_third_week_image_attend");
+            $survey['dec_fourth_week_image_attend'] = $this->parse_image($survey['dec_fourth_week_image_attend'] ?? null, "{$name}_dec_fourth_week_image_attend");
+
+
+
             //  loc pars
             // $survey['name']
             // $survey['name']

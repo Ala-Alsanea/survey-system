@@ -19,6 +19,8 @@ use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Konnco\FilamentImport\Actions\ImportField;
 use Konnco\FilamentImport\Actions\ImportAction;
 use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
+use Illuminate\Database\Eloquent\Builder;
+
 
 class ListSurveys extends ListRecords
 {
@@ -39,7 +41,6 @@ class ListSurveys extends ListRecords
                     ->withFilename('all')
                     // ->fromForm()
                     ->withColumns([
-
 
                         Column::make('id')
                             ->heading('id'),
@@ -276,8 +277,66 @@ class ListSurveys extends ListRecords
                         Column::make('done')
                             ->heading(__('done')),
 
+                        // new
+                        Column::make('sep_second_week_image_attend')
+                            ->getStateUsing(fn ($record) => SurveyResource::getStorageName($record->sep_second_week_image_attend) ?? "null")
+                            ->heading(__('sep_second_week_image_attend')),
 
+                        Column::make('sep_third_week_image_attend')
+                            ->getStateUsing(fn ($record) => SurveyResource::getStorageName($record->sep_third_week_image_attend) ?? "null")
+                            ->heading(__('sep_third_week_image_attend')),
 
+                        Column::make('sep_four_week_image_attend')
+                            ->getStateUsing(fn ($record) => SurveyResource::getStorageName($record->sep_four_week_image_attend) ?? "null")
+                            ->heading(__('sep_four_week_image_attend')),
+
+                        Column::make('oct_second_week_image_attend')
+                            ->getStateUsing(fn ($record) => SurveyResource::getStorageName($record->oct_second_week_image_attend) ?? "null")
+                            ->heading(__('oct_second_week_image_attend')),
+
+                        Column::make('oct_third_week_image_attend')
+                            ->getStateUsing(fn ($record) => SurveyResource::getStorageName($record->oct_third_week_image_attend) ?? "null")
+                            ->heading(__('oct_third_week_image_attend')),
+
+                        Column::make('oct_Fourth_week_image_attend')
+                            ->getStateUsing(fn ($record) => SurveyResource::getStorageName($record->oct_Fourth_week_image_attend) ?? "null")
+                            ->heading(__('oct_Fourth_week_image_attend')),
+
+                        Column::make('nov_second_week_image_attend')
+                            ->getStateUsing(fn ($record) => SurveyResource::getStorageName($record->nov_second_week_image_attend) ?? "null")
+                            ->heading(__('nov_second_week_image_attend')),
+
+                        Column::make('nov_third_week_image_attend')
+                            ->getStateUsing(fn ($record) => SurveyResource::getStorageName($record->nov_third_week_image_attend) ?? "null")
+                            ->heading(__('nov_third_week_image_attend')),
+
+                        Column::make('nov_fourth_week_image_attend')
+                            ->getStateUsing(fn ($record) => SurveyResource::getStorageName($record->nov_fourth_week_image_attend) ?? "null")
+                            ->heading(__('nov_fourth_week_image_attend')),
+
+                        Column::make('dec_second_week_image_attend')
+                            ->getStateUsing(fn ($record) => SurveyResource::getStorageName($record->dec_second_week_image_attend) ?? "null")
+                            ->heading(__('dec_second_week_image_attend')),
+
+                        Column::make('dec_third_week_image_attend')
+                            ->getStateUsing(fn ($record) => SurveyResource::getStorageName($record->dec_third_week_image_attend) ?? "null")
+                            ->heading(__('dec_third_week_image_attend')),
+
+                        Column::make('dec_fourth_week_image_attend')
+                            ->getStateUsing(fn ($record) => SurveyResource::getStorageName($record->dec_fourth_week_image_attend) ?? "null")
+                            ->heading(__('dec_fourth_week_image_attend')),
+
+                        Column::make('manager_name_as_on_real_life')
+                            ->heading(__('manager_name_as_on_real_life')),
+
+                        Column::make('manager_Phone_num_as_on_real_life')
+                            ->heading(__('manager_Phone_num_as_on_real_life')),
+
+                        Column::make('school_name_as_on_real_life')
+                            ->heading(__('school_name_as_on_real_life')),
+
+                        Column::make('amount_of_money_that_teacher_gained')
+                            ->heading(__('amount_of_money_that_teacher_gained')),
 
 
 
@@ -295,7 +354,9 @@ class ListSurveys extends ListRecords
 
 
                     ])
+                    ->modifyQueryUsing(fn (Builder $query) => $query->where('is_deleted', true))
                     ->withWriterType(\Maatwebsite\Excel\Excel::XLSX),
+
             ])
                 ->label('Export All'),
 
@@ -304,7 +365,7 @@ class ListSurveys extends ListRecords
                 // ->uniqueField('id')
                 ->handleRecordCreation(function ($data) {
 
-                    if($survey =  Survey::where('id', $data['id'])->first()) {
+                    if ($survey =  Survey::where('id', $data['id'])->first()) {
                         $survey->update($data);
                         return $survey;
                     } else {
@@ -312,7 +373,7 @@ class ListSurveys extends ListRecords
                             ->causedBy(auth()->user())
                             ->performedOn((new Survey))
                             ->event('not-updated')
-                        ->withProperties(['attributes'=>$data])
+                            ->withProperties(['attributes' => $data])
                             ->log('not-updated');
 
                         return (new Survey);
@@ -382,19 +443,7 @@ class ListSurveys extends ListRecords
                     ImportField::make('school')
                         // ->required()
                         ->label('المدرسة'),
-                    // img
 
-                    ImportField::make('school_image')
-                        // ->required()
-                        ->label(__('school_image')),
-
-                    // ImportField::make('maneger_name')
-                    //     // ->required()
-                    //     ->label(__('maneger_name')),
-
-                    // ImportField::make('maneger_phone')
-                    //     // ->required()
-                    //     ->label(__('maneger_phone')),
 
                     ImportField::make('school_status')
                         // ->required()
@@ -433,15 +482,6 @@ class ListSurveys extends ListRecords
                         ->label(__('national_card_id')),
                     // img
 
-                    ImportField::make('image_national_card_front')
-                        // ->required()
-                        ->label(__('image_national_card_front')),
-                    // img
-
-                    ImportField::make('image_national_card_back')
-                        // ->required()
-                        ->label(__('image_national_card_back')),
-
                     ImportField::make('q_4')
                         // ->required()
                         ->label(__('q_4')),
@@ -457,12 +497,6 @@ class ListSurveys extends ListRecords
                     ImportField::make('Low_eduqual')
                         // ->required()
                         ->label(__('Low_eduqual')),
-                    // img
-
-                    ImportField::make('eduqual_image')
-                        // ->required()
-                        ->label(__('صوره موهل المستفيد')),
-
                     ImportField::make('q_5')
                         // ->required()
                         ->label(__('q_5')),
@@ -474,38 +508,20 @@ class ListSurveys extends ListRecords
                     ImportField::make('q_7')
                         // ->required()
                         ->label(__('q_7')),
-                    // img
 
-                    ImportField::make('image_attend')
-                        // ->required()
-                        ->label(__('image_attend')),
+
 
                     ImportField::make('teaching_days_num_oct')
                         // ->required()
                         ->label(__('teaching_days_num_oct')),
-                    // img
-
-                    ImportField::make('oct_image_attend')
-                        // ->required()
-                        ->label(__('oct_image_attend')),
 
                     ImportField::make('teaching_days_num_nov')
                         // ->required()
                         ->label(__('teaching_days_num_nov')),
-                    // img
-
-                    ImportField::make('nov_image_attend')
-                        // ->required()
-                        ->label(__('nov_image_attend')),
 
                     ImportField::make('teaching_days_num_dec')
                         // ->required()
                         ->label(__('teaching_days_num_dec')),
-                    // img
-
-                    ImportField::make('dec_image_attend')
-                        // ->required()
-                        ->label(__('dec_image_attend')),
 
                     ImportField::make('q_8')
                         // ->required()
@@ -590,11 +606,6 @@ class ListSurveys extends ListRecords
                     ImportField::make('checked_stamp')
                         // ->required()
                         ->label(__('checked_stamp')),
-                    // img
-
-                    ImportField::make('image_contract_direct_work')
-                        // ->required()
-                        ->label(__('صوره العقد')),
 
                     ImportField::make('teacher_cotract_type')
                         // ->required()
@@ -616,6 +627,18 @@ class ListSurveys extends ListRecords
                         // ->required()
                         ->label(__('done')),
 
+                    ImportField::make('manager_name_as_on_real_life')
+                        ->label(__('manager_name_as_on_real_life')),
+
+                    ImportField::make('manager_Phone_num_as_on_real_life')
+                        ->label(__('manager_Phone_num_as_on_real_life')),
+
+                    ImportField::make('school_name_as_on_real_life')
+                        ->label(__('school_name_as_on_real_life')),
+
+                    ImportField::make('amount_of_money_that_teacher_gained')
+                        ->label(__('amount_of_money_that_teacher_gained')),
+
 
 
                 ]),
@@ -626,18 +649,21 @@ class ListSurveys extends ListRecords
     {
         return [
             'all' => Tab::make('all')
-                ->badge(Survey::count()),
+                ->badge(Survey::where('is_deleted', true)->count())
+                ->modifyQueryUsing(function ($query) {
+                    return $query->where('is_deleted', true);
+                }),
 
             'reviewed' => Tab::make('reviewed')
-                ->badge(Survey::where('done', 1)->count())
+                ->badge(Survey::where('is_deleted', true)->where('done', 1)->count())
                 ->modifyQueryUsing(function ($query) {
-                    return $query->where('done', 1);
+                    return $query->where('is_deleted', true)->where('done', 1);
                 }),
             'not reviewed' => Tab::make('not reviewed')
-                ->badge(Survey::where('done', 0)->count())
+                ->badge(Survey::where('is_deleted', true)->where('done', 0)->count())
 
                 ->modifyQueryUsing(function ($query) {
-                    return $query->where('done', 0);
+                    return $query->where('is_deleted', true)->where('done', 0);
                 }),
 
         ];

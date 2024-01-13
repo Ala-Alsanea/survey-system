@@ -142,6 +142,26 @@ class Survey extends Model
         'phone_manager_school',
 
 
+        'sep_second_week_image_attend',
+        'sep_third_week_image_attend',
+        'sep_four_week_image_attend',
+        'oct_second_week_image_attend',
+        'oct_third_week_image_attend',
+        'oct_Fourth_week_image_attend',
+        'nov_second_week_image_attend',
+        'nov_third_week_image_attend',
+        'nov_fourth_week_image_attend',
+        'dec_second_week_image_attend',
+        'dec_third_week_image_attend',
+        'dec_fourth_week_image_attend',
+        'manager_name_as_on_real_life',
+        'manager_Phone_num_as_on_real_life',
+        'school_name_as_on_real_life',
+        'amount_of_money_that_teacher_gained',
+        'is_deleted',
+
+
+
     ];
 
     // protected static $recordEvents = ['deleted','updated'];
