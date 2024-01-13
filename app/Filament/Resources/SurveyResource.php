@@ -325,9 +325,6 @@ class SurveyResource extends Resource
             ->columns([
                 //
 
-                Tables\Columns\TextColumn::make('is_deleted')
-                    ->label(__('is_deleted'))
-                    ->searchable(),
 
                 Tables\Columns\TextColumn::make('id')
                     ->label(__('id'))
@@ -338,21 +335,28 @@ class SurveyResource extends Resource
 
                 Tables\Columns\TextColumn::make('phone')
                     ->label(__('phone'))
+                    ->toggleable(isToggledHiddenByDefault: false)
+
                     ->searchable(),
                 Tables\Columns\TextColumn::make('gender')
                     ->label(__('gender'))
+                    ->toggleable(isToggledHiddenByDefault: false)
+
                     ->searchable(),
                 Tables\Columns\TextColumn::make('gov')
+                    ->toggleable(isToggledHiddenByDefault: false)
+
                     ->label(__('gov'))
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('district')
                     ->label(__('district'))
+                    ->toggleable(isToggledHiddenByDefault: true)
+
                     ->searchable(),
-
-
                 Tables\Columns\TextColumn::make('subdistrict')
                     ->label(__('subdistrict'))
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('researcher.name')
@@ -381,8 +385,7 @@ class SurveyResource extends Resource
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
-                // ->toggleable(isToggledHiddenByDefault: true)
-                ,
+                    ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
@@ -399,14 +402,8 @@ class SurveyResource extends Resource
             ])
             ->actions([
                 // Tables\Actions\ViewAction::make(),
-                Action::make('delete')
+                Action::make('Hide')
                     ->color('danger')
-                    // ->after(
-                    //     function (Survey $record) {
-                    //     $record->is_deleted = 0;
-                    //     $record->save();
-                    //     return $record;
-                    // })
                     ->action(
                         function (Survey $record) {
                             $record->is_deleted = 0;
@@ -426,7 +423,8 @@ class SurveyResource extends Resource
             ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 // Tables\Actions\BulkActionGroup::make([
-                Tables\Actions\DeleteBulkAction::make()
+                Tables\Actions\BulkAction::make('Hide')
+                    ->color('danger')
                     ->action(
                         function (Collection $records) {
                             $records->each(
