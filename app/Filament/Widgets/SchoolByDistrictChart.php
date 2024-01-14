@@ -29,9 +29,10 @@ class SchoolByDistrictChart extends ChartWidget
         $district = array_values(TeacherInfo::pluck('district')->unique()->all());
 
         $targetedSchool = array_values(array_map(fn ($val) => ['data' => TeacherInfo::where('district', $val)->pluck('school')->unique()->count(), 'lable' => $val], $district));
-        $progressedSchool = array_values(array_map(fn ($val) => ['data' => Survey::where('district', $val)->pluck('school')->count(), 'lable' => $val], $district));
+        $progressedSchool = array_values(array_map(fn ($val) => ['data' => Survey::where('district', $val)->pluck('school')->unique()->count(), 'lable' => $val], $district));
 
         $test = usort($targetedSchool, fn ($a, $b)=> $b['data'] <=> $a['data']);
+        $test_2 = usort($progressedSchool, fn ($a, $b) => $b['data'] <=> $a['data']);
 
         // dd($targetedSchool);
 
