@@ -59,10 +59,10 @@ class Dashboard extends BaseDashboard
             Map::make(),
             SchoolByGovernoratesChart::make(),
             SchoolByDistrictChart::make(),
-            NationalIdTypeChart::make(),
+            NationalIdTypeChart::make(['filters' => $this->filters]),
             GenderByDistrictChart::make(),
             TeachersByGovChart::make(),
-            EduQualTypeChart::make(),
+            EduQualTypeChart::make(['filters' => $this->filters]),
         ];
     }
 

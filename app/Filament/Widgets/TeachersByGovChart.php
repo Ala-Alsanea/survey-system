@@ -23,7 +23,8 @@ class TeachersByGovChart extends ChartWidget
 
         $type = array_values(Survey::pluck('gov')->unique()->all());
 
-        $total = array_values(array_map(fn ($val) => ['data' => Survey::where('gov', 'like', '%' . $val . '%')->count(), 'lable' => $val], $type));
+        $total = array_values(array_map(fn ($val) => ['data' => Survey::where('gov', 'like', '%' . $val . '%')
+            ->where('is_deleted', 1)->count(), 'lable' => $val], $type));
 
 
 

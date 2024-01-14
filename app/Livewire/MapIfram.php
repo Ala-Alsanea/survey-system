@@ -21,7 +21,7 @@ class MapIfram extends Component
     public  function locations()
     {
 
-        $survey = array_values(Survey::get()->unique('school',)->all());
+        $survey = array_values(Survey::get()->unique('school',)->where('is_deleted', 1)->all());
 
         $loc = array_map(function ($row) {
 

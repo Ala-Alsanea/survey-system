@@ -29,23 +29,11 @@ class SchoolByDistrictChart extends ChartWidget
         $district = array_values(TeacherInfo::pluck('district')->unique()->all());
 
         $targetedSchool = array_values(array_map(fn ($val) => ['data' => TeacherInfo::where('district', $val)->pluck('school')->unique()->count(), 'lable' => $val], $district));
-        $progressedSchool = array_values(array_map(fn ($val) => ['data' => Survey::where('district', $val)->pluck('school')->unique()->count(), 'lable' => $val], $district));
+        $progressedSchool = array_values(array_map(fn ($val) => ['data' => Survey::where('district', $val)->where('is_deleted', 1)->pluck('school')->unique()->count(), 'lable' => $val], $district));
 
         $test = usort($targetedSchool, fn ($a, $b)=> $b['data'] <=> $a['data']);
         $test_2 = usort($progressedSchool, fn ($a, $b) => $b['data'] <=> $a['data']);
 
-        // dd($targetedSchool);
-
-        // $num = 0;
-        // for ($i = 0; $i < count($targetedSchool); $i++) {
-        //     $num += $targetedSchool[$i]['data'];
-        //     // echo $num;
-        // }
-
-        // dd($targetedSchool);
-
-
-        // dd($progressedSchool);
 
         return [
             'datasets' => [

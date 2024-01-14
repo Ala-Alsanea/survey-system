@@ -30,7 +30,7 @@ class SchoolByGovernoratesChart extends ChartWidget
 
         $gov = array_values(TeacherInfo::pluck('gov')->unique()->all());
         $targetedSchool = array_values(array_map(fn ($val) => ['data' => TeacherInfo::where('gov', $val)->pluck('school')->unique()->count(), 'lable' => $val], $gov));
-        $progressedSchool = array_values(array_map(fn ($val) => ['data' => Survey::where('gov', $val)->pluck('school')->unique()->count(), 'lable' => $val], $gov));
+        $progressedSchool = array_values(array_map(fn ($val) => ['data' => Survey::where('gov', $val)->where('is_deleted', 1)->pluck('school')->unique()->count(), 'lable' => $val], $gov));
 
         $test = usort($targetedSchool, fn ($a, $b) => $b['data'] <=> $a['data']);
         $test_2 = usort($progressedSchool, fn ($a, $b) => $b['data'] <=> $a['data']);

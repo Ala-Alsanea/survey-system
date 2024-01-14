@@ -15,14 +15,16 @@ class GenderByDistrictChart extends ChartWidget
         $district = array_values(TeacherInfo::pluck('district')->unique()->all());
 
         $male = array_values(array_map(fn ($val) => ['data' => Survey::where('district', $val)
-        ->where('gender', 'ذكر')
-        ->pluck('gender')
-        ->count(), 'lable' => $val], $district));
+            ->where('gender', 'ذكر')
+            ->where('is_deleted', 1)
+            ->pluck('gender')
+            ->count(), 'lable' => $val], $district));
 
         $female = array_values(array_map(fn ($val) => ['data' => Survey::where('district', $val)
-        ->where('gender', 'أنثى')
-        ->pluck('gender')
-        ->count(), 'lable' => $val], $district));
+            ->where('gender', 'أنثى')
+            ->where('is_deleted', 1)
+            ->pluck('gender')
+            ->count(), 'lable' => $val], $district));
 
 
         return [
