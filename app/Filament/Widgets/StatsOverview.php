@@ -15,19 +15,6 @@ use function PHPUnit\Framework\isEmpty;
 class StatsOverview extends BaseWidget
 {
     use InteractsWithPageFilters;
-    // use HasFiltersAction;
-
-
-    protected static ?int $sort = 1;
-
-    // public bool $readyToLoad = false;
-
-    // protected int | string | array $columnSpan = 'full';
-
-    // public function loadData()
-    // {
-    //     $this->readyToLoad = true;
-    // }
 
 
     protected function calpercentage($partSchool, $allSchools)

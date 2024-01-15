@@ -9,14 +9,6 @@ class TeachersByGovChart extends ChartWidget
 {
     protected static ?string $heading = 'Teachers By Gov';
 
-    public bool $readyToLoad = false;
-    protected static bool $isLazy = true;
-    // protected static ?string $maxHeight = '300px';
-
-    public function loadData()
-    {
-        $this->readyToLoad = true;
-    }
 
     protected function getData(): array
     {

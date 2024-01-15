@@ -17,15 +17,9 @@ class NationalIdTypeChart extends ChartWidget
 
     // protected static ?string $heading = 'National Id Type';
 
-    public bool $readyToLoad = false;
-    protected static bool $isLazy = true;
-    // protected static ?string $maxHeight = '300px';
     protected static string $color = 'info';
 
-    public function loadData()
-    {
-        $this->readyToLoad = true;
-    }
+
 
     public function getHeading(): string | Htmlable | null
     {

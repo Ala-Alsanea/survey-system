@@ -14,15 +14,9 @@ class EduQualTypeChart extends ChartWidget
     use InteractsWithPageFilters;
 
     protected static ?string $heading = 'Education Qualification Type';
-    public bool $readyToLoad = false;
-    protected static bool $isLazy = true;
     protected static ?string $maxHeight = '300px';
     protected static string $color = 'primary';
 
-    public function loadData()
-    {
-        $this->readyToLoad = true;
-    }
 
     public function getHeading(): string | Htmlable | null
     {
