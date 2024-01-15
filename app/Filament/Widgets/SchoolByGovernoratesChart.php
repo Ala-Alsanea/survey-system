@@ -11,18 +11,7 @@ use Filament\Widgets\ChartWidget;
 class SchoolByGovernoratesChart extends ChartWidget
 {
     protected static ?string $heading = 'School By Governorates';
-
-    protected static ?int $sort = 3;
-
-    public bool $readyToLoad = false;
-
     protected static ?string $maxHeight = '300px';
-
-    public function loadData()
-    {
-        $this->readyToLoad = true;
-    }
-
     protected static string $color = 'info';
 
     protected function getData(): array

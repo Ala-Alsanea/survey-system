@@ -9,18 +9,6 @@ use Filament\Widgets\ChartWidget;
 class SchoolByDistrictChart extends ChartWidget
 {
     protected static ?string $heading = 'School By district';
-
-    protected static ?int $sort = 5;
-
-    public bool $readyToLoad = false;
-    protected static bool $isLazy = true;
-    // protected static ?string $maxHeight = '300px';
-
-    public function loadData()
-    {
-        $this->readyToLoad = true;
-    }
-
     protected static string $color = 'info';
 
     protected function getData(): array
