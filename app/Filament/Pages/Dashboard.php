@@ -25,6 +25,8 @@ use App\Filament\Widgets\SchoolByGovernoratesChart;
 use Filament\Pages\Dashboard\Concerns\HasFiltersForm;
 use Filament\Pages\Dashboard\Concerns\HasFiltersAction;
 use Filament\Widgets\Concerns\InteractsWithPageFilters;
+use function PHPUnit\Framework\isEmpty;
+
 
 class Dashboard extends BaseDashboard
 {
@@ -73,10 +75,9 @@ class Dashboard extends BaseDashboard
 
         // filter
         // ?? it can be implemented in another way ,but the time could not help 😢😢
-        if (isset($this->filters['gov'])) {
+        if (!isEmpty($this->filters['gov']) || $this->filters['gov'] != null) {
 
             $district = array_values(TeacherInfo::where('gov', $this->filters['gov'])->pluck('district')->unique()->all());
-
 
             // filter if is set and district is in gov
             if (
@@ -91,7 +92,6 @@ class Dashboard extends BaseDashboard
                     $this->filters['school'] =  null;
             } else {
                 $school = [];
-                // dd($this->filters['school']);
                 $this->filters['district'] =  null;
                 $this->filters['school'] =  null;
             }
