@@ -24,7 +24,7 @@ class NationalIdTypeChart extends ChartWidget
     public function getHeading(): string | Htmlable | null
     {
         $filterLable = $this->filters['gov'] . " - " . $this->filters['district'] . " - " . $this->filters['school'];
-        return "National Id Type ( $filterLable )";
+        return "National Id Type";
     }
 
     protected function getData(): array
@@ -48,7 +48,16 @@ class NationalIdTypeChart extends ChartWidget
                         ->where('gov', $this->filters['gov'])
                         ->where('district', $this->filters['district'])
                         ->where('school', $this->filters['school'])
-                        ->count(), 'lable' => $val], $type));
+                        ->count(), 'lable' => match ($val) {
+                            'إستبيان' => 'Temporary ID (a questionnaire)',
+                            'بطاقة شخصية جديدة (إلكترونية)' => 'Personal electronic ID',
+                            'بطاقة شخصية قديمة' => 'Old Personal ID',
+                            'بطاقة عائلية' => 'Family Card',
+                            'جواز سفر' => 'Passport',
+                            'لا يوجد' => 'None',
+                        default => 'Not Selected',
+                    }
+                ], $type));
                 } else {
                     // gov and distract
 
@@ -56,18 +65,43 @@ class NationalIdTypeChart extends ChartWidget
                         ->where('is_deleted', 1)
                         ->where('gov', $this->filters['gov'])
                         ->where('district', $this->filters['district'])
-                        ->count(), 'lable' => $val], $type));
+                        ->count(), 'lable' => match ($val) {
+                            'إستبيان' => 'Temporary ID (a questionnaire)',
+                            'بطاقة شخصية جديدة (إلكترونية)' => 'Personal electronic ID',
+                            'بطاقة شخصية قديمة' => 'Old Personal ID',
+                            'بطاقة عائلية' => 'Family Card',
+                            'جواز سفر' => 'Passport',
+                            'لا يوجد' => 'None',
+                        default => 'Not Selected',
+                    }], $type));
                 }
             } else {
                 // gov
                 $total = array_values(array_map(fn ($val) => ['data' => Survey::where('q_3', 'like', '%' . $val . '%')
                     ->where('is_deleted', 1)
                     ->where('gov', $this->filters['gov'])
-                    ->count(), 'lable' => $val], $type));;
+                    ->count(), 'lable' => match ($val) {
+                            'إستبيان' => 'Temporary ID (a questionnaire)',
+                            'بطاقة شخصية جديدة (إلكترونية)' => 'Personal electronic ID',
+                            'بطاقة شخصية قديمة' => 'Old Personal ID',
+                            'بطاقة عائلية' => 'Family Card',
+                            'جواز سفر' => 'Passport',
+                            'لا يوجد' => 'None',
+                        default => 'Not Selected',
+                    }], $type));;
             }
         } else {
             // all
-            $total = array_values(array_map(fn ($val) => ['data' => Survey::where('q_3', 'like', '%' . $val . '%')->where('is_deleted', 1)->count(), 'lable' => $val], $type));
+            $total = array_values(array_map(fn ($val) => ['data' => Survey::where('q_3', 'like', '%' . $val . '%')->where('is_deleted', 1)->count(),
+            'lable' => match ($val) {
+                            'إستبيان' => 'Temporary ID (a questionnaire)',
+                            'بطاقة شخصية جديدة (إلكترونية)' => 'Personal electronic ID',
+                            'بطاقة شخصية قديمة' => 'Old Personal ID',
+                            'بطاقة عائلية' => 'Family Card',
+                            'جواز سفر' => 'Passport',
+                            'لا يوجد' => 'None',
+                        default => 'Not Selected',
+                    }], $type));
         }
 
 
@@ -81,8 +115,8 @@ class NationalIdTypeChart extends ChartWidget
                 [
                     'label' => 'National Id',
                     'data' => array_map(fn ($val) => $val['data'], $total),
-                    // 'backgroundColor' => '#d4d4d8',
-                    // 'borderColor' => '#3f3f46',
+                    'backgroundColor' => '#0198F1',
+                    'borderColor' => '#0198F1',
                 ],
 
 

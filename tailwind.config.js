@@ -4,10 +4,10 @@ export default {
         "./resources/**/*.blade.php",
         "./resources/**/*.js",
         "./resources/**/*.vue",
+        "<path-to-vendor>/awcodes/overlook/resources/**/*.blade.php",
     ],
     theme: {
         extend: {},
     },
     plugins: [],
 };
-

@@ -41,14 +41,14 @@
     >
     <div class="overflow-x-clip">
         <header
-            class="flex items-center h-16 px-6 bg-white fi-sidebar-header ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10 lg:shadow-sm">
+            class="flex items-center h-16 px-3 bg-white fi-sidebar-header ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10 lg:shadow-sm">
             <div
                 @if (filament()->isSidebarCollapsibleOnDesktop()) x-show="$store.sidebar.isOpen"
                     x-transition:enter="lg:transition lg:delay-100"
                     x-transition:enter-start="opacity-0"
                     x-transition:enter-end="opacity-100" @endif>
                 @if ($homeUrl = filament()->getHomeUrl())
-                    <a {{ \Filament\Support\generate_href_html($homeUrl) }}>
+                    <a {{ \Filament\Support\generate_href_html($homeUrl) }} >
                         <x-filament-panels::logo />
                     </a>
                 @else

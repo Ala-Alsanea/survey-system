@@ -56,13 +56,11 @@ class AdminPanelProvider extends PanelProvider
                 // Widgets\FilamentInfoWidget::class,
             ])
 
-            ->viteTheme('resources/css/filament/admin/theme.css')
+            // ->viteTheme('resources/css/filament/admin/theme.css')
 
 
             ->plugins([
                 FilamentShieldPlugin::make(),
-
-
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -84,8 +82,8 @@ class AdminPanelProvider extends PanelProvider
     {
         FilamentAsset::register([
             // Css::make('leaflet-1-9-4-css', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'),
-            Js::make('jquery-3-4-1-js', 'https://code.jquery.com/jquery-3.4.1.js'),
-            Js::make('googlemap', "https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initMap"),
+            // Js::make('jquery-3-4-1-js', 'https://code.jquery.com/jquery-3.4.1.js'),
+            // Js::make('googlemap', "https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initMap"),
             // AlpineComponent::make('visitor-heatmap-js', __DIR__ . '/../../resources/js/leaflet-heatmap.js'),
             // AlpineComponent::make('visitor-heatmap-js', 'https://cdn.jsdelivr.net/npm/leaflet-heatmap@1.0.0/leaflet-heatmap.js'),
         ]);

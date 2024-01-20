@@ -370,22 +370,13 @@ class StatsOverview extends BaseWidget
         return [
 
 
-            Stat::make('filter', !isEmpty($this->filters['gov']) || $this->filters['gov'] != null  ? $this->filters['gov'] : 'all')
-                // ->color('success')
-                ->description($desc)
-                // ->descriptionIcon('heroicon-s-building-office-2')
-                // ->color('success')
-                ->extraAttributes([
-                    // 'class' => 'col-span-2',
-                ]),
-
             Stat::make('School', $Schools)
                 // ->color('success')
                 ->description('all')
                 ->descriptionIcon('heroicon-s-building-office-2')
                 ->color('success')
                 ->extraAttributes([
-                    // 'class' => 'col-span-2',
+                    // 'class' => 'h-20',
                 ]),
 
             Stat::make('School', $SchoolCollected)

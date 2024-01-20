@@ -13,9 +13,11 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
 use App\Filament\Widgets\StatsOverview;
 use Filament\Forms\Components\Fieldset;
+use function PHPUnit\Framework\isEmpty;
 use Filament\Forms\Components\DatePicker;
 use App\Filament\Widgets\EduQualTypeChart;
 use App\Filament\Widgets\TeachersByGovChart;
+use Awcodes\Overlook\Widgets\OverlookWidget;
 use App\Filament\Widgets\NationalIdTypeChart;
 use Filament\Pages\Dashboard as BaseDashboard;
 use App\Filament\Widgets\GenderByDistrictChart;
@@ -25,7 +27,6 @@ use App\Filament\Widgets\SchoolByGovernoratesChart;
 use Filament\Pages\Dashboard\Concerns\HasFiltersForm;
 use Filament\Pages\Dashboard\Concerns\HasFiltersAction;
 use Filament\Widgets\Concerns\InteractsWithPageFilters;
-use function PHPUnit\Framework\isEmpty;
 
 
 class Dashboard extends BaseDashboard
@@ -41,7 +42,7 @@ class Dashboard extends BaseDashboard
 
     protected static string $view = 'filament.pages.dashboard';
 
-    protected static ?string $title = 'dashboard';
+    protected static ?string $title = 'Dashboard';
 
 
     // public function getWidgets(): array
