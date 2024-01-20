@@ -30,19 +30,19 @@
             @if ($icon)
                 <x-filament::icon
                     :icon="$icon"
-                    class="fi-sidebar-group-icon h-6 w-6 text-gray-400 dark:text-gray-500"
+                    class="w-6 h-6 text-white fi-sidebar-group-icon dark:text-gray-500"
                 />
             @endif
 
             <span
-                class="fi-sidebar-group-label flex-1 text-sm font-medium leading-6 text-gray-500 dark:text-gray-400"
+                class="flex-1 text-sm font-medium leading-6 text-white fi-sidebar-group-label dark:text-gray-400"
             >
                 {{ $label }}
             </span>
 
             @if ($collapsible)
                 <x-filament::icon-button
-                    color="gray"
+                    color="#000000"
                     icon="heroicon-m-chevron-up"
                     icon-alias="panels::sidebar.group.collapse-button"
                     :label="$label"
@@ -63,7 +63,7 @@
             x-transition:enter-end="opacity-100"
         @endif
         x-collapse.duration.200ms
-        class="fi-sidebar-group-items flex flex-col gap-y-1"
+        class="flex flex-col fi-sidebar-group-items gap-y-1"
     >
         @foreach ($items as $item)
             <x-filament-panels::sidebar.item

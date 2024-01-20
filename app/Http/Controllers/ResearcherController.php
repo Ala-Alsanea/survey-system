@@ -121,10 +121,11 @@ class ResearcherController extends Controller
         ];
 
         if (auth()->user()->valid) {
+
+
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
             ]);
-
             if ($validator->fails()) {
 
                 $response['errors'] = $validator->errors();
@@ -134,29 +135,20 @@ class ResearcherController extends Controller
 
 
             $survey = $request->all();
-            // add manager info
-            // $survey['name_manager_school'] = TeacherInfo::where('school', 'LIKE', '%' . $survey['school'] . '%')->first()->name_manager_school;
-            // $survey['phone_manager_school'] = TeacherInfo::where('school', 'LIKE', '%' . $survey['school'] . '%')->first()->phone_manager_school;
 
             // attach imgs
-
             $name = trim($survey['name']);
             $name = str_replace(' ', '_', $survey['name']);
 
             $survey['image_national_card_front'] = $this->parse_image($survey['image_national_card_front'] ?? null, "{$name}_image_national_card_front");
             $survey['image_national_card_back'] = $this->parse_image($survey['image_national_card_back'] ?? null, "{$name}_image_national_card_back");
-            $survey['image_attend'] = $this->parse_image($survey['image_attend'] ?? null, "{$name}_ image_attend");
+            $survey['image_attend'] = $this->parse_image($survey['image_attend'] ?? null, "{$name}_image_attend");
             $survey['image_contract_direct_work'] = $this->parse_image($survey['image_contract_direct_work'] ?? null, "{$name}_image_contract_direct_work");
-
             $survey['oct_image_attend'] = $this->parse_image($survey['oct_image_attend'] ?? null, "{$name}_oct_image_attend");
             $survey['nov_image_attend'] = $this->parse_image($survey['nov_image_attend'] ?? null, "{$name}_nov_image_attend");
             $survey['dec_image_attend'] = $this->parse_image($survey['dec_image_attend'] ?? null, "{$name}_dec_image_attend");
             $survey['school_image'] = $this->parse_image($survey['school_image'] ?? null, "{$name}_school_image");
             $survey['eduqual_image'] = $this->parse_image($survey['eduqual_image'] ?? null, "{$name}_eduqual_image");
-
-
-
-
             $survey['sep_second_week_image_attend'] = $this->parse_image($survey['sep_second_week_image_attend'] ?? null, "{$name}_sep_second_week_image_attend");
             $survey['sep_third_week_image_attend'] = $this->parse_image($survey['sep_third_week_image_attend'] ?? null, "{$name}_sep_third_week_image_attend");
             $survey['sep_four_week_image_attend'] = $this->parse_image($survey['sep_four_week_image_attend'] ?? null, "{$name}_sep_four_week_image_attend");
@@ -170,13 +162,6 @@ class ResearcherController extends Controller
             $survey['dec_third_week_image_attend'] = $this->parse_image($survey['dec_third_week_image_attend'] ?? null, "{$name}_dec_third_week_image_attend");
             $survey['dec_fourth_week_image_attend'] = $this->parse_image($survey['dec_fourth_week_image_attend'] ?? null, "{$name}_dec_fourth_week_image_attend");
 
-
-
-            //  loc pars
-            // $survey['name']
-            // $survey['name']
-
-            // ##########################
 
             // cheack repeated phone
             if ($phoneRepeat = PhoneRepeat::where('phone', $request->phone)->first()) {
@@ -194,8 +179,6 @@ class ResearcherController extends Controller
                 if ($teacher = TeacherInfo::where('phone', $request->phone)->first()) {
 
                     $teacher->update(['changed_national_card_id' => $request->national_card_id]);
-                    // return response($teacher);
-
                 }
             }
 
@@ -205,26 +188,21 @@ class ResearcherController extends Controller
 
                 if ($teacher = TeacherInfo::where('national_card_id', $request->national_card_id)->first()) {
                     $teacher->update(['changed_phone' => $request->phone]);
-                    // return response($teacher);
                 }
             }
 
 
             $survey['researcher_id'] = auth()->user()->id;
-            // return response($survey);
             $surveySaved = new Survey();
 
-            $surveySaved
-                // ->disableLogging()
-                ->create($survey);
-
-            // dd($surveySaved->activity);
+            $surveySaved->create($survey);
 
             $response['success'] = [
                 'saved'
             ];
             return response($response);
         }
+
         $response['errors'] = 'Please validate your account';
         return response()->json($response, 401);
     }

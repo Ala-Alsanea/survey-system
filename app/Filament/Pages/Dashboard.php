@@ -59,12 +59,12 @@ class Dashboard extends BaseDashboard
         return [
             StatsOverview::make(['filters' => $this->filters]),
             Map::make(),
+            EduQualTypeChart::make(['filters' => $this->filters]),
+            NationalIdTypeChart::make(['filters' => $this->filters]),
             SchoolByGovernoratesChart::make(),
             SchoolByDistrictChart::make(),
-            NationalIdTypeChart::make(['filters' => $this->filters]),
             GenderByDistrictChart::make(),
             TeachersByGovChart::make(),
-            EduQualTypeChart::make(['filters' => $this->filters]),
         ];
     }
 
@@ -75,7 +75,12 @@ class Dashboard extends BaseDashboard
 
         // filter
         // ?? it can be implemented in another way ,but the time could not help 😢😢
-        if (!isEmpty($this->filters['gov']) || $this->filters['gov'] != null) {
+
+
+
+
+        if (isset($this->filters['gov'])) {
+
 
             $district = array_values(TeacherInfo::where('gov', $this->filters['gov'])->pluck('district')->unique()->all());
 
@@ -88,17 +93,23 @@ class Dashboard extends BaseDashboard
                 $school = array_values(TeacherInfo::where('district', $this->filters['district'])->pluck('school')->unique()->all());
 
                 // filter school is not in district to clear filter
-                if (TeacherInfo::where('district', $this->filters['district'])->where('school', $this->filters['school'])->pluck('school')->count() === 0)
+                if (
+                    TeacherInfo::where('district', $this->filters['district'])->where('school', $this->filters['school'])->pluck('school')->count() === 0
+                )
                     $this->filters['school'] =  null;
             } else {
                 $school = [];
                 $this->filters['district'] =  null;
                 $this->filters['school'] =  null;
             }
+
+
         } else {
 
-            $district = array_values(TeacherInfo::pluck('district')->unique()->all());
-            $school = array_values(TeacherInfo::pluck('school')->unique()->all());
+            // $district = array_values(TeacherInfo::pluck('district')->unique()->all());
+            // $school = array_values(TeacherInfo::pluck('school')->unique()->all());
+            $district = [];
+            $school = [];
             $this->filters['district'] =  null;
             $this->filters['school'] =  null;
             $this->filters['gov'] =  null;

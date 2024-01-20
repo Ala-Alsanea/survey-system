@@ -9,7 +9,7 @@
 
     <meta charset="utf-8" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no,maximum-scale=1.0" />
 
     @if ($favicon = filament()->getFavicon())
         <link rel="icon" href="{{ $favicon }}" />
@@ -120,7 +120,8 @@
 
     {{ \Filament\Support\Facades\FilamentView::renderHook('panels::body.end') }}
 
-    <script type="text/javascript"   src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initMap"></script>
+    <script type="text/javascript"
+        src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initMap"></script>
 </body>
 
 </html>

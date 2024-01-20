@@ -32,7 +32,9 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->brandName('Volunters Teachers Ueoifcation')
+            ->favicon('https://www.un.org/sites/un2.un.org/files/2021/08/un-logo.png')
+        // ->sidebarCollapsibleOnDesktop()
+            ->brandName('Volunteers Teachers Verification')
             // ->brandLogo('https://upload.wikimedia.org/wikipedia/commons/4/4d/Logo_of_the_United_Nations.svg')
             ->colors([
                 'danger' => Color::Rose,
@@ -41,6 +43,7 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => '#0198F1',
                 'success' => Color::Emerald,
                 'warning' => Color::Orange,
+                'white' => Color::hex('#000000')
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
