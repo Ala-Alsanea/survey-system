@@ -72,7 +72,8 @@ class Dashboard extends BaseDashboard
 
     public function filtersForm(Form $form): Form
     {
-        $gov = array_values(TeacherInfo::pluck('gov')->unique()->all());
+        $teacherInfo = TeacherInfo::all();
+        $gov = array_values($teacherInfo->pluck('gov')->unique()->all());
 
         // filter
         // ?? it can be implemented in another way ,but the time could not help 😢😢
@@ -83,19 +84,19 @@ class Dashboard extends BaseDashboard
         if (isset($this->filters['gov'])) {
 
 
-            $district = array_values(TeacherInfo::where('gov', $this->filters['gov'])->pluck('district')->unique()->all());
+            $district = array_values($teacherInfo->where('gov', $this->filters['gov'])->pluck('district')->unique()->all());
 
             // filter if is set and district is in gov
             if (
-                $this->filters['district'] &&
-                TeacherInfo::where('gov', $this->filters['gov'])->where('district', $this->filters['district'])->pluck('district')->count() !== 0
+                isset($this->filters['district'])&&
+                $teacherInfo->where('gov', $this->filters['gov'])->where('district', $this->filters['district'])->pluck('district')->count() !== 0
             ) {
 
-                $school = array_values(TeacherInfo::where('district', $this->filters['district'])->pluck('school')->unique()->all());
+                $school = array_values($teacherInfo->where('district', $this->filters['district'])->pluck('school')->unique()->all());
 
                 // filter school is not in district to clear filter
                 if (
-                    TeacherInfo::where('district', $this->filters['district'])->where('school', $this->filters['school'])->pluck('school')->count() === 0
+                    $teacherInfo->where('district', $this->filters['district'])->where('school', $this->filters['school'])->pluck('school')->count() === 0
                 )
                     $this->filters['school'] =  null;
             } else {

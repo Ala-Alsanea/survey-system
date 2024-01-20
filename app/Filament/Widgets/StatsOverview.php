@@ -42,11 +42,27 @@ class StatsOverview extends BaseWidget
 
                     // gov, distract and school
 
-                    $SchoolCollected = $survey
+                    $openSchools = $survey
                         ->where('gov', $this->filters['gov'])
-                        ->where('is_deleted', 1)
                         ->where('district', $this->filters['district'])
-                        ->where('school', $this->filters['school'])->pluck('school')->unique()->count();
+                        ->where('school', $this->filters['school'])
+                        ->where('is_deleted', 1)
+                        ->where('school_status', 'مفتوحة')
+                        ->pluck('school')
+                        ->unique()
+                        ->count();
+                    $closeSchools = $survey
+                        ->where('gov', $this->filters['gov'])
+                        ->where('district', $this->filters['district'])
+                        ->where('school', $this->filters['school'])
+                        ->where('is_deleted', 1)
+                        ->where('school_status', '!=', 'مفتوحة')
+                        ->pluck('school')
+                        ->unique()
+                        ->count();
+
+                    $SchoolCollected = $openSchools + $closeSchools;
+
                     $Schools = $teacherInfo
                         ->where('gov', $this->filters['gov'])
                         ->where('district', $this->filters['district'])
@@ -67,24 +83,7 @@ class StatsOverview extends BaseWidget
                         ->where('q_1', 'لا')->count();
 
                     // ?#######################(new)#############################
-                    $openSchools = $survey
-                        ->where('gov', $this->filters['gov'])
-                        ->where('district', $this->filters['district'])
-                        ->where('school', $this->filters['school'])
-                        ->where('is_deleted', 1)
-                        ->where('school_status', 'مفتوحة')
-                        ->pluck('school')
-                        ->unique()
-                        ->count();
-                    $closeSchools = $survey
-                        ->where('gov', $this->filters['gov'])
-                        ->where('district', $this->filters['district'])
-                        ->where('school', $this->filters['school'])
-                        ->where('is_deleted', 1)
-                        ->where('school_status', 'مغلقه')
-                        ->pluck('school')
-                        ->unique()
-                        ->count();
+
 
                     $totalNationalCardId = $survey
                         ->where('gov', $this->filters['gov'])
@@ -127,10 +126,27 @@ class StatsOverview extends BaseWidget
 
                     // gov and distract
 
-                    $SchoolCollected = $survey
+                    $openSchools = $survey
                         ->where('gov', $this->filters['gov'])
+                        ->where('district', $this->filters['district'])
+                        // ->where('school', $this->filters['school'])
                         ->where('is_deleted', 1)
-                        ->where('district', $this->filters['district'])->pluck('school')->unique()->count();
+                        ->where('school_status', 'مفتوحة')
+                        ->pluck('school')
+                        ->unique()
+                        ->count();
+                    $closeSchools = $survey
+                        ->where('gov', $this->filters['gov'])
+                        ->where('district', $this->filters['district'])
+                        // ->where('school', $this->filters['school'])
+                        ->where('is_deleted', 1)
+                        ->where('school_status', '!=', 'مفتوحة')
+                        ->pluck('school')
+                        ->unique()
+                        ->count();
+
+                    $SchoolCollected = $openSchools + $closeSchools;
+
                     $Schools = $teacherInfo
                         ->where('gov', $this->filters['gov'])
                         ->where('district', $this->filters['district'])->pluck('school')->unique()->count();
@@ -150,24 +166,6 @@ class StatsOverview extends BaseWidget
 
 
                       // ?#######################(new)#############################
-                    $openSchools = $survey
-                        ->where('gov', $this->filters['gov'])
-                        ->where('district', $this->filters['district'])
-                        // ->where('school', $this->filters['school'])
-                        ->where('is_deleted', 1)
-                        ->where('school_status', 'مفتوحة')
-                        ->pluck('school')
-                        ->unique()
-                        ->count();
-                    $closeSchools = $survey
-                        ->where('gov', $this->filters['gov'])
-                        ->where('district', $this->filters['district'])
-                        // ->where('school', $this->filters['school'])
-                        ->where('is_deleted', 1)
-                        ->where('school_status', 'مغلقه')
-                        ->pluck('school')
-                        ->unique()
-                        ->count();
 
                     $totalNationalCardId = $survey
                         ->where('gov', $this->filters['gov'])
@@ -212,8 +210,26 @@ class StatsOverview extends BaseWidget
 
 
                 // gov
-                $SchoolCollected = $survey
-                    ->where('gov', $this->filters['gov'])->where('is_deleted', 1)->pluck('school')->unique()->count();
+                $openSchools = $survey
+                    ->where('gov', $this->filters['gov'])
+                    // ->where('district', $this->filters['district'])
+                    // ->where('school', $this->filters['school'])
+                    ->where('is_deleted', 1)
+                    ->where('school_status', 'مفتوحة')
+                    ->pluck('school')
+                    ->unique()
+                    ->count();
+                $closeSchools = $survey
+                    ->where('gov', $this->filters['gov'])
+                    // ->where('district', $this->filters['district'])
+                    // ->where('school', $this->filters['school'])
+                    ->where('is_deleted', 1)
+                    ->where('school_status', '!=', 'مفتوحة')
+                    ->pluck('school')
+                    ->unique()
+                    ->count();
+
+                $SchoolCollected = $openSchools + $closeSchools;
                 $Schools = $teacherInfo
                     ->where('gov', $this->filters['gov'])->pluck('school')->unique()->count();
                 $SchoolNotCollected = $Schools - $SchoolCollected;
@@ -231,24 +247,6 @@ class StatsOverview extends BaseWidget
 
 
                 // ?#######################(new)#############################
-                $openSchools = $survey
-                    ->where('gov', $this->filters['gov'])
-                    // ->where('district', $this->filters['district'])
-                    // ->where('school', $this->filters['school'])
-                    ->where('is_deleted', 1)
-                    ->where('school_status', 'مفتوحة')
-                    ->pluck('school')
-                    ->unique()
-                    ->count();
-                $closeSchools = $survey
-                    ->where('gov', $this->filters['gov'])
-                    // ->where('district', $this->filters['district'])
-                    // ->where('school', $this->filters['school'])
-                    ->where('is_deleted', 1)
-                    ->where('school_status', 'مغلقه')
-                    ->pluck('school')
-                    ->unique()
-                    ->count();
 
                 $totalNationalCardId = $survey
                     ->where('gov', $this->filters['gov'])
@@ -288,20 +286,6 @@ class StatsOverview extends BaseWidget
         } else {
 
             // all
-            $SchoolCollected = $survey->where('is_deleted', 1)->pluck('school')->unique()->count();
-            $Schools = $teacherInfo->pluck('school')->unique()->count();
-            $SchoolNotCollected = $Schools - $SchoolCollected;
-
-            $TeacherExist = $survey
-                ->where('is_deleted', 1)
-                ->where('q_1', 'نعم')->count();
-            $TeacherNotExist = $survey
-                ->where('is_deleted', 1)
-                ->where('q_1', 'لا')->count();
-
-
-
-            // ?#######################(new)#############################
             $openSchools = $survey
                 // ->where('gov', $this->filters['gov'])
                 // ->where('district', $this->filters['district'])
@@ -316,10 +300,26 @@ class StatsOverview extends BaseWidget
                 // ->where('district', $this->filters['district'])
                 // ->where('school', $this->filters['school'])
                 ->where('is_deleted', 1)
-                ->where('school_status', 'مغلقه')
+                ->where('school_status', '!=', 'مفتوحة')
                 ->pluck('school')
                 ->unique()
                 ->count();
+
+            $SchoolCollected = $openSchools + $closeSchools;
+
+            $Schools = $teacherInfo->pluck('school')->unique()->count();
+            $SchoolNotCollected = $Schools - $SchoolCollected;
+
+            $TeacherExist = $survey
+                ->where('is_deleted', 1)
+                ->where('q_1', 'نعم')->count();
+            $TeacherNotExist = $survey
+                ->where('is_deleted', 1)
+                ->where('q_1', 'لا')->count();
+
+
+
+            // ?#######################(new)#############################
 
             $totalNationalCardId = $survey
                 // ->where('gov', $this->filters['gov'])
@@ -364,7 +364,7 @@ class StatsOverview extends BaseWidget
         $subLabel = !isEmpty($this->filters['school']) || $this->filters['school'] != null ? $this->filters['school'] : 'all';
         $desc = $disLabel . ' - ' . $subLabel;
 
-        // dd($this->filters);
+        // dd($openSchools);
 
 
         return [
