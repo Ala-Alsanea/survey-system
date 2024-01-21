@@ -2,6 +2,4 @@
 
     @livewire('list-image')
 
-
-
 </x-filament-panels::page>
