@@ -28,8 +28,8 @@ class TeachersByGovChart extends ChartWidget
                 [
                     'label' => 'teachers',
                     'data' => array_map(fn ($val) => $val['data'], $total),
-                    // 'backgroundColor' => '#d4d4d8',
-                    // 'borderColor' => '#3f3f46',
+                    'backgroundColor' => '#0198F1',
+                    'borderColor' => '#0198F1',
                 ],
 
 

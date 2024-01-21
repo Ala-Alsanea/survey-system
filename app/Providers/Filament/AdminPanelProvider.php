@@ -58,7 +58,7 @@ class AdminPanelProvider extends PanelProvider
 
             // ->viteTheme('resources/css/filament/admin/theme.css')
 
-
+            ->darkMode(false)
             ->plugins([
                 FilamentShieldPlugin::make(),
             ])

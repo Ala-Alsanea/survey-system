@@ -9,11 +9,14 @@ use App\Filament\Widgets;
 use App\Models\TeacherInfo;
 use App\Filament\Widgets\Map;
 use Filament\Facades\Filament;
+use App\Filament\Widgets\Q6Chart;
+use App\Filament\Widgets\Q10Chart;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
 use App\Filament\Widgets\StatsOverview;
 use Filament\Forms\Components\Fieldset;
 use function PHPUnit\Framework\isEmpty;
+use App\Filament\Widgets\GainMoneyChart;
 use Filament\Forms\Components\DatePicker;
 use App\Filament\Widgets\EduQualTypeChart;
 use App\Filament\Widgets\TeachersByGovChart;
@@ -66,6 +69,9 @@ class Dashboard extends BaseDashboard
             SchoolByDistrictChart::make(),
             GenderByDistrictChart::make(),
             TeachersByGovChart::make(),
+            Q10Chart::make(),
+            Q6Chart::make(),
+            GainMoneyChart::make(),
         ];
     }
 
@@ -153,10 +159,10 @@ class Dashboard extends BaseDashboard
                     ->schema([
                         Select::make('gov')
                             ->options($govArr)
-                            ->label('gov'),
+                            ->label('Governorate'),
 
                         // $this->filters['district'] ?
-                        Select::make('district')
+                        Select::make('District')
                             ->reactive()
                             ->options($districtArr)
                             ->label('district')
@@ -166,7 +172,7 @@ class Dashboard extends BaseDashboard
                         // $this->filters['school'] ?
                         Select::make('school')
                             ->options($schoolArr)
-                            ->label('school')
+                            ->label('School')
                         // : Select::make('')
                         ,
                     ])

@@ -21,6 +21,8 @@ class TeacherInfoResource extends Resource
 {
     protected static ?string $model = TeacherInfo::class;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $label = 'Teacher info';

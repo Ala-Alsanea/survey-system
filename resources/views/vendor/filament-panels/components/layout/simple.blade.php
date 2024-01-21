@@ -8,13 +8,13 @@
         'heading' => null,
         'subheading' => null,
     ])
-    <img src="{{ asset('/img/bg.jpg') }}" class="absolute w-full h-full " style=" z-index: -10;">
+    <img src="{{ asset('/img/bg2.jpg') }}" class="absolute w-full h-full " style=" z-index: -10;">
     <div {{-- style="background: url({{asset('/img/bg.jpg')}});" --}}>
 
         {{-- <img src="/img/logo_1.jpeg" width="100" style="position: fixed; z-index:10; bottom: 0px" alt=""> --}}
         {{-- <img src="/img/logo_2.jpeg" width="100" style="position: fixed; z-index:9; bottom: 0px; right:1px ;" alt=""> --}}
 
-        <div class="flex flex-col items-center min-h-screen  fi-simple-layout" style="padding-left: 17%">
+        <div class="flex flex-col items-center min-h-screen  fi-simple-layout" style="padding-left: 15%">
             @if (filament()->auth()->check())
                 <div class="flex items-center h-16 end-0 gap-x-4 pe-4 md:pe-6 lg:pe-8">
                     @if (filament()->hasDatabaseNotifications())
@@ -27,7 +27,7 @@
 
             <div class="flex items-center justify-between flex-grow w-full fi-simple-main-ctn">
                 <main @class([
-                    'max-w-2xl fi-simple-main  w-full bg-white px-6 py-12 shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10 sm:rounded-xl sm:px-12 ',
+                    'max-w-xl fi-simple-main w-full bg-white px-6 py-12 shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10 sm:rounded-xl sm:px-12 ',
                     // match ($maxWidth ?? null) {
                     //     MaxWidth::ExtraSmall, 'xs' => 'sm:max-w-xs',
                     //     MaxWidth::Small, 'sm' => 'sm:max-w-sm',

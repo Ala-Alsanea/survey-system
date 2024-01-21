@@ -16,6 +16,7 @@ class StatsOverview extends BaseWidget
 {
     use InteractsWithPageFilters;
 
+    protected static ?string $pollingInterval = null;
 
     protected function calpercentage($partSchool, $allSchools)
     {
@@ -109,7 +110,7 @@ class StatsOverview extends BaseWidget
                         ->where('gender', 'ذكر')
                         ->count();
 
-                    $famale = $survey
+                    $female = $survey
                         ->where('gov', $this->filters['gov'])
                         ->where('district', $this->filters['district'])
                         ->where('school', $this->filters['school'])
@@ -194,7 +195,7 @@ class StatsOverview extends BaseWidget
                         ->where('gender', 'ذكر')
                         ->count();
 
-                    $famale = $survey
+                    $female = $survey
                         ->where('gov', $this->filters['gov'])
                         ->where('district', $this->filters['district'])
                         // ->where('school', $this->filters['school'])
@@ -272,7 +273,7 @@ class StatsOverview extends BaseWidget
                     ->where('gender', 'ذكر')
                     ->count();
 
-                $famale = $survey
+                $female = $survey
                     ->where('gov', $this->filters['gov'])
                     // ->where('district', $this->filters['district'])
                     // ->where('school', $this->filters['school'])
@@ -335,6 +336,7 @@ class StatsOverview extends BaseWidget
                 // ->where('school', $this->filters['school'])
                 ->where('is_deleted', 1)
                 ->where('edu_qual', '!=', 'غير محدد')
+                ->where('edu_qual', '!=', 'اقل من ثانوية عامة')
                 ->count();
 
             $male = $survey
@@ -345,7 +347,7 @@ class StatsOverview extends BaseWidget
                 ->where('gender', 'ذكر')
                 ->count();
 
-            $famale = $survey
+            $female = $survey
                 // ->where('gov', $this->filters['gov'])
                 // ->where('district', $this->filters['district'])
                 // ->where('school', $this->filters['school'])
@@ -370,69 +372,69 @@ class StatsOverview extends BaseWidget
         return [
 
 
-            Stat::make('School', $Schools)
+            Stat::make('All targeted schools', $Schools)
                 // ->color('success')
-                ->description('all')
+                // ->description('all')
                 ->descriptionIcon('heroicon-s-building-office-2')
-                ->color('success')
+                ->color('info')
                 ->extraAttributes([
-                    // 'class' => 'h-20',
+                    // 'class' => 'h-16',
                 ]),
 
-            Stat::make('School', $SchoolCollected)
+            Stat::make('Achieved schools', $SchoolCollected)
                 // ->color('success')
                 ->description("$percentageOfCollectedSchools% collected")
                 ->descriptionIcon('heroicon-s-building-office')
                 ->color('success'),
 
-            Stat::make('School', $SchoolNotCollected)
+            Stat::make('Not achieved schools', $SchoolNotCollected)
                 // ->color('success')
                 ->description("$percentageOfNotCollectedSchools% not collected")
                 ->descriptionIcon('heroicon-s-building-office')
                 ->color('danger'),
 
 
-            Stat::make('Teacher', $TeacherExist)
+            Stat::make('Available', $TeacherExist)
                 // ->color('success')
-                ->description('Exist')
+                ->description('teachers')
                 ->descriptionIcon('heroicon-s-user')
                 ->color('success'),
 
-            Stat::make('Teacher', $TeacherNotExist)
+            Stat::make('Not available', $TeacherNotExist)
                 // ->color('success')
-                ->description('Not Exist')
+                ->description('teachers')
                 ->descriptionIcon('heroicon-s-user')
                 ->color('danger'),
 
             // ?#######################(new)#############################
             Stat::make('open', $openSchools)
                 ->description('Schools')
-                // ->descriptionIcon('heroicon-s-user')
+                ->descriptionIcon('heroicon-s-lock-open')
                 ->color('success'),
 
             Stat::make('close', $closeSchools)
                 ->description('Schools')
-                // ->descriptionIcon('heroicon-s-user')
+                ->descriptionIcon('heroicon-s-lock-closed')
                 ->color('danger'),
 
-            Stat::make('total', $totalNationalCardId)
-                ->description('National Card Id')
-                // ->descriptionIcon('heroicon-s-user')
-                ->color('success'),
-
-            Stat::make('total', $totalEduQual)
-                ->description('Education Qualification')
-                // ->descriptionIcon('heroicon-s-user')
-                ->color('success'),
-
-            Stat::make('total', $male)
-                ->description('male')
-                // ->descriptionIcon('heroicon-s-user')
+            Stat::make('Teachers have ID', $totalNationalCardId)
+                // ->description('National Card Id')
+                ->descriptionIcon('heroicon-s-identification')
                 ->color('info'),
 
-            Stat::make('total', $famale)
-                ->description('famale')
-                // ->descriptionIcon('heroicon-s-user')
+            Stat::make('Qualified teachers', $totalEduQual)
+                // ->description('Education Qualification')
+                ->descriptionIcon('heroicon-s-academic-cap')
+                ->color('info'),
+
+            Stat::make('Male teachers', $male)
+                // ->description('male')
+                ->descriptionIcon('heroicon-s-user-circle')
+                ->color('info'),
+
+            Stat::make('Female teachers', $female)
+                // ->description('famale')
+                ->descriptionIcon('heroicon-s-user-circle')
                 ->color('danger'),
 
 

@@ -28,8 +28,8 @@ class SchoolByDistrictChart extends ChartWidget
                 [
                     'label' => 'targeted',
                     'data' => array_map(fn ($val) => $val['data'], $targetedSchool),
-                    // 'backgroundColor' => '#d4d4d8',
-                    // 'borderColor' => '#3f3f46',
+                    'backgroundColor' => '#0198F1',
+                    'borderColor' => '#0198F1',
                 ],
 
                 [
