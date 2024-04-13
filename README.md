@@ -1,8 +1,7 @@
-### New quation
+# survey system
 
-* added to migration
-* added to model
-* added to api
-* added to form and table (dashboard)
-* added to excel export
-* added to excel import
+This survey system made to collect teacher info for the Volunteers Teachers Verification program by the UN.
+
+
+
+

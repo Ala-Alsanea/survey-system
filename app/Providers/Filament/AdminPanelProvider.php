@@ -34,8 +34,8 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->favicon('https://www.un.org/sites/un2.un.org/files/2021/08/un-logo.png')
         // ->sidebarCollapsibleOnDesktop()
-            ->brandName('Volunteers Teachers Verification')
-            // ->brandLogo('https://upload.wikimedia.org/wikipedia/commons/4/4d/Logo_of_the_United_Nations.svg')
+            // ->brandName('Volunteers Teachers Verification')
+            ->brandLogo('https://upload.wikimedia.org/wikipedia/commons/4/4d/Logo_of_the_United_Nations.svg')
             ->colors([
                 'danger' => Color::Rose,
                 'gray' => Color::Gray,

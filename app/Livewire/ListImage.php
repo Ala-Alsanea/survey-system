@@ -149,20 +149,23 @@ class ListImage extends Component
         if ($this->govSelected != '') {
             if ($this->districtSelected != '') {
                 $images = Survey::select($imageType)
+                    ->where('is_deleted', 1)
                     ->where('gov', $this->govSelected)
                     ->where('district', $this->districtSelected)
                     ->paginate(20);
             } else {
                 $images = Survey::select($imageType)
+                    ->where('is_deleted', 1)
                     ->where('gov', $this->govSelected)
                     ->paginate(20);
             }
         } else {
 
             $images = Survey::select($imageType)
-            ->paginate(10);
+                ->where('is_deleted', 1)
+                ->paginate(10);
         }
-
+        // array_push($this->_selected, 'select all');
 
         return $images;
     }

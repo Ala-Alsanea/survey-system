@@ -158,6 +158,8 @@ class Survey extends Model
         'manager_Phone_num_as_on_real_life',
         'school_name_as_on_real_life',
         'amount_of_money_that_teacher_gained',
+        'maneger_name',
+        'maneger_phone',
         'is_deleted',
 
 

@@ -32,14 +32,33 @@ return new class extends Migration
             $table->string('national_card_id')->nullable();
 
             // attach
-            $table->string('image_national_card_front')->nullable();
-            $table->string('image_national_card_back')->nullable();
-            $table->string('image_attend')->nullable();
-            $table->string('image_contract_direct_work')->nullable();
+            $table->text('image_national_card_front')->nullable();
+            $table->text('image_national_card_back')->nullable();
+            $table->text('image_attend')->nullable();
+            $table->text('image_contract_direct_work')->nullable();
 
-            $table->string('oct_image_attend')->nullable();
-            $table->string('nov_image_attend')->nullable();
-            $table->string('dec_image_attend')->nullable();
+            $table->text('oct_image_attend')->nullable();
+            $table->text('nov_image_attend')->nullable();
+            $table->text('dec_image_attend')->nullable();
+
+            $table->text('sep_second_week_image_attend')->nullable();
+            $table->text('sep_third_week_image_attend')->nullable();
+            $table->text('sep_four_week_image_attend')->nullable();
+
+            $table->text('oct_second_week_image_attend')->nullable();
+            $table->text('oct_third_week_image_attend')->nullable();
+            $table->text('oct_Fourth_week_image_attend')->nullable();
+
+            $table->text('nov_second_week_image_attend')->nullable();
+            $table->text('nov_third_week_image_attend')->nullable();
+            $table->text('nov_fourth_week_image_attend')->nullable();
+
+            $table->text('dec_second_week_image_attend')->nullable();
+            $table->text('dec_third_week_image_attend')->nullable();
+            $table->text('dec_fourth_week_image_attend')->nullable();
+
+
+
             $table->string('school_image')->nullable();
             $table->string('eduqual_image')->nullable();
 
@@ -96,9 +115,13 @@ return new class extends Migration
             // $table->string('name_manager_school')->nullable();
             // $table->string('phone_manager_school')->nullable();
 
+            $table->string('manager_name_as_on_real_life')->nullable();
+            $table->string('manager_Phone_num_as_on_real_life')->nullable();
+
             $table->string('village_name')->nullable();
             $table->string('school_name_as_on_user_contract_work')->nullable();
             $table->text('school_name_on_vistiting_and_contract_identical')->nullable();
+            $table->text('school_name_as_on_real_life')->nullable();
             $table->string('check_school_location')->nullable();
             $table->string('teacher_name_as_on_real_life')->nullable();
             $table->string('exact_teacher_job_type')->nullable();
@@ -107,9 +130,11 @@ return new class extends Migration
             $table->text('teacher_signature_comparison')->nullable();
             $table->text('teacher_cotract_type')->nullable();
             $table->text('contract_date')->nullable();
+            $table->text('amount_of_money_that_teacher_gained')->nullable();
 
 
             $table->boolean('done')->default(0);
+            $table->boolean('is_deleted')->default(0);
             $table->foreignId('researcher_id')->nullable()->constrained('researchers')->cascadeOnUpdate();
             // $table->foreignId('district_id')->nullable()->constrained('districts')->cascadeOnUpdate();
 

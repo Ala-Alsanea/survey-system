@@ -6,12 +6,12 @@
     @endphp
     {{-- select filter --}}
 
-    <div class="flex w-full max-w-2xl gap-4 m-8 mb-6" >
+    <div class="flex w-full max-w-2xl gap-4 m-8 mb-6">
         <div class="w-full">
             <h3 class="text-sm">Governorates</h3>
             <x-filament::input.wrapper>
                 <x-filament::input.select wire:model.live="govSelected">
-                    <option wire:click="reset_select" selected>{{$this->allLable}}</option>
+                    <option wire:click="reset_select" selected>{{ $this->allLable }}</option>
 
                     @foreach ($this->gov as $option)
                         <option value="{{ $option }}">{{ __($option) }}</option>
@@ -25,7 +25,7 @@
             <h3 class="text-sm">District</h3>
             <x-filament::input.wrapper>
                 <x-filament::input.select wire:model.live="districtSelected">
-                    <option wire:click="reset_select" selected>{{$this->allLable}}</option>
+                    <option wire:click="reset_select" selected>{{ $this->allLable }}</option>
 
                     @foreach ($this->district as $option)
                         <option value="{{ $option }}">{{ __($option) }}</option>
@@ -39,7 +39,7 @@
             <h3 class="text-sm">Type of Image</h3>
             <x-filament::input.wrapper>
                 <x-filament::input.select wire:model.live="selectedLabel">
-                    <option selected>{{$this->allLable}}</option>
+                    <option selected>{{ $this->allLable }}</option>
 
                     @foreach ($labels as $option)
                         <option value="{{ $option }}">{{ __($option) }}</option>
@@ -52,7 +52,8 @@
 
     {{-- {{ collect($this->_selected)->implode('-')}} --}}
 
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3" style="margin-top: 5%">
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3"
+        style="margin-top: 5%">
         <!--Card 1-->
         @foreach ($this->images as $img)
             @if ($img->image_national_card_front)
@@ -201,6 +202,211 @@
             @endif
 
             {{-- new --}}
+
+
+            @if ($img->sep_second_week_image_attend)
+                <a target="_blank" href="{{ $this->getStorageName($img->sep_second_week_image_attend) }}">
+                    <div class="overflow-hidden rounded shadow-lg">
+                        <img class="w-full" src="{{ $this->getStorageName($img->sep_second_week_image_attend) }}"
+                            alt="{{ $img->sep_second_week_image_attend }}">
+                        <div class="px-6 py-4">
+                            <div class="mb-2 text-xl font-bold">{{ __('sep_second_week_image_attend') }}</div>
+                            <p class="text-base text-gray-700">
+                                {{-- {{ $img->name }} --}}
+                            </p>
+                        </div>
+
+                    </div>
+                </a>
+            @endif
+
+
+            @if ($img->sep_third_week_image_attend)
+                <a target="_blank" href="{{ $this->getStorageName($img->sep_third_week_image_attend) }}">
+                    <div class="overflow-hidden rounded shadow-lg">
+                        <img class="w-full" src="{{ $this->getStorageName($img->sep_third_week_image_attend) }}"
+                            alt="{{ $img->sep_third_week_image_attend }}">
+                        <div class="px-6 py-4">
+                            <div class="mb-2 text-xl font-bold">{{ __('sep_third_week_image_attend') }}</div>
+                            <p class="text-base text-gray-700">
+                                {{-- {{ $img->name }} --}}
+                            </p>
+                        </div>
+
+                    </div>
+                </a>
+            @endif
+
+
+            @if ($img->sep_four_week_image_attend)
+                <a target="_blank" href="{{ $this->getStorageName($img->sep_four_week_image_attend) }}">
+                    <div class="overflow-hidden rounded shadow-lg">
+                        <img class="w-full" src="{{ $this->getStorageName($img->sep_four_week_image_attend) }}"
+                            alt="{{ $img->sep_four_week_image_attend }}">
+                        <div class="px-6 py-4">
+                            <div class="mb-2 text-xl font-bold">{{ __('sep_four_week_image_attend') }}</div>
+                            <p class="text-base text-gray-700">
+                                {{-- {{ $img->name }} --}}
+                            </p>
+                        </div>
+
+                    </div>
+                </a>
+            @endif
+
+
+            @if ($img->oct_second_week_image_attend)
+                <a target="_blank" href="{{ $this->getStorageName($img->oct_second_week_image_attend) }}">
+                    <div class="overflow-hidden rounded shadow-lg">
+                        <img class="w-full" src="{{ $this->getStorageName($img->oct_second_week_image_attend) }}"
+                            alt="{{ $img->oct_second_week_image_attend }}">
+                        <div class="px-6 py-4">
+                            <div class="mb-2 text-xl font-bold">{{ __('oct_second_week_image_attend') }}</div>
+                            <p class="text-base text-gray-700">
+                                {{-- {{ $img->name }} --}}
+                            </p>
+                        </div>
+
+                    </div>
+                </a>
+            @endif
+
+
+            @if ($img->oct_third_week_image_attend)
+                <a target="_blank" href="{{ $this->getStorageName($img->oct_third_week_image_attend) }}">
+                    <div class="overflow-hidden rounded shadow-lg">
+                        <img class="w-full" src="{{ $this->getStorageName($img->oct_third_week_image_attend) }}"
+                            alt="{{ $img->oct_third_week_image_attend }}">
+                        <div class="px-6 py-4">
+                            <div class="mb-2 text-xl font-bold">{{ __('oct_third_week_image_attend') }}</div>
+                            <p class="text-base text-gray-700">
+                                {{-- {{ $img->name }} --}}
+                            </p>
+                        </div>
+
+                    </div>
+                </a>
+            @endif
+
+
+            @if ($img->oct_Fourth_week_image_attend)
+                <a target="_blank" href="{{ $this->getStorageName($img->oct_Fourth_week_image_attend) }}">
+                    <div class="overflow-hidden rounded shadow-lg">
+                        <img class="w-full" src="{{ $this->getStorageName($img->oct_Fourth_week_image_attend) }}"
+                            alt="{{ $img->oct_Fourth_week_image_attend }}">
+                        <div class="px-6 py-4">
+                            <div class="mb-2 text-xl font-bold">{{ __('oct_Fourth_week_image_attend') }}</div>
+                            <p class="text-base text-gray-700">
+                                {{-- {{ $img->name }} --}}
+                            </p>
+                        </div>
+
+                    </div>
+                </a>
+            @endif
+
+
+            @if ($img->nov_second_week_image_attend)
+                <a target="_blank" href="{{ $this->getStorageName($img->nov_second_week_image_attend) }}">
+                    <div class="overflow-hidden rounded shadow-lg">
+                        <img class="w-full" src="{{ $this->getStorageName($img->nov_second_week_image_attend) }}"
+                            alt="{{ $img->nov_second_week_image_attend }}">
+                        <div class="px-6 py-4">
+                            <div class="mb-2 text-xl font-bold">{{ __('nov_second_week_image_attend') }}</div>
+                            <p class="text-base text-gray-700">
+                                {{-- {{ $img->name }} --}}
+                            </p>
+                        </div>
+
+                    </div>
+                </a>
+            @endif
+
+
+            @if ($img->nov_third_week_image_attend)
+                <a target="_blank" href="{{ $this->getStorageName($img->nov_third_week_image_attend) }}">
+                    <div class="overflow-hidden rounded shadow-lg">
+                        <img class="w-full" src="{{ $this->getStorageName($img->nov_third_week_image_attend) }}"
+                            alt="{{ $img->nov_third_week_image_attend }}">
+                        <div class="px-6 py-4">
+                            <div class="mb-2 text-xl font-bold">{{ __('nov_third_week_image_attend') }}</div>
+                            <p class="text-base text-gray-700">
+                                {{-- {{ $img->name }} --}}
+                            </p>
+                        </div>
+
+                    </div>
+                </a>
+            @endif
+
+
+            @if ($img->nov_fourth_week_image_attend)
+                <a target="_blank" href="{{ $this->getStorageName($img->nov_fourth_week_image_attend) }}">
+                    <div class="overflow-hidden rounded shadow-lg">
+                        <img class="w-full" src="{{ $this->getStorageName($img->nov_fourth_week_image_attend) }}"
+                            alt="{{ $img->nov_fourth_week_image_attend }}">
+                        <div class="px-6 py-4">
+                            <div class="mb-2 text-xl font-bold">{{ __('nov_fourth_week_image_attend') }}</div>
+                            <p class="text-base text-gray-700">
+                                {{-- {{ $img->name }} --}}
+                            </p>
+                        </div>
+
+                    </div>
+                </a>
+            @endif
+
+
+            @if ($img->dec_second_week_image_attend)
+                <a target="_blank" href="{{ $this->getStorageName($img->dec_second_week_image_attend) }}">
+                    <div class="overflow-hidden rounded shadow-lg">
+                        <img class="w-full" src="{{ $this->getStorageName($img->dec_second_week_image_attend) }}"
+                            alt="{{ $img->dec_second_week_image_attend }}">
+                        <div class="px-6 py-4">
+                            <div class="mb-2 text-xl font-bold">{{ __('dec_second_week_image_attend') }}</div>
+                            <p class="text-base text-gray-700">
+                                {{-- {{ $img->name }} --}}
+                            </p>
+                        </div>
+
+                    </div>
+                </a>
+            @endif
+
+
+            @if ($img->dec_third_week_image_attend)
+                <a target="_blank" href="{{ $this->getStorageName($img->dec_third_week_image_attend) }}">
+                    <div class="overflow-hidden rounded shadow-lg">
+                        <img class="w-full" src="{{ $this->getStorageName($img->dec_third_week_image_attend) }}"
+                            alt="{{ $img->dec_third_week_image_attend }}">
+                        <div class="px-6 py-4">
+                            <div class="mb-2 text-xl font-bold">{{ __('dec_third_week_image_attend') }}</div>
+                            <p class="text-base text-gray-700">
+                                {{-- {{ $img->name }} --}}
+                            </p>
+                        </div>
+
+                    </div>
+                </a>
+            @endif
+
+
+            @if ($img->dec_fourth_week_image_attend)
+                <a target="_blank" href="{{ $this->getStorageName($img->dec_fourth_week_image_attend) }}">
+                    <div class="overflow-hidden rounded shadow-lg">
+                        <img class="w-full" src="{{ $this->getStorageName($img->dec_fourth_week_image_attend) }}"
+                            alt="{{ $img->dec_fourth_week_image_attend }}">
+                        <div class="px-6 py-4">
+                            <div class="mb-2 text-xl font-bold">{{ __('dec_fourth_week_image_attend') }}</div>
+                            <p class="text-base text-gray-700">
+                                {{-- {{ $img->name }} --}}
+                            </p>
+                        </div>
+
+                    </div>
+                </a>
+            @endif
+
         @endforeach
 
 

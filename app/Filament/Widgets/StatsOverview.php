@@ -308,7 +308,9 @@ class StatsOverview extends BaseWidget
 
             $SchoolCollected = $openSchools + $closeSchools;
 
-            $Schools = $teacherInfo->pluck('school')->unique()->count();
+            // $Schools = $teacherInfo->pluck('school')->unique()->count();
+            $Schools = 516;
+
             $SchoolNotCollected = $Schools - $SchoolCollected;
 
             $TeacherExist = $survey
@@ -366,7 +368,6 @@ class StatsOverview extends BaseWidget
         $subLabel = !isEmpty($this->filters['school']) || $this->filters['school'] != null ? $this->filters['school'] : 'all';
         $desc = $disLabel . ' - ' . $subLabel;
 
-        // dd($openSchools);
 
 
         return [
